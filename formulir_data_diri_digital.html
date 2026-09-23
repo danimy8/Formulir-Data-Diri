@@ -326,6 +326,20 @@
         let uploadedPhotoBase64 = '';
         let isSigned = false;
         
+    const API_URL = "https://script.google.com/macros/s/AKfycbwnX680ihHaIcaOvo5Rm6IcBNaWYwAdCUFwhMNmYyrXmQHRNi9knd8GQVlKTgrpH4nKCw/exec"; // 
+    async function kirimKeMasterData(data) {
+        try {
+            await fetch(API_URL, {
+                method: "POST",
+                body: JSON.stringify({
+                    action: "create",
+                    data: data
+                }),
+            });
+        } catch (err) {
+            console.error("Gagal mengirim ke master data:", err);
+        }
+    }
         // Canvas Setup
         const canvas = document.getElementById('signatureCanvas');
         const ctx = canvas.getContext('2d');
@@ -463,7 +477,17 @@
             const email = document.getElementById('email').value;
             const phone = document.getElementById('phone').value;
             const address = document.getElementById('address').value;
-
+kirimKeMasterData({
+    namaLengkap: fullName,
+    nik: nik,
+    tempatLahir: birthPlace,
+    tanggalLahir: birthDateVal,
+    jenisKelamin: gender,
+    agama: religion,
+    email: email,
+    noTelepon: phone,
+    alamat: address,
+});
             // Format Birth Date to ID format (e.g. 17 Agustus 1995)
             const formattedDate = new Date(birthDateVal).toLocaleDateString('id-ID', {
                 day: 'numeric',
