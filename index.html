@@ -125,7 +125,7 @@
                         
                         <div>
                             <label class="block text-sm font-medium text-slate-700 mb-1">Alias <span class="text-red-500">*</span></label>
-                            <input type="text" id="fullName" required placeholder="Contoh: Budi Pratama, S.Kom" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
+                            <input type="text" id="fullName" placeholder="Contoh: Budi Pratama, S.Kom" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
                         </div>
 
                         <div>
@@ -144,7 +144,7 @@
 
                         <div>
                             <label class="block text-sm font-medium text-slate-700 mb-1">NPWP (Nomor Pokok Wajib Pajak) <span class="text-red-500">*</span></label>
-                            <input type="text" id="nik" required placeholder="16 digit angka" pattern="[0-9]{16}" title="Masukkan 16 digit NIK" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
+                            <input type="text" id="nik" placeholder="Masukkan 15 atau 16 digit (boleh dengan titik/strip)" pattern="[0-9.\]{15,16}" title="Masukkan 15 atau 16 digit NPWP" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
                         </div>
 
                         <div>
@@ -192,12 +192,7 @@
 
                         <div>
                             <label class="block text-sm font-medium text-slate-700 mb-1">Pekerjaan / Bidang Usaha <span class="text-red-500">*</span></label>
-                            <input type="text" id="Work" required placeholder="Contoh: Jakarta" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Tempat Lahir <span class="text-red-500">*</span></label>
-                            <input type="text" id="birthPlace" required placeholder="Contoh: Jakarta" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
+                            <input type="text" id="Work" required placeholder="Contoh: Wiraswasta" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
                         </div>
 
                         <div class="md:col-span-2">
@@ -244,6 +239,11 @@
                             </select>
                             <input type="text" id="accountPurposeOther" placeholder="Sebutkan tujuan lainnya" class="hidden mt-2 w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
                         </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Tujuan Pembukaan Rekening Lainnya <span class="text-red-500">*</span></label>
+                            <input type="text" id="accountPurpose" required placeholder="Contoh: Penyimpanan atau lainnya" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
+                        </div>
 
                         <div class="md:col-span-2">
                             <label class="block text-sm font-medium text-slate-700 mb-1">Asal Sumber Dana <span class="text-red-500">*</span></label>
@@ -258,6 +258,11 @@
                                 <option value="Lainnya">Lainnya</option>
                             </select>
                             <input type="text" id="fundSourceOther" placeholder="Sebutkan sumber dana lainnya" class="hidden mt-2 w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Asal Sumber Dana Lainnya <span class="text-red-500">*</span></label>
+                            <input type="text" id="fundSource" required placeholder="Contoh: Keuntungan dari investasi atau dividen perusahaan" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
                         </div>
 
                         <div>
@@ -280,11 +285,6 @@
                         <i class="fa-solid fa-envelope text-brand-600"></i> Kontak & Alamat
                     </h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Email <span class="text-red-500">*</span></label>
-                            <input type="email" id="email" required placeholder="nama@email.com" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
-                        </div>
-
                         <div>
                             <label class="block text-sm font-medium text-slate-700 mb-1">Nomor Telepon / WhatsApp <span class="text-red-500">*</span></label>
                             <input type="tel" id="phone" required placeholder="081234567890" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
@@ -365,7 +365,7 @@
                         <div class="w-36 h-48 rounded-xl overflow-hidden border-2 border-slate-300 shadow-md bg-slate-100">
                             <img id="reviewPhoto" src="" alt="Foto Profil" class="w-full h-full object-cover">
                         </div>
-                        <span class="text-xs text-slate-400 font-medium mt-2">Foto Pemohon</span>
+                        <span class="text-xs text-slate-400 font-medium mt-2">Foto KTP Pemohon</span>
                     </div>
 
                     <!-- Information Table -->
@@ -377,8 +377,18 @@
                             </div>
 
                             <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Alias</span>
+                                <span id="reviewName" class="text-base font-bold text-slate-800"></span>
+                            </div>
+
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
                                 <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">NIK</span>
                                 <span id="reviewNik" class="text-base font-bold text-slate-800 tracking-wider"></span>
+                            </div>
+
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">NPWP</span>
+                                <span id="reviewNpwp" class="text-base font-bold text-slate-800 tracking-wider"></span>
                             </div>
 
                             <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
@@ -392,6 +402,16 @@
                             </div>
 
                             <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Kewarganegaraan</span>
+                                <span id="reviewCitizenship" class="text-base font-semibold text-slate-800"></span>
+                            </div>
+
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Status Pernikahan</span>
+                                <span id="reviewGender" class="text-base font-semibold text-slate-800"></span>
+                            </div>
+
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
                                 <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Agama</span>
                                 <span id="reviewReligion" class="text-base font-semibold text-slate-800"></span>
                             </div>
@@ -400,17 +420,78 @@
                                 <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Nomor Telepon</span>
                                 <span id="reviewPhone" class="text-base font-semibold text-slate-800"></span>
                             </div>
-                        </div>
+                            </div>
 
-                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                            <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Email</span>
-                            <span id="reviewEmail" class="text-base font-semibold text-slate-800"></span>
-                        </div>
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Email</span>
+                                <span id="reviewEmail" class="text-base font-semibold text-slate-800"></span>
+                            </div>
 
-                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                            <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Alamat Lengkap</span>
-                            <span id="reviewAddress" class="text-base font-medium text-slate-800 leading-relaxed block"></span>
-                        </div>
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Alamat Lengkap</span>
+                                <span id="reviewAddress" class="text-base font-medium text-slate-800 leading-relaxed block"></span>
+                            </div>
+                        
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Pekerjaan</span>
+                                <span id="reviewJob" class="text-base font-semibold text-slate-800"></span>
+                            </div>
+
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Alamat Pekerjaan</span>
+                                <span id="reviewJobAddres" class="text-base font-semibold text-slate-800"></span>
+                            </div>
+
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Pendidikan</span>
+                                <span id="reviewEducation" class="text-base font-semibold text-slate-800"></span>
+                            </div>
+                        
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Penghasilan Perbulan</span>
+                                <span id="reviewIncome" class="text-base font-semibold text-slate-800"></span>
+                            </div>
+                        
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Volume / Omset per Bulan</span>
+                                <span id="reviewTurnover" class="text-base font-semibold text-slate-800"></span>
+                            </div>
+
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Tujuan Pembukaan Rekening</span>
+                                <span id="reviewPurpose" class="text-base font-semibold text-slate-800"></span>
+                            </div>
+
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 sm:col-span-2">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Asal Sumber Dana</span>
+                                <span id="reviewFund" class="text-base font-semibold text-slate-800"></span>
+                            </div>
+
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Nama Ibu Kandung</span>
+                                <span id="reviewMother" class="text-base font-semibold text-slate-800"></span>
+                            </div>
+
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 sm:col-span-2">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Nama Suami / Istri</span>
+                                <span id="reviewSpouse" class="text-base font-semibold text-slate-800"></span>
+                            </div>
+
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">Perwalian / Ahli Waris</h3>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                        <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Nama</span>
+                                        <span id="reviewHeirName" class="text-base font-semibold text-slate-800"></span>
+                            </div>
+                                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                    <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Status Hubungan</span>
+                                    <span id="reviewHeirRelation" class="text-base font-semibold text-slate-800"></span>
+                            </div>
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 sm:col-span-2">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Alamat</span>
+                                <span id="reviewHeirAddress" class="text-base font-medium text-slate-800 leading-relaxed block"></span>
+                            </div>           
                     </div>
                 </div>
 
@@ -569,6 +650,29 @@
             document.getElementById('removePhotoBtn').classList.add('hidden');
         }
 
+        function toggleOther(selectId, otherId) {
+            const sel = document.getElementById(selectId);
+            const other = document.getElementById(otherId);
+            if (sel.value === 'Lainnya') {
+                other.classList.remove('hidden');
+                other.required = true;
+        } else {
+            other.classList.add('hidden');
+            other.required = false;
+            other.value = '';
+        }
+    }
+        function formatRupiah(el) {
+            const digits = el.value.replace(/\D/g, '');
+            el.value = digits ? Number(digits).toLocaleString('id-ID') : '';
+    }
+        // Ambil nilai select, atau teks "Lainnya" jika dipilih
+        function getSelectOrOther(selectId, otherId) {
+            const val = document.getElementById(selectId).value;
+            return val === 'Lainnya'
+                ? 'Lainnya: ' + document.getElementById(otherId).value.trim()
+                : val;
+        }
         function handleFormSubmit(event) {
             event.preventDefault();
 
@@ -589,6 +693,22 @@
             const email = document.getElementById('email').value;
             const phone = document.getElementById('phone').value;
             const address = document.getElementById('address').value;
+            const citizenship    = document.getElementById('citizenship').value;
+            const npwp           = document.getElementById('npwp').value.trim() || '-';
+            const education      = document.getElementById('education').value;
+            const motherName     = document.getElementById('motherName').value;
+            const spouseName     = document.getElementById('spouseName').value.trim() || '-';
+            const job            = document.getElementById('job').value;
+            const jobAddress     = document.getElementById('jobAddress').value;
+            const income         = document.getElementById('income').value;
+            const turnoverRaw    = document.getElementById('turnover').value;
+            const turnover       = turnoverRaw ? 'Rp ' + turnoverRaw : '-';
+            const accountPurpose = getSelectOrOther('accountPurpose', 'accountPurposeOther');
+            const fundSource     = getSelectOrOther('fundSource', 'fundSourceOther');
+            const heirName       = document.getElementById('heirName').value;
+            const heirRelation   = document.getElementById('heirRelation').value;
+            const heirAddress    = document.getElementById('heirAddress').value;
+
 kirimKeMasterData({
     namaLengkap: fullName,
     nik: nik,
@@ -599,6 +719,20 @@ kirimKeMasterData({
     email: email,
     noTelepon: phone,
     alamat: address,
+    kewarganegaraan: citizenship,
+    npwp: npwp,
+    pendidikan: education,
+    namaIbuKandung: motherName,
+    namaPasangan: spouseName,
+    pekerjaan: job,
+    alamatPekerjaan: jobAddress,
+    penghasilanPerBulan: income,
+    omsetPerBulan: turnover,
+    tujuanPembukaanRekening: accountPurpose,
+    asalSumberDana: fundSource,
+    namaAhliWaris: heirName,
+    alamatAhliWaris: heirAddress,
+    hubunganAhliWaris: heirRelation,
 });
             // Format Birth Date to ID format (e.g. 17 Agustus 1995)
             const formattedDate = new Date(birthDateVal).toLocaleDateString('id-ID', {
@@ -617,6 +751,21 @@ kirimKeMasterData({
             document.getElementById('reviewPhone').innerText = phone;
             document.getElementById('reviewAddress').innerText = address;
             document.getElementById('reviewSignerName').innerText = fullName;
+            document.getElementById('reviewCitizenship').innerText = citizenship;
+            document.getElementById('reviewNpwp').innerText = npwp;
+            document.getElementById('reviewEducation').innerText = education;
+            document.getElementById('reviewMother').innerText = motherName;
+            document.getElementById('reviewSpouse').innerText = spouseName;
+            document.getElementById('reviewJob').innerText = job;
+            document.getElementById('reviewJobAddress').innerText = jobAddress;
+            document.getElementById('reviewIncome').innerText = income;
+            document.getElementById('reviewTurnover').innerText = turnover;
+            document.getElementById('reviewPurpose').innerText = accountPurpose;
+            document.getElementById('reviewFund').innerText = fundSource;
+            document.getElementById('reviewHeirName').innerText = heirName;
+            document.getElementById('reviewHeirRelation').innerText = heirRelation;
+            document.getElementById('reviewHeirAddress').innerText = heirAddress;
+
 
             // Set Photo & Signature Data URL
             document.getElementById('reviewPhoto').src = uploadedPhotoBase64;
