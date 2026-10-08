@@ -70,6 +70,41 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
         }
+
+        /* Header & footer khusus cetak: sembunyi di layar */
+        .print-header, .print-footer {
+            display: none;
+        }
+
+        @media print {
+            .print-header {
+                display: flex !important;
+                align-items: center;
+                justify-content: space-between;
+                border-bottom: 2px solid #1e293b;
+                padding-bottom: 12px;
+                margin-bottom: 20px;
+            }
+            .print-footer {
+                display: flex !important;
+                align-items: center;
+                justify-content: space-between;
+                border-top: 2px solid #1e293b;
+                padding-top: 12px;
+                margin-top: 24px;
+                font-size: 11px;
+                color: #475569;
+            }
+            .print-logo {
+                height: 60px;
+                width: auto;
+                object-fit: contain;
+            }
+            .print-footer .print-logo {
+                height: 36px;
+            }
+        }
+    </style>
     </style>
 </head>
 <body class="min-h-screen text-slate-800 antialiased py-8 px-4 sm:px-6 lg:px-8">
