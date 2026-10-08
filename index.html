@@ -339,6 +339,39 @@
                         </div>
                     </div>
                 </div>
+                <div>
+                    <!-- Pembukaan Rekening Tabungan -->
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-piggy-bank text-brand-600"></i> Pembukaan Rekening Tabungan
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Produk yang Dipilih <span class="text-red-500">*</span></label>
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <label class="flex items-center gap-3 flex-1 px-4 py-3 rounded-lg border border-slate-300 cursor-pointer hover:bg-slate-50 transition-colors">
+                                    <input type="checkbox" name="product" value='Tabungan "ARAYA"' class="w-4 h-4 accent-blue-600">
+                                    <span class="text-sm font-medium text-slate-700">Tabungan "ARAYA"</span>
+                                </label>
+                                <label class="flex items-center gap-3 flex-1 px-4 py-3 rounded-lg border border-slate-300 cursor-pointer hover:bg-slate-50 transition-colors">
+                                    <input type="checkbox" name="product" value='Tabungan "KU"' class="w-4 h-4 accent-blue-600">
+                                    <span class="text-sm font-medium text-slate-700">Tabungan "KU"</span>
+                                </label>
+                            </div>
+                            <p id="productError" class="text-xs text-red-500 mt-1 hidden font-medium">Pilih minimal satu produk tabungan!</p>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Rekening Lain yang Dimiliki</label>
+                            <input type="text" id="otherAccount" placeholder="Contoh: Tabungan BPR / Bank lain (kosongkan jika tidak ada)" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Nomor Rekening</label>
+                            <input type="text" id="otherAccountNo" inputmode="numeric" placeholder="Nomor rekening lain" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Signature Pad Section -->
                 <div>
@@ -539,6 +572,25 @@
             </div>
         </div>
 
+                                <!-- Pembukaan Rekening Tabungan (Review) -->
+                                <div class="mt-8">
+                                    <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">Pembukaan Rekening Tabungan</h3>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 sm:col-span-2">
+                                            <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Produk yang Dipilih</span>
+                                            <span id="reviewProduct" class="text-base font-semibold text-slate-800"></span>
+                                        </div>
+                                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                            <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Rekening Lain yang Dimiliki</span>
+                                            <span id="reviewOtherAccount" class="text-base font-semibold text-slate-800"></span>
+                                        </div>
+                                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                            <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Nomor Rekening</span>
+                                            <span id="reviewOtherAccountNo" class="text-base font-semibold text-slate-800"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
                     <!-- Signature Display Section -->
                                 <div class="mt-10 pt-6 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-end gap-6">
                                 <div class="text-xs text-slate-500 max-w-sm">
@@ -731,6 +783,14 @@
                 canvas.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return;
             }
+                        // Validate Produk Tabungan
+            const selectedProducts = Array.from(document.querySelectorAll('input[name="product"]:checked')).map(el => el.value);
+            if (selectedProducts.length === 0) {
+                document.getElementById('productError').classList.remove('hidden');
+                document.getElementById('productError').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+            document.getElementById('productError').classList.add('hidden');
 
             // Gather values
             const fullName = document.getElementById('fullName').value;
@@ -757,7 +817,10 @@
             const heirRelation   = document.getElementById('heirRelation').value;
             const heirAddress    = document.getElementById('heirAddress').value;
             const alias          = document.getElementById('alias').value.trim() || '-';  
-            const maritalStatus  = document.getElementById('maritalStatus').value;           
+            const maritalStatus  = document.getElementById('maritalStatus').value;  
+            const product        = selectedProducts.join(' & ');
+            const otherAccount   = document.getElementById('otherAccount').value.trim() || '-';
+            const otherAccountNo = document.getElementById('otherAccountNo').value.trim() || '-';
 
 kirimKeMasterData({
     namaLengkap: fullName,
@@ -784,6 +847,9 @@ kirimKeMasterData({
     hubunganAhliWaris: heirRelation,
     aliasNama: alias,     
     statusPernikahan: maritalStatus,
+    produkDipilih: product,
+    rekeningLain: otherAccount,
+    nomorRekeningLain: otherAccountNo,
 });
             // Format Birth Date to ID format (e.g. 17 Agustus 1995)
             const formattedDate = new Date(birthDateVal).toLocaleDateString('id-ID', {
@@ -816,7 +882,10 @@ kirimKeMasterData({
             document.getElementById('reviewHeirRelation').innerText = heirRelation;
             document.getElementById('reviewHeirAddress').innerText = heirAddress;
             document.getElementById('reviewAlias').innerText = alias;                
-            document.getElementById('reviewMarital').innerText = maritalStatus; 
+            document.getElementById('reviewMarital').innerText = maritalStatus;
+            document.getElementById('reviewProduct').innerText = product;
+            document.getElementById('reviewOtherAccount').innerText = otherAccount;
+            document.getElementById('reviewOtherAccountNo').innerText = otherAccountNo;
 
 
             // Set Photo & Signature Data URL
