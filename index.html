@@ -72,9 +72,7 @@
         }
 
         /* Header & footer khusus cetak: sembunyi di layar */
-        .print-header, .print-footer {
-            display: none;
-        }
+        .print-header, .print-footer { display: none; }
 
         @media print {
             @page { margin: 10mm; }
@@ -86,18 +84,6 @@
                 display: block;
                 width: 100%;
                 height: auto;
-            }
-            .print-company {
-                text-align: center;
-                margin-top: 10px;
-                line-height: 1.4;
-            }
-            .print-company .nama  { font-size: 16px; font-weight: 700; color: #0f172a; }
-            .print-company .info  { font-size: 11px; color: #475569; }
-            .print-company .judul {
-                font-size: 14px; font-weight: 700; margin-top: 8px;
-                border-top: 1px solid #1e293b; border-bottom: 1px solid #1e293b;
-                padding: 4px 0; letter-spacing: 1px;
             }
         }
     </style>
@@ -401,14 +387,9 @@
 
             <!-- Review Card Container -->
             <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-8 sm:p-12 print-card">
-                <!-- Header Cetak (logo atas) -->
+                <!-- Header Cetak -->
                 <div class="print-header">
-                    <img src="banner-bpr.png" alt="BPR Araya Arta" class="print-banner">
-                <div class="print-company">
-                    <div class="nama">PT. BPR ARAYA ARTA</div>
-                    <div class="info">Jl. HM. Sarbini No. 87 Kebumen</div>
-                    <div class="info">Telp. 0287-382132, Fax. 0287-385445</div>
-                    <div class="judul">APLIKASI PEMBUKAAN REKENING</div>
+                    <img src="header-bpr.png" alt="PT. BPR Araya Arta" class="print-banner">
                 </div>
             </div>
                 <!-- Header Card -->
@@ -572,9 +553,9 @@
                             <img id="reviewSignature" src="" alt="Tanda Tangan" class="max-h-full max-w-full object-contain">
                         </div>
                         <span id="reviewSignerName" class="text-xs font-bold text-slate-700 mt-2"></span>
-                <!-- Footer Cetak (logo bawah) -->
-                <div class="print-footer">
-                    <img src="banner-bpr.png" alt="BPR Araya Arta" class="print-banner">
+                    <!-- Footer Cetak -->
+                    <div class="print-footer">
+                        <img src="banner-bpr.png" alt="Bank Sahabat Anak Negeri" class="print-banner">
                     </div>
                 </div>
             </div>
