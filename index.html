@@ -77,31 +77,27 @@
         }
 
         @media print {
-            .print-header {
-                display: flex !important;
-                align-items: center;
-                justify-content: space-between;
-                border-bottom: 2px solid #1e293b;
-                padding-bottom: 12px;
-                margin-bottom: 20px;
+            @page { margin: 10mm; }
+
+            .print-header { display: block !important; margin-bottom: 16px; }
+            .print-footer { display: block !important; margin-top: 24px; }
+
+            .print-banner {
+                display: block;
+                width: 100%;
+                height: auto;
             }
-            .print-footer {
-                display: flex !important;
-                align-items: center;
-                justify-content: space-between;
-                border-top: 2px solid #1e293b;
-                padding-top: 12px;
-                margin-top: 24px;
-                font-size: 11px;
-                color: #475569;
+            .print-company {
+                text-align: center;
+                margin-top: 10px;
+                line-height: 1.4;
             }
-            .print-logo {
-                height: 60px;
-                width: auto;
-                object-fit: contain;
-            }
-            .print-footer .print-logo {
-                height: 36px;
+            .print-company .nama  { font-size: 16px; font-weight: 700; color: #0f172a; }
+            .print-company .info  { font-size: 11px; color: #475569; }
+            .print-company .judul {
+                font-size: 14px; font-weight: 700; margin-top: 8px;
+                border-top: 1px solid #1e293b; border-bottom: 1px solid #1e293b;
+                padding: 4px 0; letter-spacing: 1px;
             }
         }
     </style>
@@ -407,10 +403,12 @@
             <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-8 sm:p-12 print-card">
                 <!-- Header Cetak (logo atas) -->
                 <div class="print-header">
-                    <img src="logo.png" alt="Logo" class="print-logo">
-                <div style="text-align:right;">
-                    <div style="font-size:18px;font-weight:700;color:#0f172a;">NAMA PERUSAHAAN / BANK</div>
-                    <div style="font-size:11px;color:#475569;">Alamat lengkap perusahaan - Telp. (021) 000000</div>
+                    <img src="banner-bpr.png" alt="BPR Araya Arta" class="print-banner">
+                <div class="print-company">
+                    <div class="nama">PT. BPR ARAYA ARTA</div>
+                    <div class="info">Jl. HM. Sarbini No. 87 Kebumen</div>
+                    <div class="info">Telp. 0287-382132, Fax. 0287-385445</div>
+                    <div class="judul">APLIKASI PEMBUKAAN REKENING</div>
                 </div>
             </div>
                 <!-- Header Card -->
@@ -576,10 +574,7 @@
                         <span id="reviewSignerName" class="text-xs font-bold text-slate-700 mt-2"></span>
                 <!-- Footer Cetak (logo bawah) -->
                 <div class="print-footer">
-                    <img src="logo.png" alt="Logo" class="print-logo">
-                <div style="text-align:right;">
-                    <div>Dokumen ini dibuat secara elektronik melalui Formulir Data Diri Digital.</div>
-                    <div>www.bprarayaarta.co.id | bprarayaarta@yahoo.co.id</div>
+                    <img src="banner-bpr.png" alt="BPR Araya Arta" class="print-banner">
                     </div>
                 </div>
             </div>
