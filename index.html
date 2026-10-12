@@ -445,14 +445,6 @@
                             </div>
                             <p id="productError" class="text-xs text-red-500 mt-1 hidden font-medium">Pilih minimal satu produk tabungan!</p>
                             
-                            <!-- Pernyataan Tabungan Arisan (muncul jika arisan dipilih) -->
-                            <div id="arisanBox" class="hidden mt-4 p-4 rounded-xl border border-amber-200 bg-amber-50">
-                                <p class="text-sm text-slate-700 leading-relaxed">
-                                    Bahwa saya telah mengerti dan memahami dengan seluruh ketentuan tabungan arisan di PT. BPR ARAYA ARTA maka dengan ini saya menyatakan bersedia menjadi anggota tabungan arisan di PT. BPR ARAYA ARTA. Saya bersedia dan saya mendaftarkan diri untuk mengikuti sebanyak
-                                    <input type="number" id="arisanCount" min="1" inputmode="numeric" placeholder="..." class="inline-block w-20 mx-1 px-2 py-1 text-center rounded-md border border-slate-300 bg-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none">
-                                    nomor kepesertaan.
-                                </p>
-                            </div>
                         </div>
 
                         <div>
@@ -471,6 +463,9 @@
                         <h2 class="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
                             <i class="fa-solid fa-file-signature text-brand-600"></i> Pernyataan
                         </h2>
+
+                    <!-- Pernyataan umum (default) -->
+                    <div id="stmtStandard">
                         <p class="text-sm text-slate-700 leading-relaxed">
                             Dengan ini saya menyatakan bahwa data tersebut di atas adalah data diri saya yang sebenarnya. Saya tunduk dan patuh pada peraturan dan ketentuan Bank, apabila saya menggunakan rekening untuk tujuan melanggar peraturan maka saya sanggup :
                         </p>
@@ -478,11 +473,22 @@
                             <li>Rekening saya diblokir, dan atau ditutup oleh Bank.</li>
                             <li>Mempertanggungjawabkan secara hukum yang berlaku.</li>
                         </ol>
-                        <label class="flex items-start gap-3 mt-4 cursor-pointer">
-                            <input type="checkbox" id="agreeStatement" required class="mt-0.5 w-4 h-4 accent-blue-600">
-                            <span class="text-sm font-medium text-slate-700">Saya telah membaca dan menyetujui pernyataan di atas. <span class="text-red-500">*</span></span>
-                        </label>
                     </div>
+
+                    <!-- Pernyataan Tabungan Arisan (menggantikan pernyataan umum) -->
+                    <div id="stmtArisan" class="hidden">
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Bahwa saya telah mengerti dan memahami dengan seluruh ketentuan tabungan arisan di PT. BPR ARAYA ARTA maka dengan ini saya menyatakan bersedia menjadi anggota tabungan arisan di PT. BPR ARAYA ARTA. Saya bersedia dan saya mendaftarkan diri untuk mengikuti sebanyak
+                            <input type="number" id="arisanCount" min="1" inputmode="numeric" placeholder="..." class="inline-block w-20 mx-1 px-2 py-1 text-center rounded-md border border-slate-300 bg-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none">
+                            nomor kepesertaan.
+                        </p>
+                    </div>
+
+                    <label class="flex items-start gap-3 mt-4 cursor-pointer">
+                        <input type="checkbox" id="agreeStatement" required class="mt-0.5 w-4 h-4 accent-blue-600">
+                        <span class="text-sm font-medium text-slate-700">Saya telah membaca dan menyetujui pernyataan di atas. <span class="text-red-500">*</span></span>
+                    </label>
+                </div>
 
                 <!-- Signature Pad Section -->
                 <div>
@@ -699,22 +705,25 @@
                                             <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Nomor Rekening</span>
                                             <span id="reviewOtherAccountNo" class="text-base font-semibold text-slate-800"></span>
                                         </div>
-                                        <div id="reviewArisanBox" class="hidden mt-3 p-3 rounded-xl border border-slate-200 text-xs text-slate-600 leading-relaxed">
-                                            <p>Bahwa saya telah mengerti dan memahami dengan seluruh ketentuan tabungan arisan di PT. BPR ARAYA ARTA maka dengan ini saya menyatakan bersedia menjadi anggota tabungan arisan di PT. BPR ARAYA ARTA. Saya bersedia dan saya mendaftarkan diri untuk mengikuti sebanyak <b id="reviewArisanCount" class="text-slate-800"></b> nomor kepesertaan.</p>
-                                        </div>
                                     </div>
                                 </div>
 
                     <!-- Signature Display Section -->
-                                <div class="mt-10 pt-6 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-end gap-6">
-                                <div class="text-xs text-slate-500 max-w-md">
-                                    <p class="font-medium text-slate-700 mb-1">Pernyataan:</p>
-                                    <p>Dengan ini saya menyatakan bahwa data tersebut di atas adalah data diri saya yang sebenarnya. Saya tunduk dan patuh pada peraturan dan ketentuan Bank, apabila saya menggunakan rekening untuk tujuan melanggar peraturan maka saya sanggup :</p>
-                                    <ol class="list-decimal list-inside mt-1 space-y-0.5">
-                                        <li>Rekening saya diblokir, dan atau ditutup oleh Bank.</li>
-                                        <li>Mempertanggungjawabkan secara hukum yang berlaku.</li>
-                                    </ol>
-                                </div>
+                    <div class="text-xs text-slate-500 max-w-md">
+                        <p class="font-medium text-slate-700 mb-1">Pernyataan:</p>
+
+                        <div id="reviewStmtStandard">
+                            <p>Dengan ini saya menyatakan bahwa data tersebut di atas adalah data diri saya yang sebenarnya. Saya tunduk dan patuh pada peraturan dan ketentuan Bank, apabila saya menggunakan rekening untuk tujuan melanggar peraturan maka saya sanggup :</p>
+                            <ol class="list-decimal list-inside mt-1 space-y-0.5">
+                                <li>Rekening saya diblokir, dan atau ditutup oleh Bank.</li>
+                                <li>Mempertanggungjawabkan secara hukum yang berlaku.</li>
+                            </ol>
+                        </div>
+
+                        <div id="reviewStmtArisan" class="hidden">
+                            <p>Bahwa saya telah mengerti dan memahami dengan seluruh ketentuan tabungan arisan di PT. BPR ARAYA ARTA maka dengan ini saya menyatakan bersedia menjadi anggota tabungan arisan di PT. BPR ARAYA ARTA. Saya bersedia dan saya mendaftarkan diri untuk mengikuti sebanyak <b id="reviewArisanCount" class="text-slate-800"></b> nomor kepesertaan.</p>
+                        </div>
+                    </div>
 
                                 <div class="flex flex-col items-center">
                                 <span class="text-xs text-slate-500 mb-1">Kebumen, <span id="reviewSignDate"></span></span>
@@ -893,19 +902,14 @@
                 ? 'Lainnya: ' + document.getElementById(otherId).value.trim()
                 : val;
         }
-        // Tampilkan/sembunyikan pernyataan Tabungan Arisan
-        function toggleArisan() {
-            const checked = document.getElementById('productArisan').checked;
-            const box = document.getElementById('arisanBox');
-            const count = document.getElementById('arisanCount');
-            if (checked) {
-                box.classList.remove('hidden');
-                count.required = true;
-            } else {
-                box.classList.add('hidden');
-                count.required = false;
-                count.value = '';
-            }
+            // Pernyataan arisan menggantikan pernyataan umum
+            function toggleArisan() {
+                const checked = document.getElementById('productArisan').checked;
+                document.getElementById('stmtStandard').classList.toggle('hidden', checked);
+                document.getElementById('stmtArisan').classList.toggle('hidden', !checked);
+                const count = document.getElementById('arisanCount');
+                count.required = checked;
+                if (!checked) count.value = '';
         }
         function handleFormSubmit(event) {
             event.preventDefault();
@@ -1023,8 +1027,8 @@ kirimKeMasterData({
             document.getElementById('reviewProduct').innerText = product;
             document.getElementById('reviewOtherAccount').innerText = otherAccount;
             document.getElementById('reviewOtherAccountNo').innerText = otherAccountNo;
-            document.getElementById('reviewArisanBox').classList.toggle('hidden', !isArisan);
-            document.getElementById('reviewArisanCount').innerText = arisanCount;
+            document.getElementById('reviewStmtStandard').classList.toggle('hidden', isArisan);
+            document.getElementById('reviewStmtArisan').classList.toggle('hidden', !isArisan);
 
 
             // Set Photo & Signature Data URL
