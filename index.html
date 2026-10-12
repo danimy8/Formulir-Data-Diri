@@ -966,7 +966,24 @@
                 count.required = checked;
                 if (!checked) count.value = '';
         }
-        function handleFormSubmit(event) {
+        // Perkecil foto agar ringan dikirim (maks 1200px, JPEG kualitas 80%)
+        function compressImage(dataUrl, maxSize) {
+            return new Promise(resolve => {
+                if (!dataUrl) return resolve('');
+                const img = new Image();
+                img.onload = () => {
+                    const scale = Math.min(1, maxSize / Math.max(img.width, img.height));
+                    const c = document.createElement('canvas');
+                    c.width = Math.round(img.width * scale);
+                    c.height = Math.round(img.height * scale);
+                    c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+                    resolve(c.toDataURL('image/jpeg', 0.8));
+                };
+                img.onerror = () => resolve('');
+                img.src = dataUrl;
+            });
+        }
+        async function handleFormSubmit(event) {
             event.preventDefault();
 
             // Validate Signature
@@ -1045,6 +1062,8 @@ kirimKeMasterData({
     rekeningLain: otherAccount,
     nomorRekeningLain: otherAccountNo,
     jumlahKepesertaanArisan: arisanCount,
+    fotoKtp: await compressImage(uploadedPhotoBase64, 1200),
+    tandaTangan: canvas.toDataURL('image/png'),
 });
             // Format Birth Date to ID format (e.g. 17 Agustus 1995)
             const formattedDate = new Date(birthDateVal).toLocaleDateString('id-ID', {
