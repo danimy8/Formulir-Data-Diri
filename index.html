@@ -30,21 +30,6 @@
             }
         }
     </script>
-        /* ===== TATA LETAK TANDA TANGAN: pihak bank di samping pemohon ===== */
-        .sign-section { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; }
-        .sign-row { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; margin-top: 16px; }
-        .sign-row .bank-sign { flex: 1 1 0; min-width: 0; margin-top: 0; }
-        .applicant-sign { margin-left: auto; }
-        @media (min-width: 640px) { .sign-row { flex-direction: row; } }
-
-        @media print {
-            .sign-section { margin-top: 8px !important; padding-top: 6px !important; break-inside: avoid; }
-            .sign-section .stmt-box { font-size: 8px !important; line-height: 1.35 !important; max-width: none !important; }
-            .sign-row { flex-direction: row !important; align-items: flex-end !important; gap: 10px !important; margin-top: 6px !important; }
-            .sign-row .bank-sign { margin-top: 0 !important; }
-            .applicant-sign span { font-size: 8px !important; }
-            .applicant-sign > div { width: 140px !important; height: 56px !important; }
-        }
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -182,7 +167,8 @@
             .print-card > .mt-10 > div:last-child > div { width: 150px !important; height: 60px !important; }
             .print-card { zoom: 0.9; }
             }
-                /* ===== TANDA TANGAN PIHAK BANK ===== */
+        
+            /* ===== TANDA TANGAN PIHAK BANK ===== */
             .bank-sign { break-inside: avoid; }
             @media print {
             .bank-sign { margin-top: 8px !important; gap: 6px !important; }
@@ -191,6 +177,22 @@
             .bank-sign-space { height: 42px !important; }
             .bank-sign-note  { font-size: 7.5px !important; }
             }
+        
+            /* ===== TATA LETAK TANDA TANGAN: pihak bank di samping pemohon ===== */
+            .sign-section { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; }
+            .sign-row { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; margin-top: 16px; }
+            .sign-row .bank-sign { flex: 1 1 0; min-width: 0; margin-top: 0; }
+            .applicant-sign { margin-left: auto; }
+            @media (min-width: 640px) { .sign-row { flex-direction: row; } }
+
+            @media print {
+                .sign-section { margin-top: 8px !important; padding-top: 6px !important; break-inside: avoid; }
+                .sign-section .stmt-box { font-size: 8px !important; line-height: 1.35 !important; max-width: none !important; }
+                .sign-row { flex-direction: row !important; align-items: flex-end !important; gap: 10px !important; margin-top: 6px !important; }
+                .sign-row .bank-sign { margin-top: 0 !important; }
+                .applicant-sign span { font-size: 8px !important; }
+                .applicant-sign > div { width: 140px !important; height: 56px !important; }
+        }
     </style>
 </head>
 <body class="min-h-screen text-slate-800 antialiased py-8 px-4 sm:px-6 lg:px-8">
