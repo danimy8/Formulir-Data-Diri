@@ -438,8 +438,21 @@
                                     <input type="checkbox" name="product" value='Tabungan "KU"' class="w-4 h-4 accent-blue-600">
                                     <span class="text-sm font-medium text-slate-700">Tabungan "KU"</span>
                                 </label>
+                                <label class="flex items-center gap-3 flex-1 px-4 py-3 rounded-lg border border-slate-300 cursor-pointer hover:bg-slate-50 transition-colors">
+                                    <input type="checkbox" id="productArisan" name="product" value="Tabungan Arisan" onchange="toggleArisan()" class="w-4 h-4 accent-blue-600">
+                                    <span class="text-sm font-medium text-slate-700">Tabungan Arisan</span>
+                                </label>
                             </div>
                             <p id="productError" class="text-xs text-red-500 mt-1 hidden font-medium">Pilih minimal satu produk tabungan!</p>
+                            
+                            <!-- Pernyataan Tabungan Arisan (muncul jika arisan dipilih) -->
+                            <div id="arisanBox" class="hidden mt-4 p-4 rounded-xl border border-amber-200 bg-amber-50">
+                                <p class="text-sm text-slate-700 leading-relaxed">
+                                    Bahwa saya telah mengerti dan memahami dengan seluruh ketentuan tabungan arisan di PT. BPR ARAYA ARTA maka dengan ini saya menyatakan bersedia menjadi anggota tabungan arisan di PT. BPR ARAYA ARTA. Saya bersedia dan saya mendaftarkan diri untuk mengikuti sebanyak
+                                    <input type="number" id="arisanCount" min="1" inputmode="numeric" placeholder="..." class="inline-block w-20 mx-1 px-2 py-1 text-center rounded-md border border-slate-300 bg-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none">
+                                    nomor kepesertaan.
+                                </p>
+                            </div>
                         </div>
 
                         <div>
@@ -501,19 +514,19 @@
                 </form>
             </div>
 
-        <!-- REVIEW / BIODATA CARD SECTION (HIDDEN BY DEFAULT) -->
-        <div id="reviewSection" class="hidden">
-            <!-- Review Actions Bar (No Print) -->
-            <div class="mb-6 flex flex-wrap items-center justify-between gap-4 no-print bg-white p-4 rounded-xl shadow-md border border-slate-100">
-                <button onclick="editForm()" class="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-lg transition-colors text-sm">
-                    <i class="fa-solid fa-arrow-left"></i> Edit Data Kembali
-                </button>
-                <div class="flex items-center gap-3">
-                    <button onclick="window.print()" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg shadow-md transition-all text-sm">
-                        <i class="fa-solid fa-print"></i> Cetak / Simpan PDF
+            <!-- REVIEW / BIODATA CARD SECTION (HIDDEN BY DEFAULT) -->
+            <div id="reviewSection" class="hidden">
+                <!-- Review Actions Bar (No Print) -->
+                <div class="mb-6 flex flex-wrap items-center justify-between gap-4 no-print bg-white p-4 rounded-xl shadow-md border border-slate-100">
+                    <button onclick="editForm()" class="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-lg transition-colors text-sm">
+                        <i class="fa-solid fa-arrow-left"></i> Edit Data Kembali
                     </button>
+                    <div class="flex items-center gap-3">
+                        <button onclick="window.print()" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg shadow-md transition-all text-sm">
+                            <i class="fa-solid fa-print"></i> Cetak / Simpan PDF
+                        </button>
+                    </div>
                 </div>
-            </div>
 
             <!-- Review Card Container -->
             <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-8 sm:p-12 print-card">
@@ -685,6 +698,9 @@
                                         <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
                                             <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Nomor Rekening</span>
                                             <span id="reviewOtherAccountNo" class="text-base font-semibold text-slate-800"></span>
+                                        </div>
+                                        <div id="reviewArisanBox" class="hidden mt-3 p-3 rounded-xl border border-slate-200 text-xs text-slate-600 leading-relaxed">
+                                            <p>Bahwa saya telah mengerti dan memahami dengan seluruh ketentuan tabungan arisan di PT. BPR ARAYA ARTA maka dengan ini saya menyatakan bersedia menjadi anggota tabungan arisan di PT. BPR ARAYA ARTA. Saya bersedia dan saya mendaftarkan diri untuk mengikuti sebanyak <b id="reviewArisanCount" class="text-slate-800"></b> nomor kepesertaan.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -877,6 +893,20 @@
                 ? 'Lainnya: ' + document.getElementById(otherId).value.trim()
                 : val;
         }
+        // Tampilkan/sembunyikan pernyataan Tabungan Arisan
+        function toggleArisan() {
+            const checked = document.getElementById('productArisan').checked;
+            const box = document.getElementById('arisanBox');
+            const count = document.getElementById('arisanCount');
+            if (checked) {
+                box.classList.remove('hidden');
+                count.required = true;
+            } else {
+                box.classList.add('hidden');
+                count.required = false;
+                count.value = '';
+            }
+        }
         function handleFormSubmit(event) {
             event.preventDefault();
 
@@ -924,6 +954,8 @@
             const product        = selectedProducts.join(' & ');
             const otherAccount   = document.getElementById('otherAccount').value.trim() || '-';
             const otherAccountNo = document.getElementById('otherAccountNo').value.trim() || '-';
+            const isArisan    = selectedProducts.includes('Tabungan Arisan');
+            const arisanCount = isArisan ? document.getElementById('arisanCount').value.trim() : '-';
 
 kirimKeMasterData({
     namaLengkap: fullName,
@@ -953,6 +985,7 @@ kirimKeMasterData({
     produkDipilih: product,
     rekeningLain: otherAccount,
     nomorRekeningLain: otherAccountNo,
+    jumlahKepesertaanArisan: arisanCount,
 });
             // Format Birth Date to ID format (e.g. 17 Agustus 1995)
             const formattedDate = new Date(birthDateVal).toLocaleDateString('id-ID', {
@@ -990,6 +1023,8 @@ kirimKeMasterData({
             document.getElementById('reviewProduct').innerText = product;
             document.getElementById('reviewOtherAccount').innerText = otherAccount;
             document.getElementById('reviewOtherAccountNo').innerText = otherAccountNo;
+            document.getElementById('reviewArisanBox').classList.toggle('hidden', !isArisan);
+            document.getElementById('reviewArisanCount').innerText = arisanCount;
 
 
             // Set Photo & Signature Data URL
