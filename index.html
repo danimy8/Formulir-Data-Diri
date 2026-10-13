@@ -168,30 +168,41 @@
             .print-card { zoom: 0.9; }
             }
         
-            /* ===== TANDA TANGAN PIHAK BANK ===== */
-            .bank-sign { break-inside: avoid; }
-            @media print {
-            .bank-sign { margin-top: 8px !important; gap: 6px !important; }
-            .bank-sign > div { padding: 4px 6px !important; border-color: #94a3b8 !important; }
-            .bank-sign-title { font-size: 8.5px !important; line-height: 11px !important; min-height: 22px !important; }
-            .bank-sign-space { height: 42px !important; }
-            .bank-sign-note  { font-size: 7.5px !important; }
+            /* ===== TANDA TANGAN: bank kecil, pemohon sedikit lebih besar ===== */
+            .sign-section { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; break-inside: avoid; }
+
+            .sign-grid  { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-top: 16px; }
+            .sign-bank  { display: flex; gap: 8px; }
+
+            .sign-box { border: 1px solid #94a3b8; border-radius: 8px; padding: 6px 8px; text-align: center; background: #fff; }
+            .sign-box.bank-only      { flex: 0 0 110px; }                       /* kecil */
+            .sign-box.applicant-box  { flex: 0 0 170px; border-color: #475569; } /* sedikit lebih besar */
+
+            .sign-box-title { font-size: 10.5px; font-weight: 600; line-height: 14px; min-height: 28px; color: #334155; }
+            .sign-box-space { height: 45px; display: flex; align-items: center; justify-content: center; }
+            .applicant-box .sign-box-space { height: 75px; }
+            .sign-box-space img { max-width: 100%; max-height: 100%; object-fit: contain; }
+            .sign-box-note  { font-size: 8.5px; color: #64748b; border-top: 1px solid #94a3b8; margin-top: 2px; padding-top: 2px; }
+            .applicant-box .sign-box-note { font-size: 10px; font-weight: 700; color: #334155; }
+
+            @media (max-width: 639px) {
+                .sign-grid { flex-direction: column; align-items: stretch; }
+                .sign-bank { flex-direction: column; }
+                .sign-box.bank-only, .sign-box.applicant-box { flex: none; }
             }
-        
-            /* ===== TATA LETAK TANDA TANGAN: pihak bank di samping pemohon ===== */
-            .sign-section { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; }
-            .sign-row { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; margin-top: 16px; }
-            .sign-row .bank-sign { flex: 1 1 0; min-width: 0; margin-top: 0; }
-            .applicant-sign { margin-left: auto; }
-            @media (min-width: 640px) { .sign-row { flex-direction: row; } }
 
             @media print {
-                .sign-section { margin-top: 8px !important; padding-top: 6px !important; break-inside: avoid; }
-                .sign-section .stmt-box { font-size: 8px !important; line-height: 1.35 !important; max-width: none !important; }
-                .sign-row { flex-direction: row !important; align-items: flex-end !important; gap: 10px !important; margin-top: 6px !important; }
-                .sign-row .bank-sign { margin-top: 0 !important; }
-                .applicant-sign span { font-size: 9px !important; }
-                .applicant-sign > div { width: 190px !important; height: 82px !important; }
+                .sign-section { margin-top: 8px !important; padding-top: 6px !important; }
+                .sign-section .stmt-box { font-size: 8px !important; line-height: 1.35 !important; }
+                .sign-grid { flex-direction: row !important; align-items: flex-end !important; margin-top: 6px !important; gap: 10px !important; }
+                .sign-bank { flex-direction: row !important; gap: 6px !important; }
+                .sign-box.bank-only     { flex: 0 0 95px !important; padding: 3px 5px !important; }
+                .sign-box.applicant-box { flex: 0 0 140px !important; padding: 4px 6px !important; }
+                .sign-box-title { font-size: 8px !important; line-height: 10px !important; min-height: 20px !important; }
+                .sign-box-space { height: 36px !important; }
+                .applicant-box .sign-box-space { height: 56px !important; }
+                .sign-box-note  { font-size: 7px !important; }
+                .applicant-box .sign-box-note { font-size: 8.5px !important; }
             }
     </style>
 </head>
@@ -751,12 +762,14 @@
                             </div>
                         </div>
 
-                        <!-- Tanda tangan: 3 kotak pihak bank + 1 kotak pemohon (ukuran sama) -->
+                        <!-- Tanda tangan -->
                         <div class="sign-grid">
-                            <div class="sign-box bank-only">
-                                <p class="sign-box-title">Pengesahan Bank /<br>Pengawasan</p>
-                                <div class="sign-box-space"></div>
-                                <p class="sign-box-note">Nama &amp; Tanda Tangan</p>
+                            <!-- Pihak Bank (kecil) -->
+                            <div class="sign-bank">
+                                <div class="sign-box bank-only">
+                                    <p class="sign-box-title">Pengesahan Bank /<br>Pengawasan</p>
+                                    <div class="sign-box-space"></div>
+                                    <p class="sign-box-note">Nama &amp; Tanda Tangan</p>
                             </div>
                             <div class="sign-box bank-only">
                                 <p class="sign-box-title">Pelayanan</p>
@@ -768,6 +781,9 @@
                                 <div class="sign-box-space"></div>
                                 <p class="sign-box-note">Nama &amp; Tanda Tangan</p>
                             </div>
+                            </div>
+
+                            <!-- Pemohon (lebih besar) -->
                             <div class="sign-box applicant-box">
                                 <p class="sign-box-title">Kebumen, <span id="reviewSignDate"></span><br>Tanda Tangan Pemohon</p>
                                 <div class="sign-box-space">
@@ -775,6 +791,7 @@
                                 </div>
                                 <p id="reviewSignerName" class="sign-box-note"></p>
                             </div>
+                        </div>
                         </div>
 
                             <!-- Tanda Tangan Pemohon -->
