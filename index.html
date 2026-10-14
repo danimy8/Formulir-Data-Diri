@@ -279,9 +279,11 @@
                             <label for="photoInput" class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-300 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer shadow-sm transition-colors">
                                 <i class="fa-solid fa-upload text-brand-600"></i> Pilih Foto
                             </label>
-                            <input type="file" id="photoInput" accept="image/*" class="hidden" onchange="previewImage(event)" required>
+                            <input type="file" id="photoInput" accept="image/*" class="hidden" onchange="previewImage(event)">
                             <p class="text-xs text-slate-500">Gunakan format JPG, PNG, atau WEBP. Ukuran file disarankan di bawah 2MB.</p>
                             <button type="button" id="removePhotoBtn" onclick="removePhoto()" class="hidden text-xs text-red-600 hover:underline font-medium">Hapus Foto</button>
+                            <p id="photoError" class="text-xs text-red-500 hidden font-medium">Foto KTP wajib diupload ya!</p>
+
                         </div>
                     </div>
                 </div>
@@ -669,6 +671,8 @@
 
             <!-- REVIEW / BIODATA CARD SECTION (HIDDEN BY DEFAULT) -->
             <div id="reviewSection" class="hidden">
+                <!-- Status penyimpanan data -->
+                <div id="saveStatus" class="no-print hidden mb-4 p-4 rounded-xl border text-sm font-medium"></div>
                 <!-- Review Actions Bar (No Print) -->
                 <div class="mb-6 flex flex-wrap items-center justify-between gap-4 no-print bg-white p-4 rounded-xl shadow-md border border-slate-100">
                     <button onclick="editForm()" class="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-lg transition-colors text-sm">
@@ -919,7 +923,7 @@
                             <div id="specimenSection" class="hidden max-w-4xl mx-auto mt-8 specimen-page">
                                 <div class="specimen-card">
                                     <div class="print-header">
-                                        <img src="header-bpr.png" alt="PT. BPR Araya Arta" class="print-banner">
+                                        <img src="header-spesimen.png" alt="PT. BPR Araya Arta" class="print-banner">
                                     </div>
                                     
                                     <div class="spec-row"><span>Jenis Nasabah</span><span>:</span>
@@ -978,17 +982,20 @@
         let isSigned2 = false;
         
         const API_URL = "https://script.google.com/macros/s/AKfycbwnX680ihHaIcaOvo5Rm6IcBNaWYwAdCUFwhMNmYyrXmQHRNi9knd8GQVlKTgrpH4nKCw/exec";
+let lastPayload = null;   // disimpan supaya bisa dikirim ulang
+
         async function kirimKeMasterData(data) {
+        lastPayload = data;
         try {
-            await fetch(API_URL, {
+            const res = await fetch(API_URL, {
                 method: "POST",
-                body: JSON.stringify({
-                    action: "create",
-                    data: data
-                }),
+                body: JSON.stringify({ action: "create", data: data }),
             });
+            const hasil = await res.json();
+            return hasil.success === true;   // true = tersimpan, false = ditolak server
         } catch (err) {
             console.error("Gagal mengirim ke master data:", err);
+            return false;                    // internet putus / server tidak merespons
         }
     }
         // Canvas Setup
@@ -1095,6 +1102,7 @@
                     preview.classList.remove('hidden');
                     document.getElementById('photoPlaceholder').classList.add('hidden');
                     document.getElementById('removePhotoBtn').classList.remove('hidden');
+                    document.getElementById('photoError').classList.add('hidden');
                 };
                 reader.readAsDataURL(file);
             }
@@ -1165,6 +1173,12 @@
         async function handleFormSubmit(event) {
             event.preventDefault();
 
+            if (!uploadedPhotoBase64) {
+            document.getElementById('photoError').classList.remove('hidden');
+            document.getElementById('photoError').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+}
+
             // Validate Signature
             if (!isSigned) {
                 document.getElementById('sigError').classList.remove('hidden');
@@ -1225,6 +1239,7 @@
             const isArisan    = selectedProducts.includes('Tabungan Arisan');
             const arisanCount = isArisan ? document.getElementById('arisanCount').value.trim() : '-';
 
+tampilStatus('loading');
 kirimKeMasterData({
     namaLengkap: fullName,
     nik: nik,
@@ -1256,7 +1271,7 @@ kirimKeMasterData({
     jumlahKepesertaanArisan: arisanCount,
     fotoKtp: await compressImage(uploadedPhotoBase64, 1200),
     tandaTangan: canvas.toDataURL('image/png'),
-});
+})}).then(ok => tampilStatus(ok ? 'ok' : 'gagal'));
             // Format Birth Date to ID format (e.g. 17 Agustus 1995)
             const formattedDate = new Date(birthDateVal).toLocaleDateString('id-ID', {
                 day: 'numeric',
@@ -1413,6 +1428,35 @@ kirimKeMasterData({
                 document.getElementById('specSign2').src = perusahaan ? canvas2.toDataURL('image/png') : '';
                 document.getElementById('specStampImg').src = perusahaan ? stampBase64 : '';
             }
+        
+            // Menampilkan status penyimpanan di halaman review
+            function tampilStatus(state) {
+                const box = document.getElementById('saveStatus');
+                box.className = 'no-print mb-4 p-4 rounded-xl border text-sm font-medium';
+
+            if (state === 'loading') {
+                box.classList.add('bg-amber-50', 'border-amber-200', 'text-amber-800');
+                box.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Menyimpan data ke master data...';
+            } else if (state === 'ok') {
+                box.classList.add('bg-emerald-50', 'border-emerald-200', 'text-emerald-800');
+                box.innerHTML = '<i class="fa-solid fa-circle-check mr-2"></i> Data berhasil tersimpan di master data.';
+            } else {
+                box.classList.add('bg-red-50', 'border-red-200', 'text-red-800');
+                box.innerHTML =
+                    '<div class="flex flex-wrap items-center justify-between gap-3">' +
+                    '<span><i class="fa-solid fa-triangle-exclamation mr-2"></i> Data GAGAL tersimpan. Periksa koneksi internet, lalu kirim ulang.</span>' +
+                    '<button type="button" onclick="kirimUlang()" class="px-4 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold">Kirim Ulang</button>' +
+                    '</div>';
+            }
+        }
+
+        // Tombol "Kirim Ulang"
+        async function kirimUlang() {
+            if (!lastPayload) return;
+            tampilStatus('loading');
+            const ok = await kirimKeMasterData(lastPayload);
+            tampilStatus(ok ? 'ok' : 'gagal');
+        }
 
             function editForm() {
                 document.getElementById('specimenSection').classList.add('hidden');
