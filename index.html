@@ -224,7 +224,9 @@
             .spec-ttd { height: 62px; display: flex; align-items: center; gap: 6px; }
             .spec-ttd + .spec-ttd { border-top: 1px dashed #111; }
             .spec-ttd img { max-height: 100%; max-width: 85%; object-fit: contain; }
-            .spec-stamp { height: 140px; }
+            .spec-stamp { height: 140px; display: flex; align-items: center; justify-content: center; }
+            .spec-stamp img { max-width: 100%; max-height: 100%; object-fit: contain; }
+            .spec-box.single { grid-template-columns: 1fr; }
             .spec-right { font-size: 12px; text-align: center; }
             .spec-right .space { height: 70px; }
             .spec-foot { font-size: 11px; margin-top: 4px; }
@@ -562,46 +564,74 @@
                         <span class="text-sm font-medium text-slate-700">Saya telah membaca dan menyetujui pernyataan di atas. <span class="text-red-500">*</span></span>
                     </label>
                 </div>
-                        <!-- Spesimen Tanda Tangan Nasabah -->
-                        <div class="p-4 bg-amber-50 rounded-xl border border-amber-200">
-                            <h2 class="text-base font-bold text-slate-900 mb-1 flex items-center gap-2">
-                                <i class="fa-solid fa-file-pen text-amber-600"></i> Spesimen Tanda Tangan Nasabah
-                            </h2>
-                            <p class="text-xs text-slate-500 mb-3">Dicetak sebagai lembar terpisah (kertas kuning). Nama dan tanda tangan diambil otomatis dari isian di atas.</p>
+                    <!-- Spesimen Tanda Tangan Nasabah -->
+                    <div class="p-4 bg-amber-50 rounded-xl border border-amber-200">
+                        <h2 class="text-base font-bold text-slate-900 mb-1 flex items-center gap-2">
+                            <i class="fa-solid fa-file-pen text-amber-600"></i> Spesimen Tanda Tangan Nasabah
+                        </h2>
+                        <p class="text-xs text-slate-500 mb-3">Dicetak sebagai lembar terpisah (kertas kuning). Nama dan tanda tangan diambil otomatis dari isian di atas.</p>
 
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Jenis Nasabah</label>
-                            <select id="specJenisNasabah" onchange="toggleSpesimen()" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none bg-white">
-                                <option value="Perorangan">Perorangan</option>
-                                <option value="Perusahaan">Perusahaan</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Keterangan</label>
-                            <select id="specRule" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none bg-white">
-                                <option value="Satu">Satu tanda tangan</option>
-                                <option value="Dua">Harus dua tanda tangan</option>
-                            </select>
-                        </div>
-                        <div class="md:col-span-2">
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Nomor Rekening (boleh dikosongkan, diisi pihak Bank)</label>
-                            <input type="text" id="specNoRekInput" inputmode="numeric" placeholder="Nomor rekening" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
-                        </div>
-
-                        <!-- Khusus Perusahaan -->
-                        <div id="specDireksiWrap" class="hidden md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="md:col-span-2">
-                                <label class="block text-sm font-medium text-slate-700 mb-1">Nama Perusahaan</label>
-                                <input type="text" id="specNamaPerusahaan" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Jenis Nasabah</label>
+                                <select id="specJenisNasabah" onchange="toggleSpesimen()" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none bg-white">
+                                    <option value="Perorangan">Perorangan (1 tanda tangan)</option>
+                                    <option value="Perusahaan">Perusahaan (2 tanda tangan + cap/stempel)</option>
+                                </select>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-1">Nama Direksi / Pimpinan 1</label>
-                                <input type="text" id="specDireksi1" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Nomor Rekening (boleh dikosongkan, diisi pihak Bank)</label>
+                                <input type="text" id="specNoRekInput" inputmode="numeric" placeholder="Nomor rekening" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
                             </div>
+
+                            <!-- Khusus Perusahaan -->
+                            <div id="specDireksiWrap" class="hidden md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="md:col-span-2">
+                                    <label class="block text-sm font-medium text-slate-700 mb-1">Nama Perusahaan <span class="text-red-500">*</span></label>
+                                    <input type="text" id="specNamaPerusahaan" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-1">Nama Direksi / Pimpinan 1 <span class="text-red-500">*</span></label>
+                                    <input type="text" id="specDireksi1" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
+                                    <p class="text-xs text-slate-500 mt-1">Tanda tangan Direksi 1 memakai Tanda Tangan Digital di bagian bawah formulir.</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-1">Nama Direksi / Pimpinan 2 <span class="text-red-500">*</span></label>
+                                    <input type="text" id="specDireksi2" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
+                                </div>
+
+                                <!-- Tanda tangan Direksi 2 -->
+                                <div>
+                                    <div class="flex items-center justify-between mb-1">
+                                        <label class="block text-sm font-medium text-slate-700">Tanda Tangan Direksi 2 <span class="text-red-500">*</span></label>
+                                        <button type="button" onclick="clearSignature2()" class="text-xs font-semibold text-red-600 hover:underline">Hapus</button>
+                                    </div>
+                                    <div class="canvas-container relative w-full h-32 bg-white rounded-xl border-2 border-dashed border-slate-300 overflow-hidden cursor-crosshair">
+                                        <canvas id="sig2Canvas" class="w-full h-full"></canvas>
+                                        <div id="sig2Placeholder" class="absolute inset-0 pointer-events-none flex items-center justify-center text-slate-400 text-xs">
+                                            <i class="fa-solid fa-pen-nib mr-2"></i> Tanda tangan Direksi 2
+                                    </div>
+                                </div>
+                                <p id="sig2Error" class="text-xs text-red-500 mt-1 hidden font-medium">Tanda tangan Direksi 2 wajib diisi!</p>
+                            </div>
+
+                            <!-- Cap / Stempel -->
                             <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-1">Nama Direksi / Pimpinan 2</label>
-                                <input type="text" id="specDireksi2" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Cap / Stempel Perusahaan <span class="text-red-500">*</span></label>
+                                <div class="flex items-center gap-3 p-3 bg-white rounded-xl border border-dashed border-slate-300">
+                                    <div class="w-24 h-24 bg-slate-100 rounded-lg overflow-hidden flex items-center justify-center border border-slate-200">
+                                        <img id="stampPreview" src="" alt="Stempel" class="max-w-full max-h-full object-contain hidden">
+                                        <i id="stampPlaceholder" class="fa-solid fa-stamp text-2xl text-slate-400"></i>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label for="stampInput" class="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer">
+                                            <i class="fa-solid fa-upload text-brand-600"></i> Pilih Gambar
+                                        </label>
+                                        <input type="file" id="stampInput" accept="image/*" class="hidden" onchange="previewStamp(event)">
+                                        <p class="text-xs text-slate-500">Foto/scan cap perusahaan (JPG/PNG).</p>
+                                    </div>
+                                </div>
+                                <p id="stampError" class="text-xs text-red-500 mt-1 hidden font-medium">Cap/stempel perusahaan wajib diupload!</p>
                             </div>
                         </div>
                     </div>
@@ -885,45 +915,45 @@
                 </div>
                 </div>
 
-                        <!-- ===== SPESIMEN TANDA TANGAN NASABAH (halaman terpisah saat dicetak) ===== -->
-                        <div id="specimenSection" class="hidden max-w-4xl mx-auto mt-8 specimen-page">
-                            <div class="specimen-card">
-                                <div class="print-header">
-                                    <img src="header-bpr.png" alt="PT. BPR Araya Arta" class="print-banner">
-                                </div>
-                                <h2 class="spec-title">SPESIMEN TANDA TANGAN NASABAH</h2>
+                            <!-- ===== SPESIMEN TANDA TANGAN NASABAH (halaman terpisah saat dicetak) ===== -->
+                            <div id="specimenSection" class="hidden max-w-4xl mx-auto mt-8 specimen-page">
+                                <div class="specimen-card">
+                                    <div class="print-header">
+                                        <img src="header-bpr.png" alt="PT. BPR Araya Arta" class="print-banner">
+                                    </div>
+                                    <h2 class="spec-title">SPESIMEN TANDA TANGAN NASABAH</h2>
 
-                                <div class="spec-row"><span>Jenis Nasabah</span><span>:</span>
-                                    <span><span id="specPerorangan">Perorangan</span> &nbsp;/&nbsp; <span id="specPerusahaan">Perusahaan</span> *)</span></div>
-                                <div class="spec-row"><span>Jenis Rekening</span><span>:</span>
-                                    <span>Tabungan &nbsp;/&nbsp; <span class="coret">Deposito</span> &nbsp;/&nbsp; <span class="coret">Pinjaman</span> *)</span></div>
-                                <div class="spec-row"><span>No. Rek.</span><span>:</span>
-                                    <span><span id="specNoRek" class="spec-line"></span></span></div>
-                                <div class="spec-row"><span>Nama Nasabah / Perusahaan *)</span><span>:</span>
-                                    <span id="specNama" style="font-weight:700"></span></div>
-                                <div class="spec-row"><span>Nama Direksi / Pimpinan *)</span><span>:</span>
-                                    <span>1. <span id="specDireksi1Out" class="spec-line" style="min-width:260px"></span></span></div>
-                                <div class="spec-row"><span></span><span></span>
-                                    <span>2. <span id="specDireksi2Out" class="spec-line" style="min-width:260px"></span></span></div>
+                                    <div class="spec-row"><span>Jenis Nasabah</span><span>:</span>
+                                        <span id="specJenisOut"></span></div>
+                                    <div class="spec-row"><span>Jenis Rekening</span><span>:</span>
+                                        <span>Tabungan</span></div>
+                                    <div class="spec-row"><span>No. Rek.</span><span>:</span>
+                                        <span><span id="specNoRek" class="spec-line"></span></span></div>
+                                    <div class="spec-row"><span id="specNamaLabel">Nama Nasabah</span><span>:</span>
+                                        <span id="specNama" style="font-weight:700"></span></div>
+                                    <div id="specDireksiRow1" class="spec-row"><span>Nama Direksi / Pimpinan</span><span>:</span>
+                                        <span>1. <span id="specDireksi1Out" class="spec-line" style="min-width:260px"></span></span></div>
+                                    <div id="specDireksiRow2" class="spec-row"><span></span><span></span>
+                                        <span>2. <span id="specDireksi2Out" class="spec-line" style="min-width:260px"></span></span></div>
 
-                                <p class="spec-note">
-                                    Bertindak untuk &amp; atas nama <span id="specBertNas">Nasabah</span> / <span id="specBertPer">Perusahaan</span> *)<br>
-                                    dalam berhubungan dengan PT. BPR ARAYA ARTA Kebumen
-                                </p>
+                                    <p class="spec-note">
+                                        Bertindak untuk &amp; atas nama <span id="specBertOut"></span><br>
+                                        dalam berhubungan dengan PT. BPR ARAYA ARTA Kebumen
+                                    </p>
 
-                                <div class="spec-row"><span>Keterangan</span><span>:</span>
-                                    <span><span id="specSatu">Satu tanda tangan</span> &nbsp;/&nbsp; <span id="specDua">Harus dua tanda tangan</span> *)</span></div>
+                                    <div class="spec-row"><span>Keterangan</span><span>:</span>
+                                        <span id="specKetOut"></span></div>
 
-                                <div class="spec-bottom" style="margin-top:10px">
-                                    <div class="spec-box">
-                                        <div class="spec-cell">
+                                    <div class="spec-bottom" style="margin-top:10px">
+                                        <div id="specBox" class="spec-box">
+                                            <div class="spec-cell">
                                             <div class="spec-cell-title">Contoh tanda tangan</div>
                                             <div class="spec-ttd">1. <img id="specSign1" src="" alt="Tanda tangan 1"></div>
-                                            <div class="spec-ttd">2.</div>
+                                            <div id="specTtd2" class="spec-ttd">2. <img id="specSign2" src="" alt="Tanda tangan 2"></div>
                                         </div>
-                                        <div class="spec-cell">
+                                        <div id="specStampCell" class="spec-cell">
                                             <div class="spec-cell-title">Cap / Stempel Perusahaan</div>
-                                            <div class="spec-stamp"></div>
+                                            <div class="spec-stamp"><img id="specStampImg" src="" alt="Cap Perusahaan"></div>
                                         </div>
                                     </div>
                                     <div class="spec-right">
@@ -934,7 +964,6 @@
                                         <div>Pejabat Bank</div>
                                     </div>
                                 </div>
-                                <p class="spec-foot">*) Coret yang tidak perlu</p>
 
                                 <div class="print-footer">
                                     <img src="banner-bpr.png" alt="Bank Sahabat Anak Negeri" class="print-banner">
@@ -946,6 +975,8 @@
     <script>
         let uploadedPhotoBase64 = '';
         let isSigned = false;
+        let stampBase64 = '';
+        let isSigned2 = false;
         
         const API_URL = "https://script.google.com/macros/s/AKfycbwnX680ihHaIcaOvo5Rm6IcBNaWYwAdCUFwhMNmYyrXmQHRNi9knd8GQVlKTgrpH4nKCw/exec";
         async function kirimKeMasterData(data) {
@@ -1149,6 +1180,19 @@
                 return;
             }
             document.getElementById('productError').classList.add('hidden');
+            // Validasi Khusus Perusahaan : tanda tangan ke-2 dan stempel wajib
+            if (document.getElementById('specJenisNasabah').value === 'Perusahaan') {
+                if (!isSigned2) {
+                    document.getElementById('sig2Error').classList.remove('hidden');
+                    canvas2.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+                if (!stampBase64) {
+                    document.getElementById('stampError').classList.remove('hidden');
+                    document.getElementById('stampError'). scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+            }
 
             // Gather values
             const fullName = document.getElementById('fullName').value;
@@ -1269,42 +1313,114 @@ kirimKeMasterData({
             window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         
+            // ===== Pad tanda tangan Direksi 2 (khusus Perusahaan) =====
+            const canvas2 = document.getElementById('sig2Canvas');
+            const ctx2 = canvas2.getContext('2d');
+            let isDrawing2 = false;
+
+            function sizeCanvas2() {
+                const r = canvas2.getBoundingClientRect();
+                if (!r.width) return;
+                canvas2.width = r.width;
+                canvas2.height = r.height;
+                ctx2.lineWidth = 2.5; ctx2.lineCap = 'round'; ctx2.lineJoin = 'round'; ctx2.strokeStyle = '#0f172a';
+                isSigned2 = false;
+                document.getElementById('sig2Placeholder').classList.remove('hidden');
+            }
+            function getPos2(e) {
+                const r = canvas2.getBoundingClientRect();
+                const t = e.touches ? e.touches[0] : e;
+                return { x: t.clientX - r.left, y: t.clientY - r.top };
+            }
+            function start2(e) {
+                isDrawing2 = true;
+                const p = getPos2(e);
+                ctx2.beginPath(); ctx2.moveTo(p.x, p.y);
+                document.getElementById('sig2Placeholder').classList.add('hidden');
+                document.getElementById('sig2Error').classList.add('hidden');
+                isSigned2 = true;
+            }
+            function draw2(e) {
+                if (!isDrawing2) return;
+                e.preventDefault();
+                const p = getPos2(e);
+                ctx2.lineTo(p.x, p.y); ctx2.stroke();
+            }
+            function stop2() { isDrawing2 = false; }
+            function clearSignature2() {
+                ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+                document.getElementById('sig2Placeholder').classList.remove('hidden');
+                isSigned2 = false;
+            }
+            canvas2.addEventListener('mousedown', start2);
+            canvas2.addEventListener('mousemove', draw2);
+            canvas2.addEventListener('mouseup', stop2);
+            canvas2.addEventListener('mouseleave', stop2);
+            canvas2.addEventListener('touchstart', start2);
+            canvas2.addEventListener('touchmove', draw2);
+            canvas2.addEventListener('touchend', stop2);
+
+            // ===== Upload cap / stempel =====
+            function previewStamp(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = e => {
+                    stampBase64 = e.target.result;
+                    const img = document.getElementById('stampPreview');
+                    img.src = stampBase64;
+                    img.classList.remove('hidden');
+                    document.getElementById('stampPlaceholder').classList.add('hidden');
+                    document.getElementById('stampError').classList.add('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+
             // Tampilkan isian Perusahaan hanya jika jenis nasabah = Perusahaan
             function toggleSpesimen() {
                 const perusahaan = document.getElementById('specJenisNasabah').value === 'Perusahaan';
                 document.getElementById('specDireksiWrap').classList.toggle('hidden', !perusahaan);
+                ['specNamaPerusahaan', 'specDireksi1', 'specDireksi2'].forEach(id => {
+                    document.getElementById(id).required = perusahaan;
+                });
+                if (perusahaan) sizeCanvas2();
             }
 
             // Isi lembar spesimen (kertas kuning)
             function isiSpesimen(namaNasabah, signatureDataUrl) {
                 const v = id => document.getElementById(id).value.trim();
                 const set = (id, text) => document.getElementById(id).innerText = text;
-                const coret = (id, kondisi) => document.getElementById(id).classList.toggle('coret', kondisi);
+                const show = (id, tampil) => document.getElementById(id).style.display = tampil ? '' : 'none';
 
-                const jenis = v('specJenisNasabah');   // Perorangan / Perusahaan
-                const rule  = v('specRule');           // Satu / Dua
+                const perusahaan = v('specJenisNasabah') === 'Perusahaan';
 
-                coret('specPerorangan', jenis !== 'Perorangan');
-                coret('specPerusahaan', jenis !== 'Perusahaan');
-                coret('specBertNas',    jenis !== 'Perorangan');
-                coret('specBertPer',    jenis !== 'Perusahaan');
-                coret('specSatu',       rule !== 'Satu');
-                coret('specDua',        rule !== 'Dua');
-
-                set('specNama', (jenis === 'Perusahaan' && v('specNamaPerusahaan')) ? v('specNamaPerusahaan') : namaNasabah);
+                set('specJenisOut', perusahaan ? 'Perusahaan' : 'Perorangan');
+                set('specNamaLabel', perusahaan ? 'Nama Perusahaan' : 'Nama Nasabah');
+                set('specNama', perusahaan ? v('specNamaPerusahaan') : namaNasabah);
                 set('specNoRek', v('specNoRekInput'));
-                set('specDireksi1Out', jenis === 'Perusahaan' ? v('specDireksi1') : '');
-                set('specDireksi2Out', jenis === 'Perusahaan' ? v('specDireksi2') : '');
+                set('specBertOut', perusahaan ? 'Perusahaan' : 'Nasabah');
+                set('specKetOut', perusahaan ? 'Harus dua tanda tangan' : 'Satu tanda tangan');
+                set('specDireksi1Out', perusahaan ? v('specDireksi1') : '');
+                set('specDireksi2Out', perusahaan ? v('specDireksi2') : '');
                 set('specTanggal', new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }));
+
+                show('specDireksiRow1', perusahaan);
+                show('specDireksiRow2', perusahaan);
+                show('specTtd2', perusahaan);
+                show('specStampCell', perusahaan);
+                document.getElementById('specBox').classList.toggle('single', !perusahaan);
+
                 document.getElementById('specSign1').src = signatureDataUrl;
+                document.getElementById('specSign2').src = perusahaan ? canvas2.toDataURL('image/png') : '';
+                document.getElementById('specStampImg').src = perusahaan ? stampBase64 : '';
             }
 
-        function editForm() {
-            document.getElementById('specimenSection').classList.add('hidden');
-            document.getElementById('reviewSection').classList.add('hidden');
-            document.getElementById('formSection').classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-    </script>
-</body>
+            function editForm() {
+                document.getElementById('specimenSection').classList.add('hidden');
+                document.getElementById('reviewSection').classList.add('hidden');
+                document.getElementById('formSection').classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+        </script>
+    </body>
 </html>
