@@ -208,6 +208,40 @@
                 .applicant-sign .sign-frame { height: 64px !important; }
                 .applicant-sign .sign-name { font-size: 8.5px !important; }
             }
+            /* ===== SPESIMEN TANDA TANGAN (kertas kuning, halaman terpisah) ===== */
+            .specimen-card { background: #fff6b0; border: 1px solid #e5d96b; border-radius: 16px; padding: 20px 26px; color: #1e293b; box-shadow: 0 10px 25px rgba(0,0,0,.08); }
+            .spec-title { text-align: center; font-weight: 800; letter-spacing: .06em; color: #b91c1c; font-size: 17px; margin: 8px 0 14px; }
+            .spec-row { display: grid; grid-template-columns: 190px 12px 1fr; font-size: 12.5px; line-height: 24px; }
+            .spec-line { display: inline-block; min-width: 170px; border-bottom: 1px dotted #475569; padding: 0 4px; font-weight: 600; }
+            .coret { text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: #b91c1c; opacity: .6; }
+            .spec-note { font-size: 12.5px; line-height: 20px; margin: 8px 0 10px; }
+
+            .spec-bottom { display: grid; grid-template-columns: 2fr 1fr; gap: 14px; align-items: end; }
+            .spec-box { display: grid; grid-template-columns: 1fr 1fr; border: 2px solid #111; background: rgba(255,255,255,.35); }
+            .spec-cell { padding: 4px 8px; font-size: 11.5px; }
+            .spec-cell + .spec-cell { border-left: 2px solid #111; }
+            .spec-cell-title { text-align: center; }
+            .spec-ttd { height: 62px; display: flex; align-items: center; gap: 6px; }
+            .spec-ttd + .spec-ttd { border-top: 1px dashed #111; }
+            .spec-ttd img { max-height: 100%; max-width: 85%; object-fit: contain; }
+            .spec-stamp { height: 140px; }
+            .spec-right { font-size: 12px; text-align: center; }
+            .spec-right .space { height: 70px; }
+            .spec-foot { font-size: 11px; margin-top: 4px; }
+
+            @media (max-width: 639px) {
+            .spec-row { grid-template-columns: 120px 10px 1fr; }
+            .spec-bottom { grid-template-columns: 1fr; }
+            }
+
+            @media print {
+                .specimen-page { break-before: page; page-break-before: always; max-width: none !important; margin: 0 !important; }
+                .specimen-card { box-shadow: none !important; border-radius: 0 !important; padding: 8px 10px !important;
+                    -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+                .specimen-card * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            /* Jika dicetak di kertas kuning asli, hapus warna latar: */
+                .specimen-card { background: transparent !important; border: none !important; } 
+            }
     </style>
 </head>
 <body class="min-h-screen text-slate-800 antialiased py-8 px-4 sm:px-6 lg:px-8">
@@ -528,6 +562,50 @@
                         <span class="text-sm font-medium text-slate-700">Saya telah membaca dan menyetujui pernyataan di atas. <span class="text-red-500">*</span></span>
                     </label>
                 </div>
+                        <!-- Spesimen Tanda Tangan Nasabah -->
+                        <div class="p-4 bg-amber-50 rounded-xl border border-amber-200">
+                            <h2 class="text-base font-bold text-slate-900 mb-1 flex items-center gap-2">
+                                <i class="fa-solid fa-file-pen text-amber-600"></i> Spesimen Tanda Tangan Nasabah
+                            </h2>
+                            <p class="text-xs text-slate-500 mb-3">Dicetak sebagai lembar terpisah (kertas kuning). Nama dan tanda tangan diambil otomatis dari isian di atas.</p>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Jenis Nasabah</label>
+                            <select id="specJenisNasabah" onchange="toggleSpesimen()" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none bg-white">
+                                <option value="Perorangan">Perorangan</option>
+                                <option value="Perusahaan">Perusahaan</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Keterangan</label>
+                            <select id="specRule" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none bg-white">
+                                <option value="Satu">Satu tanda tangan</option>
+                                <option value="Dua">Harus dua tanda tangan</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Nomor Rekening (boleh dikosongkan, diisi pihak Bank)</label>
+                            <input type="text" id="specNoRekInput" inputmode="numeric" placeholder="Nomor rekening" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
+                        </div>
+
+                        <!-- Khusus Perusahaan -->
+                        <div id="specDireksiWrap" class="hidden md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Nama Perusahaan</label>
+                                <input type="text" id="specNamaPerusahaan" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Nama Direksi / Pimpinan 1</label>
+                                <input type="text" id="specDireksi1" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Nama Direksi / Pimpinan 2</label>
+                                <input type="text" id="specDireksi2" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Signature Pad Section -->
                 <div>
@@ -799,13 +877,70 @@
                     </div>
                 </div>
                 
-                    <!-- Footer Cetak -->
-                    <div class="print-footer">
-                        <img src="banner-bpr.png" alt="Bank Sahabat Anak Negeri" class="print-banner">
+                        <!-- Footer Cetak -->
+                        <div class="print-footer">
+                            <img src="banner-bpr.png" alt="Bank Sahabat Anak Negeri" class="print-banner">
+                        </div>
                     </div>
                 </div>
-            </div>
-            </div>            
+                </div>
+
+                        <!-- ===== SPESIMEN TANDA TANGAN NASABAH (halaman terpisah saat dicetak) ===== -->
+                        <div id="specimenSection" class="hidden max-w-4xl mx-auto mt-8 specimen-page">
+                            <div class="specimen-card">
+                                <div class="print-header">
+                                    <img src="header-bpr.png" alt="PT. BPR Araya Arta" class="print-banner">
+                                </div>
+                                <h2 class="spec-title">SPESIMEN TANDA TANGAN NASABAH</h2>
+
+                                <div class="spec-row"><span>Jenis Nasabah</span><span>:</span>
+                                    <span><span id="specPerorangan">Perorangan</span> &nbsp;/&nbsp; <span id="specPerusahaan">Perusahaan</span> *)</span></div>
+                                <div class="spec-row"><span>Jenis Rekening</span><span>:</span>
+                                    <span>Tabungan &nbsp;/&nbsp; <span class="coret">Deposito</span> &nbsp;/&nbsp; <span class="coret">Pinjaman</span> *)</span></div>
+                                <div class="spec-row"><span>No. Rek.</span><span>:</span>
+                                    <span><span id="specNoRek" class="spec-line"></span></span></div>
+                                <div class="spec-row"><span>Nama Nasabah / Perusahaan *)</span><span>:</span>
+                                    <span id="specNama" style="font-weight:700"></span></div>
+                                <div class="spec-row"><span>Nama Direksi / Pimpinan *)</span><span>:</span>
+                                    <span>1. <span id="specDireksi1Out" class="spec-line" style="min-width:260px"></span></span></div>
+                                <div class="spec-row"><span></span><span></span>
+                                    <span>2. <span id="specDireksi2Out" class="spec-line" style="min-width:260px"></span></span></div>
+
+                                <p class="spec-note">
+                                    Bertindak untuk &amp; atas nama <span id="specBertNas">Nasabah</span> / <span id="specBertPer">Perusahaan</span> *)<br>
+                                    dalam berhubungan dengan PT. BPR ARAYA ARTA Kebumen
+                                </p>
+
+                                <div class="spec-row"><span>Keterangan</span><span>:</span>
+                                    <span><span id="specSatu">Satu tanda tangan</span> &nbsp;/&nbsp; <span id="specDua">Harus dua tanda tangan</span> *)</span></div>
+
+                                <div class="spec-bottom" style="margin-top:10px">
+                                    <div class="spec-box">
+                                        <div class="spec-cell">
+                                            <div class="spec-cell-title">Contoh tanda tangan</div>
+                                            <div class="spec-ttd">1. <img id="specSign1" src="" alt="Tanda tangan 1"></div>
+                                            <div class="spec-ttd">2.</div>
+                                        </div>
+                                        <div class="spec-cell">
+                                            <div class="spec-cell-title">Cap / Stempel Perusahaan</div>
+                                            <div class="spec-stamp"></div>
+                                        </div>
+                                    </div>
+                                    <div class="spec-right">
+                                        <div>Kebumen, <span id="specTanggal"></span></div>
+                                        <div>Pengesahan / Legalisasi</div>
+                                        <div class="space"></div>
+                                        <div>( ................................ )</div>
+                                        <div>Pejabat Bank</div>
+                                    </div>
+                                </div>
+                                <p class="spec-foot">*) Coret yang tidak perlu</p>
+
+                                <div class="print-footer">
+                                    <img src="banner-bpr.png" alt="Bank Sahabat Anak Negeri" class="print-banner">
+                                </div>
+                            </div>
+                        </div>    
                                         
     <!-- JAVASCRIPT LOGIC -->
     <script>
@@ -1006,7 +1141,7 @@
                 canvas.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return;
             }
-                        // Validate Produk Tabungan
+            // Validate Produk Tabungan
             const selectedProducts = Array.from(document.querySelectorAll('input[name="product"]:checked')).map(el => el.value);
             if (selectedProducts.length === 0) {
                 document.getElementById('productError').classList.remove('hidden');
@@ -1124,17 +1259,52 @@ kirimKeMasterData({
             document.getElementById('reviewPhoto').src = uploadedPhotoBase64;
             document.getElementById('reviewSignature').src = canvas.toDataURL('image/png');
 
+            // Isi & tampilkan lembar spesimen
+            isiSpesimen(fullName, canvas.toDataURL('image/png'));
+            document.getElementById('specimenSection').classList.remove('hidden');
+
             // Toggle Visibility
             document.getElementById('formSection').classList.add('hidden');
             document.getElementById('reviewSection').classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+            }
+        
+            // Tampilkan isian Perusahaan hanya jika jenis nasabah = Perusahaan
+            function toggleSpesimen() {
+                const perusahaan = document.getElementById('specJenisNasabah').value === 'Perusahaan';
+                document.getElementById('specDireksiWrap').classList.toggle('hidden', !perusahaan);
+            }
+
+            // Isi lembar spesimen (kertas kuning)
+            function isiSpesimen(namaNasabah, signatureDataUrl) {
+                const v = id => document.getElementById(id).value.trim();
+                const set = (id, text) => document.getElementById(id).innerText = text;
+                const coret = (id, kondisi) => document.getElementById(id).classList.toggle('coret', kondisi);
+
+                const jenis = v('specJenisNasabah');   // Perorangan / Perusahaan
+                const rule  = v('specRule');           // Satu / Dua
+
+                coret('specPerorangan', jenis !== 'Perorangan');
+                coret('specPerusahaan', jenis !== 'Perusahaan');
+                coret('specBertNas',    jenis !== 'Perorangan');
+                coret('specBertPer',    jenis !== 'Perusahaan');
+                coret('specSatu',       rule !== 'Satu');
+                coret('specDua',        rule !== 'Dua');
+
+                set('specNama', (jenis === 'Perusahaan' && v('specNamaPerusahaan')) ? v('specNamaPerusahaan') : namaNasabah);
+                set('specNoRek', v('specNoRekInput'));
+                set('specDireksi1Out', jenis === 'Perusahaan' ? v('specDireksi1') : '');
+                set('specDireksi2Out', jenis === 'Perusahaan' ? v('specDireksi2') : '');
+                set('specTanggal', new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }));
+                document.getElementById('specSign1').src = signatureDataUrl;
+            }
 
         function editForm() {
+            document.getElementById('specimenSection').classList.add('hidden');
             document.getElementById('reviewSection').classList.add('hidden');
             document.getElementById('formSection').classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+            }
     </script>
 </body>
 </html>
