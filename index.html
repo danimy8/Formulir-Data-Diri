@@ -984,6 +984,8 @@
         
         const API_URL = "https://script.google.com/macros/s/AKfycbwnX680ihHaIcaOvo5Rm6IcBNaWYwAdCUFwhMNmYyrXmQHRNi9knd8GQVlKTgrpH4nKCw/exec";
 let lastPayload = null;   // disimpan supaya bisa dikirim ulang
+let isSubmitting = false;
+let submissionId = null;
 
         async function kirimKeMasterData(data) {
         lastPayload = data;
@@ -1092,22 +1094,54 @@ let lastPayload = null;   // disimpan supaya bisa dikirim ulang
             isSigned = false;
         }
 
-        function previewImage(event) {
-            const file = event.target.files[0];
-            if (file) {
+        const MAX_IMG_MB = 5; // batas file mentah; nanti dikecilkan otomatis oleh compressImage
+        const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+
+        // Mengembalikan '' jika file OK, atau pesan error jika bermasalah
+        function validateImageFile(file) {
+            return new Promise(resolve => {
+                if (!ALLOWED_TYPES.includes(file.type)) {
+                    return resolve('Format harus JPG, PNG, atau WEBP.');
+                }
+                if (file.size > MAX_IMG_MB * 1024 * 1024) {
+                    return resolve('Ukuran file maksimal ' + MAX_IMG_MB + 'MB (file Anda ' + (file.size / 1048576).toFixed(1) + 'MB).');
+                }
+                // Pastikan file benar-benar bisa dibuka sebagai gambar
+                const url = URL.createObjectURL(file);
+                const img = new Image();
+                img.onload = () => { URL.revokeObjectURL(url); resolve(''); };
+                img.onerror = () => { URL.revokeObjectURL(url); resolve('File gambar rusak atau tidak bisa dibaca.'); };
+                img.src = url;
+            });
+        }
+
+        async function previewImage(event) {
+                const input = event.target;
+                const file = input.files[0];
+                if (!file) return;
+
+                const errEl = document.getElementById('photoError');
+                const err = await validateImageFile(file);
+
+                if (err) {
+                    removePhoto();
+                    errEl.textContent = err;
+                    errEl.classList.remove('hidden');
+                    return;
+                }
+
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     uploadedPhotoBase64 = e.target.result;
                     const preview = document.getElementById('photoPreview');
                     preview.src = uploadedPhotoBase64;
                     preview.classList.remove('hidden');
                     document.getElementById('photoPlaceholder').classList.add('hidden');
                     document.getElementById('removePhotoBtn').classList.remove('hidden');
-                    document.getElementById('photoError').classList.add('hidden');
+                    errEl.classList.add('hidden');
                 };
                 reader.readAsDataURL(file);
             }
-        }
 
         function removePhoto() {
             uploadedPhotoBase64 = '';
@@ -1173,12 +1207,15 @@ let lastPayload = null;   // disimpan supaya bisa dikirim ulang
         }
         async function handleFormSubmit(event) {
             event.preventDefault();
+            if (isSubmitting) return;
 
             if (!uploadedPhotoBase64) {
-            document.getElementById('photoError').classList.remove('hidden');
-            document.getElementById('photoError').scrollIntoView({ behavior: 'smooth', block: 'center' });
-            return;
-}
+                const pe = document.getElementById('photoError');
+                pe.textContent = 'Foto KTP wajib diupload ya!';
+                pe.classList.remove('hidden');
+                pe.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
 
             // Validate Signature
             if (!isSigned) {
@@ -1234,6 +1271,7 @@ let lastPayload = null;   // disimpan supaya bisa dikirim ulang
             const otherAccountNo = document.getElementById('otherAccountNo').value.trim() || '-';
             const isArisan    = selectedProducts.includes('Tabungan Arisan');
             const arisanCount = isArisan ? document.getElementById('arisanCount').value.trim() : '-';
+            
             // Data spesimen tanda tangan
             const specJenis    = document.getElementById('specJenisNasabah').value;
             const isPerusahaan = specJenis === 'Perusahaan';
@@ -1241,9 +1279,24 @@ let lastPayload = null;   // disimpan supaya bisa dikirim ulang
             const specNamaPer  = isPerusahaan ? document.getElementById('specNamaPerusahaan').value.trim() : '-';
             const specDireksi1 = isPerusahaan ? document.getElementById('specDireksi1').value.trim() : '-';
             const specDireksi2 = isPerusahaan ? document.getElementById('specDireksi2').value.trim() : '-';
+            
+            isSubmitting = true;
+            if (!submissionId) {
+                submissionId = (crypto.randomUUID && crypto.randomUUID()) || (Date.now() + '-' + Math.random().toString(36).slice(2));
+            }
+            const fotoKtpKecil = await compressImage(uploadedPhotoBase64, 1200);
+            if (!fotoKtpKecil) {
+                isSubmitting = false;
+                const pe = document.getElementById('photoError');
+                pe.textContent = 'Foto gagal diproses. Coba pilih ulang foto (JPG/PNG).';
+                pe.classList.remove('hidden');
+                pe.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
 
 tampilStatus('loading');
 kirimKeMasterData({
+    submissionId: submissionId,
     namaLengkap: fullName,
     nik: nik,
     tempatLahir: birthPlace,
@@ -1277,11 +1330,11 @@ kirimKeMasterData({
     namaPerusahaan: specNamaPer,
     direksi1: specDireksi1,
     direksi2: specDireksi2,
-    fotoKtp: await compressImage(uploadedPhotoBase64, 1200),
+    fotoKtp: fotoKtpKecil,
     tandaTangan: canvas.toDataURL('image/png'),
     tandaTangan2: isPerusahaan ? canvas2.toDataURL('image/png') : '',
     capPerusahaan: isPerusahaan ? await compressImage(stampBase64, 800, 'image/png') : '',
-}).then(ok => tampilStatus(ok ? 'ok' : 'gagal'));
+}).then(ok => { tampilStatus(ok ? 'ok' : 'gagal'); isSubmitting = false; });
             // Format Birth Date to ID format (e.g. 17 Agustus 1995)
             const formattedDate = new Date(birthDateVal).toLocaleDateString('id-ID', {
                 day: 'numeric',
@@ -1471,6 +1524,7 @@ kirimKeMasterData({
         }
 
             function editForm() {
+                submissionId = null;
                 document.getElementById('specimenSection').classList.add('hidden');
                 document.getElementById('reviewSection').classList.add('hidden');
                 document.getElementById('formSection').classList.remove('hidden');
