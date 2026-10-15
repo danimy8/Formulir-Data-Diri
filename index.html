@@ -620,7 +620,7 @@
 
                             <!-- Cap / Stempel -->
                             <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-1">Cap / Stempel Perusahaan <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Cap / Stempel Perusahaan <span class="text-xs font-normal text-slate-400">(opsional)</span></label>
                                 <div class="flex items-center gap-3 p-3 bg-white rounded-xl border border-dashed border-slate-300">
                                     <div class="w-24 h-24 bg-slate-100 rounded-lg overflow-hidden flex items-center justify-center border border-slate-200">
                                         <img id="stampPreview" src="" alt="Stempel" class="max-w-full max-h-full object-contain hidden">
@@ -631,7 +631,7 @@
                                             <i class="fa-solid fa-upload text-brand-600"></i> Pilih Gambar
                                         </label>
                                         <input type="file" id="stampInput" accept="image/*" class="hidden" onchange="previewStamp(event)">
-                                        <p class="text-xs text-slate-500">Foto/scan cap perusahaan (JPG/PNG).</p>
+                                        <p class="text-xs text-slate-500">Foto/scan cap perusahaan (JPG/PNG). Boleh dikosongkan jika cap dibubuhkan langsung di atas kertas.</p>
                                     </div>
                                 </div>
                                 <p id="stampError" class="text-xs text-red-500 mt-1 hidden font-medium">Cap/stempel perusahaan wajib diupload!</p>
@@ -1201,11 +1201,6 @@ let lastPayload = null;   // disimpan supaya bisa dikirim ulang
                     canvas2.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     return;
                 }
-                if (!stampBase64) {
-                    document.getElementById('stampError').classList.remove('hidden');
-                    document.getElementById('stampError'). scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    return;
-                }
             }
 
             // Gather values
@@ -1441,7 +1436,9 @@ kirimKeMasterData({
 
                 document.getElementById('specSign1').src = signatureDataUrl;
                 document.getElementById('specSign2').src = perusahaan ? canvas2.toDataURL('image/png') : '';
-                document.getElementById('specStampImg').src = perusahaan ? stampBase64 : '';
+                const stampImg = document.getElementById('specStampImg');
+                stampImg.src = (perusahaan && stampBase64) ? stampBase64 : '';
+                stampImg.style.display = (perusahaan && stampBase64) ? '' : 'none';
             }
         
             // Menampilkan status penyimpanan di halaman review
