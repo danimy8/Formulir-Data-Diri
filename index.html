@@ -255,7 +255,7 @@
                 <i class="fa-solid fa-address-card text-3xl"></i>
             </div>
             <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Formulir Data Diri Nasabah Tabungan</h1>
-            <p class="mt-2 text-slate-600">Lengkapi data diri, Foto KTP, dan Tangan Tangan Anda di bawah ini dengan benar ya.</p>
+            <p class="mt-2 text-slate-600">Lengkapi data diri, Foto KTP, dan Tanda Tangan Anda di bawah ini dengan benar ya.</p>
         </header>
 
         <!-- FORM SECTION -->
@@ -526,7 +526,7 @@
 
                         <div>
                             <label class="block text-sm font-medium text-slate-700 mb-1">Rekening Lain yang Dimiliki</label>
-                            <input type="text" id="otherAccount" placeholder="Contoh: Tabungan Bank lain / BPR (kosongkan jika ada)" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
+                            <input type="text" id="otherAccount" placeholder="Contoh: Tabungan Bank lain / BPR (kosongkan jika tidak ada)" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
                         </div>
 
                         <div>
@@ -1154,7 +1154,7 @@ let lastPayload = null;   // disimpan supaya bisa dikirim ulang
                 if (!checked) count.value = '';
         }
         // Perkecil foto agar ringan dikirim (maks 1200px, JPEG kualitas 80%)
-        function compressImage(dataUrl, maxSize) {
+        function compressImage(dataUrl, maxSize, type = 'image/jpeg') {
             return new Promise(resolve => {
                 if (!dataUrl) return resolve('');
                 const img = new Image();
@@ -1164,7 +1164,7 @@ let lastPayload = null;   // disimpan supaya bisa dikirim ulang
                     c.width = Math.round(img.width * scale);
                     c.height = Math.round(img.height * scale);
                     c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-                    resolve(c.toDataURL('image/jpeg', 0.8));
+                    resolve(c.toDataURL(type, 0.8));
                 };
                 img.onerror = () => resolve('');
                 img.src = dataUrl;
@@ -1238,6 +1238,13 @@ let lastPayload = null;   // disimpan supaya bisa dikirim ulang
             const otherAccountNo = document.getElementById('otherAccountNo').value.trim() || '-';
             const isArisan    = selectedProducts.includes('Tabungan Arisan');
             const arisanCount = isArisan ? document.getElementById('arisanCount').value.trim() : '-';
+            // Data spesimen tanda tangan
+            const specJenis    = document.getElementById('specJenisNasabah').value;
+            const isPerusahaan = specJenis === 'Perusahaan';
+            const specNoRek    = document.getElementById('specNoRekInput').value.trim() || '-';
+            const specNamaPer  = isPerusahaan ? document.getElementById('specNamaPerusahaan').value.trim() : '-';
+            const specDireksi1 = isPerusahaan ? document.getElementById('specDireksi1').value.trim() : '-';
+            const specDireksi2 = isPerusahaan ? document.getElementById('specDireksi2').value.trim() : '-';
 
 tampilStatus('loading');
 kirimKeMasterData({
@@ -1269,9 +1276,16 @@ kirimKeMasterData({
     rekeningLain: otherAccount,
     nomorRekeningLain: otherAccountNo,
     jumlahKepesertaanArisan: arisanCount,
+    jenisNasabah: specJenis,
+    nomorRekeningSpesimen: specNoRek,
+    namaPerusahaan: specNamaPer,
+    direksi1: specDireksi1,
+    direksi2: specDireksi2,
     fotoKtp: await compressImage(uploadedPhotoBase64, 1200),
     tandaTangan: canvas.toDataURL('image/png'),
-})}).then(ok => tampilStatus(ok ? 'ok' : 'gagal'));
+    tandaTangan2: isPerusahaan ? canvas2.toDataURL('image/png') : '',
+    capPerusahaan: isPerusahaan ? await compressImage(stampBase64, 800, 'image/png') : '',
+}).then(ok => tampilStatus(ok ? 'ok' : 'gagal'));
             // Format Birth Date to ID format (e.g. 17 Agustus 1995)
             const formattedDate = new Date(birthDateVal).toLocaleDateString('id-ID', {
                 day: 'numeric',
