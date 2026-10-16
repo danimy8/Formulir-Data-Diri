@@ -509,18 +509,18 @@
                             <label class="block text-sm font-medium text-slate-700 mb-2">Produk yang Dipilih <span class="text-red-500">*</span></label>
                             <div class="flex flex-col sm:flex-row gap-3">
                                 <label class="flex items-center gap-3 flex-1 px-4 py-3 rounded-lg border border-slate-300 cursor-pointer hover:bg-slate-50 transition-colors">
-                                    <input type="checkbox" name="product" value='Tabungan "ARAYA"' class="w-4 h-4 accent-blue-600">
+                                    <input type="radio" name="product" value='Tabungan "ARAYA"' onchange="toggleArisan()" class="w-4 h-4 accent-blue-600">
                                     <span class="text-sm font-medium text-slate-700">Tabungan "ARAYA"</span>
                                 </label>
                                 <label class="flex items-center gap-3 flex-1 px-4 py-3 rounded-lg border border-slate-300 cursor-pointer hover:bg-slate-50 transition-colors">
-                                    <input type="checkbox" name="product" value='Tabungan "KU"' class="w-4 h-4 accent-blue-600">
+                                    <input type="radio" name="product" value='Tabungan "KU"' onchange="toggleArisan()" class="w-4 h-4 accent-blue-600">
                                     <span class="text-sm font-medium text-slate-700">Tabungan "KU"</span>
                                 </label>
                                 <label class="flex items-center gap-3 flex-1 px-4 py-3 rounded-lg border border-slate-300 cursor-pointer hover:bg-slate-50 transition-colors">
-                                    <input type="checkbox" id="productArisan" name="product" value="Tabungan Arisan" onchange="toggleArisan()" class="w-4 h-4 accent-blue-600">
+                                    <input type="radio" id="productArisan" name="product" value="Tabungan Arisan" onchange="toggleArisan()" class="w-4 h-4 accent-blue-600">
                                     <span class="text-sm font-medium text-slate-700">Tabungan Arisan</span>
-                                </label>
-                            </div>
+                            </label>
+                        </div>
                             <p id="productError" class="text-xs text-red-500 mt-1 hidden font-medium">Pilih minimal satu produk tabungan!</p>
                             
                         </div>
@@ -1009,27 +1009,31 @@ let submissionId = null;
         let isDrawing = false;
 
         // Initialize Canvas size on load & resize
-        function resizeCanvas() {
-            const rect = canvas.getBoundingClientRect();
-            // Preserve canvas content when resizing
-            const tempCanvas = document.createElement('canvas');
-            tempCanvas.width = canvas.width;
-            tempCanvas.height = canvas.height;
-            const tempCtx = tempCanvas.getContext('2d');
-            tempCtx.drawImage(canvas, 0, 0);
+            function resizeCanvas() {
+                const rect = canvas.getBoundingClientRect();
+                // Jika form sedang disembunyikan, ukuran = 0 → jangan diubah
+                if (!rect.width || !rect.height) return;
 
-            canvas.width = rect.width;
-            canvas.height = rect.height;
+                // Simpan gambar tanda tangan yang sudah ada
+                const tempCanvas = document.createElement('canvas');
+                tempCanvas.width = canvas.width;
+                tempCanvas.height = canvas.height;
+                if (canvas.width && canvas.height) {
+                    tempCanvas.getContext('2d').drawImage(canvas, 0, 0);
+                }
 
-            // Restore styling
-            ctx.lineWidth = 2.5;
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
-            ctx.strokeStyle = '#0f172a';
+                canvas.width = rect.width;
+                canvas.height = rect.height;
 
-            // Redraw content
-            ctx.drawImage(tempCanvas, 0, 0, rect.width, rect.height);
-        }
+                ctx.lineWidth = 2.5;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                ctx.strokeStyle = '#0f172a';
+
+                if (tempCanvas.width && tempCanvas.height) {
+                    ctx.drawImage(tempCanvas, 0, 0, rect.width, rect.height);
+                }
+            }
 
         window.addEventListener('load', () => {
             resizeCanvas();
@@ -1504,10 +1508,10 @@ kirimKeMasterData({
 
             if (state === 'loading') {
                 box.classList.add('bg-amber-50', 'border-amber-200', 'text-amber-800');
-                box.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Menyimpan data ke master data...';
+                box.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Menyimpan data...';
             } else if (state === 'ok') {
                 box.classList.add('bg-emerald-50', 'border-emerald-200', 'text-emerald-800');
-                box.innerHTML = '<i class="fa-solid fa-circle-check mr-2"></i> Data berhasil tersimpan di master data.';
+                box.innerHTML = '<i class="fa-solid fa-circle-check mr-2"></i> Data berhasil tersimpan ya.';
             } else {
                 box.classList.add('bg-red-50', 'border-red-200', 'text-red-800');
                 box.innerHTML =
@@ -1531,8 +1535,15 @@ kirimKeMasterData({
                 document.getElementById('specimenSection').classList.add('hidden');
                 document.getElementById('reviewSection').classList.add('hidden');
                 document.getElementById('formSection').classList.remove('hidden');
+
+                // Siapkan ulang kanvas setelah form tampil kembali
+                requestAnimationFrame(() => {
+                    resizeCanvas();
+                    if (document.getElementById('specJenisNasabah').value === 'Perusahaan') sizeCanvas2();
+                });
+
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
+            }
         </script>
     </body>
 </html>
