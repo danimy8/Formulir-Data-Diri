@@ -1530,20 +1530,18 @@ kirimKeMasterData({
             tampilStatus(ok ? 'ok' : 'gagal');
         }
 
-            function editForm() {
-                submissionId = null;
-                document.getElementById('specimenSection').classList.add('hidden');
-                document.getElementById('reviewSection').classList.add('hidden');
-                document.getElementById('formSection').classList.remove('hidden');
+                    function editForm() {
+                        submissionId = null;
+                        document.getElementById('specimenSection').classList.add('hidden');
+                        document.getElementById('reviewSection').classList.add('hidden');
+                        document.getElementById('formSection').classList.remove('hidden');
 
-                // Siapkan ulang kanvas setelah form tampil kembali
-                requestAnimationFrame(() => {
-                    resizeCanvas();
-                    if (document.getElementById('specJenisNasabah').value === 'Perusahaan') sizeCanvas2();
-                });
+                        requestAnimationFrame(() => {
+                            resizeCanvas();
+                        });
 
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
         </script>
     </body>
 </html>
