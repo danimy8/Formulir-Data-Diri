@@ -272,7 +272,7 @@
                     </h2>
                     <div class="flex flex-col sm:flex-row items-center gap-6 p-4 bg-slate-50 rounded-xl border border-dashed border-slate-300">
                         <div class="relative w-32 h-40 bg-slate-200 rounded-lg overflow-hidden flex items-center justify-center border border-slate-300 shadow-inner group">
-                            <img id="photoPreview" src="" alt="Preview Foto" class="w-full h-full object-cover hidden">
+                            <img id="photoPreview" src="" alt="Preview Foto" class="w-full h-full object-contain hidden">
                             <div id="photoPlaceholder" class="text-center p-4">
                                 <i class="fa-solid fa-user text-4xl text-slate-400 mb-1"></i>
                                 <span class="block text-xs text-slate-500 font-medium">Foto KTP</span>
@@ -304,7 +304,7 @@
                         
                         <div>
                             <label class="block text-sm font-medium text-slate-700 mb-1">Alias <span class="text-red-500">*</span></label>
-                            <input type="text" id="alias" placeholder="Contoh: Budi Pratama, S.Kom" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
+                            <input type="text" id="alias" required placeholder="Contoh: Budi Pratama, S.Kom" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
                         </div>
 
                         <div>
@@ -713,7 +713,7 @@
                     <!-- Photo Display -->
                     <div class="md:col-span-1 flex flex-col items-center">
                         <div class="w-36 h-48 rounded-xl overflow-hidden border-2 border-slate-300 shadow-md bg-slate-100">
-                            <img id="reviewPhoto" src="" alt="Foto Profil" class="w-full h-full object-cover">
+                            <img id="reviewPhoto" src="" alt="Foto Profil" class="w-full h-full object-contain">
                         </div>
                         <span class="text-xs text-slate-400 font-medium mt-2">Foto KTP Pemohon</span>
                     </div>
@@ -987,6 +987,7 @@
         let lastPayload = null;   // disimpan supaya bisa dikirim ulang
         let isSubmitting = false;
         let submissionId = null;
+        let savedOk = false;
 
         async function kirimKeMasterData(data) {
         lastPayload = data;
@@ -1339,7 +1340,7 @@ kirimKeMasterData({
     tandaTangan: canvas.toDataURL('image/png'),
     tandaTangan2: isPerusahaan ? canvas2.toDataURL('image/png') : '',
     capPerusahaan: isPerusahaan ? await compressImage(stampBase64, 800, 'image/png') : '',
-}).then(ok => { tampilStatus(ok ? 'ok' : 'gagal'); isSubmitting = false; });
+}).then(ok => { savedOk = ok; tampilStatus(ok ? 'ok' : 'gagal'); isSubmitting = false; });
             // Format Birth Date to ID format (e.g. 17 Agustus 1995)
             const formattedDate = new Date(birthDateVal).toLocaleDateString('id-ID', {
                 day: 'numeric',
@@ -1527,10 +1528,13 @@ kirimKeMasterData({
             if (!lastPayload) return;
             tampilStatus('loading');
             const ok = await kirimKeMasterData(lastPayload);
+            savedOk = ok;
             tampilStatus(ok ? 'ok' : 'gagal');
         }
 
                     function editForm() {
+                        if (savedOk && !confirm('Data sudah tersimpan. Jika disimpan lagi akan tercatat sebagai data BARU (ganda). Jika ada koreksi, mohon sampaikan ke petugas bank. Lanjutkan?')) return;
+                        savedOk = false;
                         submissionId = null;
                         document.getElementById('specimenSection').classList.add('hidden');
                         document.getElementById('reviewSection').classList.add('hidden');
