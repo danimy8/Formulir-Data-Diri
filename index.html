@@ -45,12 +45,6 @@
             .no-print {
                 display: none !important;
             }
-            .print-only {
-                display: block !important;
-            }
-            .shadow-custom {
-                box-shadow: none !important;
-            }
             .print-container {
                 width: 100% !important;
                 margin: 0 !important;
@@ -64,11 +58,6 @@
 
         .canvas-container {
             touch-action: none;
-        }
-
-        .custom-glass {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
         }
 
         /* Header & footer khusus cetak: sembunyi di layar */
@@ -149,71 +138,18 @@
             }
             .print-card .bg-slate-50 > span:first-child { font-size: 7px !important; line-height: 9px !important; }
             .print-card .bg-slate-50 > span:last-child  { font-size: 9.5px !important; line-height: 12px !important; }
-
-            /* Pernyataan dan tanda tangan */
-            .print-card > .mt-10 {
-                margin-top: 8px !important;
-                padding-top: 6px !important;
-                flex-direction: row !important;
-                gap: 12px !important;
-            }
-            .print-card > .mt-10 > div:first-child {
-                font-size: 8px !important;
-                line-height: 1.35 !important;
-                max-width: none !important;
-                flex: 1;
-            }
-            .print-card > .mt-10 span { font-size: 8px !important; }
-            .print-card > .mt-10 > div:last-child > div { width: 150px !important; height: 60px !important; }
-            .print-card { zoom: 0.9; }
-            }
+        }
+            .bank-sign { break-inside: avoid; }
+            .sign-section { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; }
+            .sign-row { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; margin-top: 16px; }
+            .sign-row .bank-sign { flex: 1 1 0; min-width: 0; margin-top: 0; }
+            .applicant-sign { margin-left: auto; }
+            @media (min-width: 640px) { .sign-row { flex-direction: row; } }
         
-            /* ===== TANDA TANGAN (sesuai contoh) ===== */
-            .sign-section { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; break-inside: avoid; }
-
-            .sign-grid { display: flex; align-items: flex-end; gap: 16px; margin-top: 16px; }
-            .sign-bank { display: flex; flex: 1 1 0; min-width: 0; gap: 12px; }
-
-            /* Kotak pihak bank: lebar, sama besar */
-            .sign-box { flex: 1 1 0; min-width: 0; border: 1px solid #94a3b8; border-radius: 8px; padding: 6px 10px; text-align: center; background: #fff; }
-            .sign-box-title { font-size: 11px; font-weight: 700; line-height: 14px; min-height: 28px; color: #334155; }
-            .sign-box-space { height: 80px; }
-            .sign-box-note  { font-size: 8.5px; color: #64748b; border-top: 1px solid #94a3b8; margin-top: 2px; padding-top: 2px; }
-
-            /* Pemohon: teks di atas, kotak kecil, nama di bawah */
-            .applicant-sign { flex: 0 0 170px; text-align: center; }
-            .applicant-sign .sign-date  { font-size: 10px; color: #64748b; }
-            .applicant-sign .sign-label { font-size: 10px; font-weight: 500; color: #64748b; margin-bottom: 6px; }
-            .applicant-sign .sign-frame { height: 80px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 4px; background: #f8fafc; display: flex; align-items: center; justify-content: center; }
-            .applicant-sign .sign-frame img { max-width: 100%; max-height: 100%; object-fit: contain; }
-            .applicant-sign .sign-name  { font-size: 10px; font-weight: 700; color: #334155; margin-top: 4px; }
-
-            @media (max-width: 639px) {
-                    .sign-grid { flex-direction: column; align-items: stretch; }
-                    .sign-bank { flex-direction: column; }
-                    .applicant-sign { flex: none; align-self: center; width: 180px; }
-            }
-
-            @media print {
-                .sign-section { margin-top: 8px !important; padding-top: 6px !important; }
-                .sign-section .stmt-box { font-size: 8px !important; line-height: 1.35 !important; }
-                .sign-grid { flex-direction: row !important; align-items: flex-end !important; gap: 10px !important; margin-top: 6px !important; }
-                .sign-bank { flex-direction: row !important; gap: 8px !important; }
-                .sign-box { padding: 4px 6px !important; }
-                .sign-box-title { font-size: 8.5px !important; line-height: 11px !important; min-height: 22px !important; }
-                .sign-box-space { height: 40px !important; }
-                .sign-box-note  { font-size: 7px !important; }
-                .applicant-sign { flex: 0 0 150px !important; width: auto !important; }
-                .applicant-sign .sign-date, .applicant-sign .sign-label { font-size: 8px !important; }
-                .applicant-sign .sign-frame { height: 64px !important; }
-                .applicant-sign .sign-name { font-size: 8.5px !important; }
-            }
             /* ===== SPESIMEN TANDA TANGAN (kertas kuning, halaman terpisah) ===== */
             .specimen-card { background: #fff6b0; border: 1px solid #e5d96b; border-radius: 16px; padding: 20px 26px; color: #1e293b; box-shadow: 0 10px 25px rgba(0,0,0,.08); }
-            .spec-title { text-align: center; font-weight: 800; letter-spacing: .06em; color: #b91c1c; font-size: 17px; margin: 8px 0 14px; }
             .spec-row { display: grid; grid-template-columns: 190px 12px 1fr; font-size: 12.5px; line-height: 24px; }
             .spec-line { display: inline-block; min-width: 170px; border-bottom: 1px dotted #475569; padding: 0 4px; font-weight: 600; }
-            .coret { text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: #b91c1c; opacity: .6; }
             .spec-note { font-size: 12.5px; line-height: 20px; margin: 8px 0 10px; }
 
             .spec-bottom { display: grid; grid-template-columns: 2fr 1fr; gap: 14px; align-items: end; }
@@ -230,7 +166,6 @@
             .spec-box.single { grid-template-columns: 1fr; }
             .spec-right { font-size: 12px; text-align: center; }
             .spec-right .space { height: 70px; }
-            .spec-foot { font-size: 11px; margin-top: 4px; }
 
             @media (max-width: 639px) {
             .spec-row { grid-template-columns: 120px 10px 1fr; }
@@ -245,9 +180,138 @@
             /* Jika dicetak di kertas kuning asli, hapus warna latar: */
                 .specimen-card { background: transparent !important; border: none !important; } 
             }
-          .produk-opt:has(input:disabled) { opacity: .5; cursor: not-allowed; }
 
+                    /* ===== Perbaikan potong kiri saat cetak ===== */
+                    @media print {
+                        html, body {
+                            width: auto !important;
+                            margin: 0 !important;
+                            padding: 0 !important;
+                            overflow: visible !important;
+                        }
+                        .print-container,
+                        #reviewSection,
+                        #specimenSection {
+                            max-width: none !important;
+                            width: 100% !important;
+                            margin-left: 0 !important;
+                            margin-right: 0 !important;
+                            padding: 0 !important;
+                        }
+                        .print-card, .specimen-card { box-sizing: border-box; }
+                        .print-card *, .specimen-card * { box-sizing: border-box; }
+                        .print-card img { max-width: 100%; } 
+                    }
+        
+                    /* ===== Teks panjang tidak boleh tembus kotak ===== */
+                    .print-card .bg-slate-50 { min-width: 0; }
+                    .print-card span[id^="review"] {
+                        overflow-wrap: anywhere;
+                        word-break: break-word;
+                }
+
+        .produk-opt:has(input:disabled) { opacity: .5; cursor: not-allowed; }
     </style>
+        <style id="printCss" media="print">
+                    @page { size: A4 portrait; margin: 6mm; }
+ 
+                    html body { padding:0 !important; margin:0 !important; background:#fff !important; }
+                    html body, html body * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+                    html body .no-print { display:none !important; }
+                    html body .print-container { max-width:none !important; width:100% !important; margin:0 !important; padding:0 !important; }
+ 
+                    /* ---------- Halaman 1: kartu review ---------- */
+                    html body #reviewSection { max-height:281mm; overflow:hidden; break-after:page; page-break-after:always; margin:0 !important; padding:0 !important; }
+ 
+                    html body .print-card {
+                      display:flex !important; flex-direction:column; box-sizing:border-box; width:100%;
+                      padding:0 !important; margin:0 !important; border:0 !important; border-radius:0 !important;
+                      box-shadow:none !important; background:#fff !important;
+                    }
+                    html body .print-card .print-header { display:block !important; margin:0 0 6px 0 !important; }
+                    html body .print-card .print-footer { display:block !important; margin-top:auto !important; padding-top:6px; }
+                    html body .print-card .print-banner { display:block; width:100%; height:auto; }
+                    html body .print-card .print-footer .print-banner { width:100% !important; margin:0 !important; }
+ 
+                    html body .print-card > .border-b { padding:0 0 4px 0 !important; margin:0 0 6px 0 !important; gap:4px !important; }
+                    html body .print-card h2 { font-size:17px !important; line-height:1.2 !important; margin-top:2px !important; }
+                    html body .print-card h3 { font-size:10px !important; margin:0 0 3px 0 !important; }
+ 
+                    /* foto di kiri, data di kanan */
+                    html body .print-card > .grid { display:grid !important; grid-template-columns:100px minmax(0,1fr) !important; gap:10px !important; }
+                    html body .print-card > .grid > div { grid-column:auto !important; min-width:0; }
+                    html body .print-card > .grid > div:first-child > div { width:92px !important; height:120px !important; }
+ 
+                    /* semua grid data: 4 kolom, kotak rapat, tulisan tetap terbaca */
+                    html body .print-card > .grid .grid,
+                    html body .print-card > .mt-8 > .grid {
+                      display:grid !important; grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+                      grid-auto-flow:row dense; gap:3px 4px !important;
+                    }
+                    html body .print-card > .grid .grid > *,
+                    html body .print-card > .mt-8 > .grid > * { grid-column:auto !important; min-width:0; }
+                    html body .print-card > .grid .grid > div:not([class]) { grid-column:1 / -1 !important; }
+                    /* alamat panjang: lebar 2 kolom */
+                    html body .print-card > .grid .grid > div:has(> #reviewAddress),
+                    html body .print-card > .grid .grid > div:has(> #reviewJobAddress),
+                    html body .print-card > .grid .grid > div:has(> #reviewHeirAddress) { grid-column:span 2 !important; }
+                    html body .print-card > .mt-8 > .grid > .col-wide { grid-column:span 2 !important; }
+                    html body .print-card > .mt-8 > .grid > .col-full { grid-column:1 / -1 !important; }
+                    html body .print-card > .mt-8 { margin-top:6px !important; }
+
+                    /* kotak data */
+                    html body .print-card .bg-slate-50 { padding:4px 7px !important; border-radius:4px !important; min-width:0; }
+                    html body .print-card .bg-slate-50 > span:first-child { font-size:8.5px !important; line-height:11px !important; }
+                    html body .print-card .bg-slate-50 > span:last-child  { font-size:11.5px !important; line-height:14px !important; }
+                    html body .print-card span[id^="review"] { overflow-wrap:anywhere; word-break:break-word; }
+                    html body .print-card .wi-note { font-size:8.5px !important; line-height:1.3 !important; margin:0 0 3px 0 !important; }
+ 
+                    /* pernyataan + tanda tangan (ukuran asli, tidak ikut disusutkan) */
+                    html body .print-card .sign-section { margin-top:10px !important; padding-top:8px !important; break-inside:avoid; }
+                    html body .print-card .stmt-box { font-size:9px !important; line-height:1.4 !important; max-width:none !important; }
+                    html body .print-card .sign-row { display:flex !important; flex-direction:row !important; align-items:flex-end !important; gap:10px !important; margin-top:8px !important; }
+                    html body .print-card .bank-sign { display:grid !important; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; flex:1 1 0; min-width:0; margin:0 !important; }
+                    html body .print-card .bank-sign > div { padding:4px 6px !important; border-color:#94a3b8 !important; }
+                    html body .print-card .bank-sign-title { font-size:10px !important; line-height:13px !important; min-height:26px !important; }
+                    html body .print-card .bank-sign-space { height:48px !important; }
+                    html body .print-card .bank-sign-note { font-size:8.5px !important; }
+                    html body .print-card .applicant-sign { flex:0 0 170px; margin-left:auto; }
+                    html body .print-card .applicant-sign span { font-size:9.5px !important; }
+                    html body .print-card .applicant-sign > div { width:160px !important; height:64px !important; }
+ 
+                    /* ---------- Halaman 2: spesimen ---------- */
+                    html body #specimenSection { max-width:none !important; margin:0 !important; padding:0 !important; box-sizing:border-box; break-before:auto !important; page-break-before:auto !important; break-inside:avoid; }
+                    html body #specimenSection:not(.hidden) { display:flex !important; flex-direction:column; }
+                    html body #specimenSection .specimen-card { padding:8px 10px !important; background:transparent !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; }
+                    html body #specimenSection .print-header { display:block !important; margin:0 0 8px 0 !important; }
+                    html body #specimenSection .print-banner { display:block; width:100%; height:auto; }
+                    html body #specimenSection .print-footer { display:block !important; margin-top:auto !important; padding-top:6px; }
+                    html body #specimenSection .print-footer .print-banner { width:100% !important; margin:0 !important; }
+                    html body #specimenSection .print-footer { display:block !important; margin-top:14px !important; padding-top:0 !important; }
+
+                    /* ---------- Warna cetak: tulisan hitam, bingkai kotak hitam ---------- */
+                    html body .print-card .text-slate-400,
+                    html body .print-card .text-slate-500,
+                    html body .print-card .text-slate-600,
+                    html body .print-card .text-slate-700,
+                    html body .print-card .text-slate-800,
+                    html body .print-card .text-slate-900,
+                    html body .print-card .stmt-box,
+                    html body .print-card .stmt-box p,
+                    html body .print-card .stmt-box li,
+                    html body .print-card .wi-note,
+                    html body .print-card .bank-sign-title,
+                    html body .print-card .bank-sign-note,
+                    html body .print-card .applicant-sign span,
+                    html body #specimenSection .specimen-card { color:#000 !important; }
+
+                    html body .print-card .bg-slate-50 { border:1px solid #000 !important; }
+                    html body .print-card .bank-sign > div { border:1px solid #000 !important; }
+                    html body .print-card .bank-sign-note { border-top-color:#000 !important; }
+                    html body .print-card .applicant-sign > div { border:1px solid #000 !important; }
+                    html body .print-card > .border-b { border-bottom:1px solid #000 !important; }
+                    html body .print-card .sign-section { border-top:1px solid #000 !important; }
+        </style>
 </head>
 <body class="min-h-screen text-slate-800 antialiased py-8 px-4 sm:px-6 lg:px-8">
 
@@ -268,7 +332,7 @@
                 <!-- PasFoto Section -->
                 <div>
                     <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-camera text-brand-600"></i> Foto KTP / Pasfoto KTP
+                        <i class="fa-solid fa-camera text-brand-600"></i> Foto KTP / Pasfoto KTP <span class="text-red-500">*</span>
                     </h2>
                     <div class="flex flex-col sm:flex-row items-center gap-6 p-4 bg-slate-50 rounded-xl border border-dashed border-slate-300">
                         <div class="relative w-32 h-40 bg-slate-200 rounded-lg overflow-hidden flex items-center justify-center border border-slate-300 shadow-inner group">
@@ -303,8 +367,8 @@
                         </div>
                         
                         <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Alias <span class="text-red-500">*</span></label>
-                            <input type="text" id="alias" required placeholder="Contoh: Budi Pratama, S.Kom" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Alias</label>
+                            <input type="text" id="alias" placeholder="Contoh: Budi Pratama, S.Kom" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
                         </div>
 
                         <div>
@@ -502,37 +566,39 @@
                 </div>
                 
                     <!-- Pembukaan Rekening Tabungan -->
-                    <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-piggy-bank text-brand-600"></i> Pembukaan Rekening Tabungan
-                    </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                       <div class="md:col-span-2">
-                            <label class="block text-sm font-medium text-slate-700 mb-2">Produk yang Dipilih <span class="text-red-500">*</span></label>
-                            <div class="produk-group flex flex-col sm:flex-row gap-3">
-                                <label class="produk-opt flex-1 flex items-center gap-2 px-4 py-3 rounded-lg border border-slate-300 bg-white cursor-pointer">
-                                    <input type="checkbox" name="produk" id="pAraya" value="Tabungan &quot;ARAYA&quot;" class="w-4 h-4 accent-blue-600">
-                                    <span class="text-sm font-medium">Tabungan "ARAYA"</span>
-                                </label>
-                                <label class="produk-opt flex-1 flex items-center gap-2 px-4 py-3 rounded-lg border border-slate-300 bg-white cursor-pointer">
-                                    <input type="checkbox" name="produk" id="pKu" value="Tabungan &quot;KU&quot;" class="w-4 h-4 accent-blue-600">
-                                    <span class="text-sm font-medium">Tabungan "KU"</span>
-                                </label>
-                                <label class="produk-opt flex-1 flex items-center gap-2 px-4 py-3 rounded-lg border border-slate-300 bg-white cursor-pointer">
-                                    <input type="checkbox" name="produk" id="pArisan" value="Tabungan Arisan" class="w-4 h-4 accent-blue-600">
-                                    <span class="text-sm font-medium">Tabungan Arisan</span>
-                                </label>
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-piggy-bank text-brand-600"></i> Pembukaan Rekening Tabungan
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                           <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Produk yang Dipilih <span class="text-red-500">*</span></label>
+                                <div class="produk-group flex flex-col sm:flex-row gap-3">
+                                    <label class="produk-opt flex-1 flex items-center gap-2 px-4 py-3 rounded-lg border border-slate-300 bg-white cursor-pointer">
+                                        <input type="checkbox" name="produk" id="pAraya" value="Tabungan &quot;ARAYA&quot;" class="w-4 h-4 accent-blue-600">
+                                        <span class="text-sm font-medium">Tabungan "ARAYA"</span>
+                                    </label>
+                                    <label class="produk-opt flex-1 flex items-center gap-2 px-4 py-3 rounded-lg border border-slate-300 bg-white cursor-pointer">
+                                        <input type="checkbox" name="produk" id="pKu" value="Tabungan &quot;KU&quot;" class="w-4 h-4 accent-blue-600">
+                                        <span class="text-sm font-medium">Tabungan "KU"</span>
+                                    </label>
+                                    <label class="produk-opt flex-1 flex items-center gap-2 px-4 py-3 rounded-lg border border-slate-300 bg-white cursor-pointer">
+                                        <input type="checkbox" name="produk" id="pArisan" value="Tabungan Arisan" class="w-4 h-4 accent-blue-600">
+                                        <span class="text-sm font-medium">Tabungan Arisan</span>
+                                    </label>
+                                </div>
+                                <p id="productError" class="text-xs text-red-500 mt-1 hidden font-medium">Pilih minimal satu produk tabungan!</p>
                             </div>
-                            <p id="productError" class="text-xs text-red-500 mt-1 hidden font-medium">Pilih minimal satu produk tabungan!</p>
-                        </div>
 
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Rekening Lain yang Dimiliki</label>
-                            <input type="text" id="otherAccount" placeholder="Contoh: Tabungan Bank lain / BPR (kosongkan jika tidak ada)" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
-                        </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Rekening Lain yang Dimiliki</label>
+                                <input type="text" id="otherAccount" placeholder="Contoh: Tabungan Bank lain / BPR (kosongkan jika tidak ada)" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
+                            </div>
 
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Nomor Rekening</label>
-                            <input type="text" id="otherAccountNo" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'')" placeholder="Nomor rekening lain" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Nomor Rekening</label>
+                                <input type="text" id="otherAccountNo" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'')" placeholder="Nomor rekening lain" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
+                            </div>
                         </div>
                     </div>
 
@@ -542,7 +608,7 @@
                             <i class="fa-solid fa-clipboard-list text-brand-600"></i> Data Khusus
                         </h2>
                         <p class="text-xs text-slate-600 leading-relaxed mb-3">
-                            Sesuai Peraturan Otoritas Jasa Keuangan No. 8 Tahun 2023 Tentang APU PPT&amp;PPPSPM, khusus nasabah yang tidak memiliki rekening di BPR (Walk-in Customer) wajib memberikan keterangan mengenai : 
+                            Sesuai Peraturan Otoritas Jasa Keuangan No. 8 Tahun 2023 tentang APU PPT&amp;PPPSPM, khusus nasabah yang tidak memiliki rekening di BPR (Walk-In Customer) wajib memberikan keterangan berikut. 
                         </p>
 
                         <div id="walkInBox" class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -617,12 +683,7 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-                            
+                
                     <!-- Pernyataan Nasabah -->
                     <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
                         <h2 class="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
@@ -721,7 +782,7 @@
                                         <p class="text-xs text-slate-500">Foto/scan cap perusahaan (JPG/PNG). Boleh dikosongkan jika cap dibubuhkan langsung di atas kertas.</p>
                                     </div>
                                 </div>
-                                <p id="stampError" class="text-xs text-red-500 mt-1 hidden font-medium">Cap/stempel perusahaan wajib diupload!</p>
+                                <p id="stampError" class="text-xs text-red-500 mt-1 hidden font-medium">File cap tidak valid.</p>
                             </div>
                         </div>
                     </div>
@@ -949,8 +1010,8 @@
                                 </div>
                     <!-- Data Khusus Walk-In Customer (Review) -->
                     <div id="reviewWalkInWrap" class="mt-8">
-                        <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-1">Data Khusus (Walk-In Customer)</h3>
-                        <p class="text-[11px] text-slate-500 mb-3">Sesuai POJK No. 8 Tahun 2023 tentang APU PPT&amp;PPPSPM.</p>
+                        <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-1">Data Khusus </h3>
+                        <p class="wi-note text-[11px] text-slate-600 mb-3">Sesuai Peraturan Otoritas Jasa Keuangan No. 8 Tahun 2023 tentang APU PPT&amp;PPPSPM, khusus nasabah yang tidak memiliki rekening di BPR (Walk-In Customer) wajib memberikan keterangan mengenai :</p>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
                                 <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Jumlah Penghasilan</span>
@@ -978,67 +1039,64 @@
                             </div>
                         </div>
                     </div>
-                
 
                     <!-- Signature Display Section -->
-                    <div class="sign-section">
-                        <!-- Pernyataan -->
-                        <div class="stmt-box text-xs text-slate-500">
-                            <p class="font-medium text-slate-700 mb-1">Pernyataan:</p>
+                        <div class="sign-section">
+                            <!-- Pernyataan -->
+                            <div class="stmt-box text-xs text-slate-500">
+                                 <p class="font-medium text-slate-700 mb-1">Pernyataan:</p>
 
-                            <div id="reviewStmtStandard">
-                                <p>Dengan ini saya menyatakan bahwa data tersebut di atas adalah data diri saya yang sebenarnya. Saya tunduk dan patuh pada peraturan dan ketentuan Bank, apabila saya menggunakan rekening untuk tujuan melanggar peraturan maka saya sanggup :</p>
-                                <ol class="list-decimal list-inside mt-1 space-y-0.5">
-                                    <li>Rekening saya diblokir, dan atau ditutup oleh Bank.</li>
-                                    <li>Mempertanggungjawabkan secara hukum yang berlaku.</li>
-                                </ol>
+                                <div id="reviewStmtStandard">
+                                    <p>Dengan ini saya menyatakan bahwa data tersebut di atas adalah data diri saya yang sebenarnya. Saya tunduk dan patuh pada peraturan dan ketentuan Bank, apabila saya menggunakan rekening untuk tujuan melanggar peraturan maka saya sanggup :</p>
+                                    <ol class="list-decimal list-inside mt-1 space-y-0.5">
+                                        <li>Rekening saya diblokir, dan atau ditutup oleh Bank.</li>
+                                        <li>Mempertanggungjawabkan secara hukum yang berlaku.</li>
+                                    </ol>
+                                </div>
+
+                                <div id="reviewStmtArisan" class="hidden">
+                                    <p>Bahwa saya telah mengerti dan memahami dengan seluruh ketentuan tabungan arisan di PT. BPR ARAYA ARTA maka dengan ini saya menyatakan bersedia menjadi anggota tabungan arisan di PT. BPR ARAYA ARTA. Saya bersedia dan saya mendaftarkan diri untuk mengikuti sebanyak <b id="reviewArisanCount" class="text-slate-800"></b> nomor kepesertaan.</p>
+                                </div>
                             </div>
 
-                            <div id="reviewStmtArisan" class="hidden">
-                                <p>Bahwa saya telah mengerti dan memahami dengan seluruh ketentuan tabungan arisan di PT. BPR ARAYA ARTA maka dengan ini saya menyatakan bersedia menjadi anggota tabungan arisan di PT. BPR ARAYA ARTA. Saya bersedia dan saya mendaftarkan diri untuk mengikuti sebanyak <b id="reviewArisanCount" class="text-slate-800"></b> nomor kepesertaan.</p>
+                            <!-- Baris tanda tangan: pihak bank (kiri) + pemohon (kanan) -->
+                            <div class="sign-row">
+                                <div class="bank-sign hidden print:grid grid-cols-3 gap-3">
+                                    <div class="border border-slate-300 rounded-lg p-3 text-center">
+                                        <p class="bank-sign-title min-h-[2rem] text-xs font-semibold text-slate-700 leading-tight">Pengesahan Bank /<br>Pengawasan</p>
+                                        <div class="bank-sign-space h-20"></div>
+                                        <p class="bank-sign-note border-t border-dotted border-slate-400 pt-1 text-[10px] text-slate-500">Nama &amp; Tanda Tangan</p>
+                                    </div>
+                                    <div class="border border-slate-300 rounded-lg p-3 text-center">
+                                        <p class="bank-sign-title min-h-[2rem] text-xs font-semibold text-slate-700 leading-tight">Pelayanan</p>
+                                        <div class="bank-sign-space h-20"></div>
+                                        <p class="bank-sign-note border-t border-dotted border-slate-400 pt-1 text-[10px] text-slate-500">Nama &amp; Tanda Tangan</p>
+                                    </div>
+                                    <div class="border border-slate-300 rounded-lg p-3 text-center">
+                                        <p class="bank-sign-title min-h-[2rem] text-xs font-semibold text-slate-700 leading-tight">Kolektor / AO</p>
+                                        <div class="bank-sign-space h-20"></div>
+                                        <p class="bank-sign-note border-t border-dotted border-slate-400 pt-1 text-[10px] text-slate-500">Nama &amp; Tanda Tangan</p>
+                                    </div>
+                                </div>
+
+                                <div class="applicant-sign flex flex-col items-center">
+                                    <span class="text-xs text-slate-500 mb-1">Kebumen, <span id="reviewSignDate"></span></span>
+                                    <span class="text-xs text-slate-500 font-medium mb-2">Tanda Tangan Pemohon</span>
+                                    <div class="w-48 h-24 border border-slate-200 rounded-lg p-2 bg-slate-50 flex items-center justify-center">
+                                        <img id="reviewSignature" src="" alt="Tanda Tangan" class="max-h-full max-w-full object-contain">
+                                    </div>
+                                    <span id="reviewSignerName" class="text-xs font-bold text-slate-700 mt-2"></span>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Tanda tangan -->
-                        <div class="sign-grid">
-                            <!-- Pihak Bank -->
-                            <div class="sign-bank">
-                                <div class="sign-box">
-                                <p class="sign-box-title">Pengesahan Bank /<br>Pengawasan</p>
-                                <div class="sign-box-space"></div>
-                                <p class="sign-box-note">Nama &amp; Tanda Tangan</p>
-                            </div>
-                            <div class="sign-box">
-                                <p class="sign-box-title">Pelayanan</p>
-                                <div class="sign-box-space"></div>
-                                <p class="sign-box-note">Nama &amp; Tanda Tangan</p>
-                            </div>
-                            <div class="sign-box">
-                                <p class="sign-box-title">Kolektor / AO</p>
-                                <div class="sign-box-space"></div>
-                                <p class="sign-box-note">Nama &amp; Tanda Tangan</p>
-                            </div>
-                        </div>
-
-                        <!-- Pemohon -->
-                        <div class="applicant-sign">
-                            <p class="sign-date">Kebumen, <span id="reviewSignDate"></span></p>
-                            <p class="sign-label">Tanda Tangan Pemohon</p>
-                            <div class="sign-frame">
-                                <img id="reviewSignature" src="" alt="Tanda Tangan">
-                            </div>
-                            <p id="reviewSignerName" class="sign-name"></p>
-                        </div>
-                    </div>
-                </div>
-                
                         <!-- Footer Cetak -->
                         <div class="print-footer">
                             <img src="banner-bpr.png" alt="Bank Sahabat Anak Negeri" class="print-banner">
                         </div>
                     </div>
                 </div>
-                </div>
+                
 
                             <!-- ===== SPESIMEN TANDA TANGAN NASABAH (halaman terpisah saat dicetak) ===== -->
                             <div id="specimenSection" class="hidden max-w-4xl mx-auto mt-8 specimen-page">
@@ -1109,19 +1167,26 @@
         let savedOk = false;
 
         async function kirimKeMasterData(data) {
-        lastPayload = data;
-        try {
-            const res = await fetch(API_URL, {
-                method: "POST",
-                body: JSON.stringify({ action: "create", data: data }),
-            });
-            const hasil = await res.json();
-            return hasil.success === true;   // true = tersimpan, false = ditolak server
-        } catch (err) {
-            console.error("Gagal mengirim ke master data:", err);
-            return false;                    // internet putus / server tidak merespons
+                lastPayload = data;
+                const ctrl = new AbortController();
+                const timer = setTimeout(() => ctrl.abort(), 45000);
+                try {
+                    const res = await fetch(API_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify({ action: "create", data: data }),
+                    signal: ctrl.signal
+                });
+                const teks = await res.text();
+                const hasil = JSON.parse(teks);
+                return hasil.success === true;
+            } catch (err) {
+                console.error("Gagal mengirim ke master data:", err);
+                return false;
+            } finally {
+                clearTimeout(timer);
+            }
         }
-    }
         // Canvas Setup
         const canvas = document.getElementById('signatureCanvas');
         const ctx = canvas.getContext('2d');
@@ -1275,18 +1340,7 @@
             document.getElementById('photoPlaceholder').classList.remove('hidden');
             document.getElementById('removePhotoBtn').classList.add('hidden');
         }
-        function toggleWalkIn() {
-            const on = document.getElementById('isWalkIn').checked;
-            document.getElementById('walkInBox').classList.toggle('hidden', !on);
-            ['wiIncome', 'wiActivity', 'wiPurpose', 'wiFund'].forEach(id => {
-                const el = document.getElementById(id);
-                el.required = on;
-                if (!on) el.value = '';
-            });
-            ['wiOtherAcc', 'wiOtherAccNo'].forEach(id => {
-                if (!on) document.getElementById(id).value = '';
-            });
-        }
+
         function toggleOther(selectId, otherId) {
             const sel = document.getElementById(selectId);
             const other = document.getElementById(otherId);
@@ -1367,7 +1421,7 @@
                 return;
             }
             document.getElementById('productError').classList.add('hidden');
-            // Validasi Khusus Perusahaan : tanda tangan ke-2 dan stempel wajib
+            // Validasi Khusus Perusahaan : tanda tangan ke-2 wajib
             if (document.getElementById('specJenisNasabah').value === 'Perusahaan') {
                 if (!isSigned2) {
                     document.getElementById('sig2Error').classList.remove('hidden');
@@ -1597,20 +1651,33 @@ kirimKeMasterData({
             canvas2.addEventListener('touchend', stop2);
 
             // ===== Upload cap / stempel =====
-            function previewStamp(event) {
-                const file = event.target.files[0];
-                if (!file) return;
-                const reader = new FileReader();
-                reader.onload = e => {
-                    stampBase64 = e.target.result;
-                    const img = document.getElementById('stampPreview');
-                    img.src = stampBase64;
-                    img.classList.remove('hidden');
-                    document.getElementById('stampPlaceholder').classList.add('hidden');
-                    document.getElementById('stampError').classList.add('hidden');
-                };
-                reader.readAsDataURL(file);
-            }
+                
+            async function previewStamp(event) {
+                    const input = event.target;
+                    const file = input.files[0];
+                    if (!file) return;
+                    const errEl = document.getElementById('stampError');
+                    const err = await validateImageFile(file);
+                    if (err) {
+                        input.value = '';
+                        stampBase64 = '';
+                        document.getElementById('stampPreview').classList.add('hidden');
+                        document.getElementById('stampPlaceholder').classList.remove('hidden');
+                        errEl.textContent = err;
+                        errEl.classList.remove('hidden');
+                        return;
+                    }
+                    const reader = new FileReader();
+                    reader.onload = e => {
+                        stampBase64 = e.target.result;
+                        const img = document.getElementById('stampPreview');
+                        img.src = stampBase64;
+                        img.classList.remove('hidden');
+                        document.getElementById('stampPlaceholder').classList.add('hidden');
+                        errEl.classList.add('hidden');
+                    };
+                    reader.readAsDataURL(file);
+                }
 
             // Tampilkan isian Perusahaan hanya jika jenis nasabah = Perusahaan
             function toggleSpesimen() {
@@ -1754,6 +1821,75 @@ kirimKeMasterData({
                           el.addEventListener("change", aturProduk);
                     });
                     aturProduk();
+        </script>
+                    
+        <script>
+        (function () {
+            const PAGE_W = 748, PAGE_H = 1050;
+
+        function split(card) {
+            const kids = Array.from(card.children);
+            const i = kids.findIndex(k => k.classList.contains('sign-section'));
+            return i < 0 ? kids : kids.slice(0, i);
+        }
+        function resetReview(card) {
+            if (!card) return;
+            split(card).forEach(el => { el.style.zoom = ''; el.style.width = ''; });
+            card.style.width = ''; card.style.minHeight = '';
+        }
+        function fitReview(card) {
+            if (!card || !card.getClientRects().length) return;
+            resetReview(card);
+            const top = split(card);
+            if (!top.length) return;
+            card.style.width = PAGE_W + 'px';
+            card.style.minHeight = '0';
+
+            const apply = s => top.forEach(el => {
+                el.style.zoom = s;
+                el.style.width = (PAGE_W / s) + 'px';
+            });
+            const fits = () => card.getBoundingClientRect().height <= PAGE_H;
+
+            apply(1);
+            if (!fits()) {
+                let lo = 0.5, hi = 1;
+                for (let i = 0; i < 12; i++) {
+                    const mid = (lo + hi) / 2;
+                    apply(mid);
+                    if (fits()) lo = mid; else hi = mid;
+                }
+                apply(lo);
+            }
+            card.style.minHeight = PAGE_H + 'px';   // banner bawah tetap di dasar halaman
+        }
+        function fitWhole(el) {
+            if (!el || !el.getClientRects().length) return;
+            el.style.zoom = '1'; el.style.minHeight = '0'; el.style.width = PAGE_W + 'px';
+            const s = Math.min(1, PAGE_H / el.scrollHeight);
+            el.style.zoom = s;
+            el.style.width = (PAGE_W / s) + 'px';
+        }
+        function resetWhole(el) {
+            if (!el) return;
+            el.style.zoom = ''; el.style.width = ''; el.style.minHeight = '';
+        }
+        function beforePrint() {
+            const m = document.createElement('style');
+            m.textContent = document.getElementById('printCss').textContent;
+            document.head.appendChild(m);
+            try {
+                fitReview(document.querySelector('#reviewSection .print-card'));
+                fitWhole(document.getElementById('specimenSection'));
+            } finally { m.remove(); }
+        }
+        function afterPrint() {
+            resetReview(document.querySelector('#reviewSection .print-card'));
+            resetWhole(document.getElementById('specimenSection'));
+        }
+        window.addEventListener('beforeprint', beforePrint);
+        window.addEventListener('afterprint', afterPrint);
+        })();
         </script>
     </body>
 </html>
