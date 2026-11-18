@@ -45,12 +45,6 @@
             .no-print {
                 display: none !important;
             }
-            .print-only {
-                display: block !important;
-            }
-            .shadow-custom {
-                box-shadow: none !important;
-            }
             .print-container {
                 width: 100% !important;
                 margin: 0 !important;
@@ -64,11 +58,6 @@
 
         .canvas-container {
             touch-action: none;
-        }
-
-        .custom-glass {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
         }
 
         /* Header & footer khusus cetak: sembunyi di layar */
@@ -149,61 +138,20 @@
             }
             .print-card .bg-slate-50 > span:first-child { font-size: 7px !important; line-height: 9px !important; }
             .print-card .bg-slate-50 > span:last-child  { font-size: 9.5px !important; line-height: 12px !important; }
-
-            /* Pernyataan dan tanda tangan */
-            .print-card > .mt-10 {
-                margin-top: 8px !important;
-                padding-top: 6px !important;
-                flex-direction: row !important;
-                gap: 12px !important;
-            }
-            .print-card > .mt-10 > div:first-child {
-                font-size: 8px !important;
-                line-height: 1.35 !important;
-                max-width: none !important;
-                flex: 1;
-            }
-            .print-card > .mt-10 span { font-size: 8px !important; }
-            .print-card > .mt-10 > div:last-child > div { width: 150px !important; height: 60px !important; }
-            
-            }
-        
-            /* ===== TANDA TANGAN PIHAK BANK ===== */
+        }
             .bank-sign { break-inside: avoid; }
-            @media print {
-            .bank-sign { margin-top: 8px !important; gap: 6px !important; }
-            .bank-sign > div { padding: 4px 6px !important; border-color: #94a3b8 !important; }
-            .bank-sign-title { font-size: 8.5px !important; line-height: 11px !important; min-height: 22px !important; }
-            .bank-sign-space { height: 42px !important; }
-            .bank-sign-note  { font-size: 7.5px !important; }
-            }
-        
-            /* ===== TATA LETAK TANDA TANGAN: pihak bank di samping pemohon ===== */
             .sign-section { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; }
             .sign-row { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; margin-top: 16px; }
             .sign-row .bank-sign { flex: 1 1 0; min-width: 0; margin-top: 0; }
             .applicant-sign { margin-left: auto; }
             @media (min-width: 640px) { .sign-row { flex-direction: row; } }
-
-            @media print {
-                .sign-section { margin-top: 8px !important; padding-top: 6px !important; break-inside: avoid; }
-                .sign-section .stmt-box { font-size: 8px !important; line-height: 1.35 !important; max-width: none !important; }
-                .sign-row { flex-direction: row !important; align-items: flex-end !important; gap: 10px !important; margin-top: 6px !important; }
-                .sign-row .bank-sign { margin-top: 0 !important; }
-                .applicant-sign span { font-size: 8px !important; }
-                .applicant-sign > div { width: 140px !important; height: 56px !important; }
-            }
-
-            /* ===== DEPOSITO: lebar kolom khusus cetak ===== */
-            @media print {
-                .print-card > .mt-8 .col-wide { grid-column: span 2 !important; }
-                .print-card > .mt-8 .col-full { grid-column: 1 / -1 !important; }
-            }
+        
             /* ===== SPESIMEN TANDA TANGAN (kertas kuning, halaman terpisah) ===== */
             .specimen-card { background: #fff6b0; border: 1px solid #e5d96b; border-radius: 16px; padding: 20px 26px; color: #1e293b; box-shadow: 0 10px 25px rgba(0,0,0,.08); }
             .spec-row { display: grid; grid-template-columns: 190px 12px 1fr; font-size: 12.5px; line-height: 24px; }
             .spec-line { display: inline-block; min-width: 170px; border-bottom: 1px dotted #475569; padding: 0 4px; font-weight: 600; }
             .spec-note { font-size: 12.5px; line-height: 20px; margin: 8px 0 10px; }
+
             .spec-bottom { display: grid; grid-template-columns: 2fr 1fr; gap: 14px; align-items: end; }
             .spec-box { display: grid; grid-template-columns: 1fr 1fr; border: 2px solid #111; background: rgba(255,255,255,.35); }
             .spec-cell { padding: 4px 8px; font-size: 11.5px; }
@@ -218,121 +166,53 @@
             .spec-box.single { grid-template-columns: 1fr; }
             .spec-right { font-size: 12px; text-align: center; }
             .spec-right .space { height: 70px; }
+
             @media (max-width: 639px) {
-                .spec-row { grid-template-columns: 120px 10px 1fr; }
-                .spec-bottom { grid-template-columns: 1fr; }
+            .spec-row { grid-template-columns: 120px 10px 1fr; }
+            .spec-bottom { grid-template-columns: 1fr; }
             }
+
             @media print {
                 .specimen-page { break-before: page; page-break-before: always; max-width: none !important; margin: 0 !important; }
-                .specimen-card { box-shadow: none !important; border-radius: 0 !important; padding: 8px 10px !important; background: transparent !important; border: none !important; }
-                .specimen-card, .specimen-card * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            }
-        
-            /* ===== Perbaikan: review muat 1 halaman ===== */
-            @media print {
-                .print-card { break-inside: auto !important; }
-                .print-card .print-footer { margin-top: 6px !important; }
-                .print-card .print-footer .print-banner { width: 100%; margin: 0; }
+                .specimen-card { box-shadow: none !important; border-radius: 0 !important; padding: 8px 10px !important;
+                    -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+                .specimen-card * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            /* Jika dicetak di kertas kuning asli, hapus warna latar: */
+                .specimen-card { background: transparent !important; border: none !important; } 
             }
 
-
-                /* ===== CETAK: review 1 halaman + spesimen 1 halaman (total 2) ===== */
-                @media print {
-                    @page { size: A4 portrait; margin: 6mm; }
-
-                    /* perkecil seluruh kartu review */
-                    .print-card { break-inside: auto !important; }
-
-                    /* header & banner bawah lebih ramping */
-                    .print-card .print-header { margin-bottom: 4px !important; }
-                    .print-card .print-footer { margin-top: 4px !important; }
-                    .print-card .print-footer .print-banner { width: 100% !important; margin: 0 !important; }
-
-                    /* judul kartu lebih rapat */
-                    .print-card > .border-b { padding-bottom: 2px !important; margin-bottom: 4px !important; }
-
-                    /* kotak data lebih tipis */
-                    .print-card .bg-slate-50 { padding: 3px 6px !important; }
-                    .print-card .md\:col-span-3 > .grid,
-                    .print-card > .mt-8 > .grid,
-                    .print-card div:not([class]) > .grid { gap: 3px !important; }
-                    .print-card > .mt-8 { margin-top: 4px !important; }
-
-                    /* pernyataan + tanda tangan lebih pendek */
-                    .sign-section { margin-top: 4px !important; padding-top: 4px !important; break-inside: avoid !important; }
-                    .sign-section .stmt-box { font-size: 7.5px !important; line-height: 1.25 !important; }
-                    .sign-row { margin-top: 4px !important; }
-                    .bank-sign-space { height: 30px !important; }
-                    .applicant-sign > div { height: 46px !important; }
-
-                    /* spesimen: tetap halaman sendiri, dan jangan sampai jadi 2 halaman */
-                    .specimen-page { break-before: page !important; page-break-before: always !important; break-inside: avoid !important; }
-                    .print-card .wi-note { font-size: 7.5px !important; line-height: 1.25 !important; margin-bottom: 3px !important; }
-                }
-
-                /* ===== Perbaikan potong kiri saat cetak ===== */
-                @media print {
-                    html, body {
-                        width: auto !important;
-                        margin: 0 !important;
-                        padding: 0 !important;
-                        overflow: visible !important;
+                    /* ===== Perbaikan potong kiri saat cetak ===== */
+                    @media print {
+                        html, body {
+                            width: auto !important;
+                            margin: 0 !important;
+                            padding: 0 !important;
+                            overflow: visible !important;
+                        }
+                        .print-container,
+                        #reviewSection,
+                        #specimenSection {
+                            max-width: none !important;
+                            width: 100% !important;
+                            margin-left: 0 !important;
+                            margin-right: 0 !important;
+                            padding: 0 !important;
+                        }
+                        .print-card, .specimen-card { box-sizing: border-box; }
+                        .print-card *, .specimen-card * { box-sizing: border-box; }
+                        .print-card img { max-width: 100%; } 
                     }
-                    .print-container,
-                    #reviewSection,
-                    #specimenSection {
-                        max-width: none !important;
-                        width: 100% !important;
-                        margin-left: 0 !important;
-                        margin-right: 0 !important;
-                        padding: 0 !important;
-                    }
-                    .print-card, .specimen-card { box-sizing: border-box; }
-                    .print-card *, .specimen-card * { box-sizing: border-box; }
-                    .print-card img { max-width: 100%; } 
-                }
-       
-                /* ===== Teks panjang tidak boleh tembus kotak ===== */
-                .print-card .bg-slate-50 { min-width: 0; }
-                .print-card span[id^="review"] {
-                    overflow-wrap: anywhere;
-                    word-break: break-word;
-                }
-
-                /* ===== CETAK: perbesar tulisan memanfaatkan ruang bawah ===== */
-                @media print {
-                    /* judul */
-                    .print-card h2 { font-size: 18px !important; }
-                    .print-card h3 { font-size: 11px !important; margin-bottom: 5px !important; }
-
-                    /* kotak data: lebih lega, tulisan lebih besar */
-                    .print-card .bg-slate-50 { padding: 6px 9px !important; }
-                    .print-card .bg-slate-50 > span:first-child { font-size: 8.5px !important; line-height: 11px !important; }
-                    .print-card .bg-slate-50 > span:last-child  { font-size: 11.5px !important; line-height: 15px !important; }
-
-                    /* jarak antar kotak dan antar blok */
-                    .print-card .md\:col-span-3 > .grid,
-                    .print-card > .mt-8 > .grid,
-                    .print-card div:not([class]) > .grid { gap: 5px !important; }
-                    .print-card > .mt-8 { margin-top: 10px !important; }
-
-                    /* teks panjang tetap di dalam kotak */
-                    .print-card .bg-slate-50 { min-width: 0; overflow: hidden; }
-
-                    /* catatan Data Khusus, pernyataan, tanda tangan */
-                    .print-card .wi-note { font-size: 9px !important; line-height: 1.35 !important; }
-                    .sign-section { margin-top: 10px !important; padding-top: 8px !important; }
-                    .sign-section .stmt-box { font-size: 9px !important; line-height: 1.4 !important; }
-                    .bank-sign-title { font-size: 10px !important; line-height: 13px !important; }
-                    .bank-sign-note { font-size: 8.5px !important; }
-                    .bank-sign-space { height: 48px !important; }
-                    .applicant-sign span { font-size: 9.5px !important; }
-                    .applicant-sign > div { width: 160px !important; height: 64px !important; }
-                }
         
+                    /* ===== Teks panjang tidak boleh tembus kotak ===== */
+                    .print-card .bg-slate-50 { min-width: 0; }
+                    .print-card span[id^="review"] {
+                        overflow-wrap: anywhere;
+                        word-break: break-word;
+                }
+
+        .produk-opt:has(input:disabled) { opacity: .5; cursor: not-allowed; }
     </style>
- 
-                    <style id="printCss" media="print">
+        <style id="printCss" media="print">
                     @page { size: A4 portrait; margin: 6mm; }
  
                     html body { padding:0 !important; margin:0 !important; background:#fff !important; }
@@ -431,10 +311,10 @@
                     html body .print-card .applicant-sign > div { border:1px solid #000 !important; }
                     html body .print-card > .border-b { border-bottom:1px solid #000 !important; }
                     html body .print-card .sign-section { border-top:1px solid #000 !important; }
-                        
-            </style>
-            <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
-        </head>
+        </style>
+
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+</head>
 <body class="min-h-screen text-slate-800 antialiased py-8 px-4 sm:px-6 lg:px-8">
 
     <div class="max-w-4xl mx-auto print-container">
@@ -443,7 +323,7 @@
             <div class="inline-flex items-center justify-center p-3 bg-brand-500 text-white rounded-2xl shadow-lg mb-4">
                 <i class="fa-solid fa-address-card text-3xl"></i>
             </div>
-            <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Formulir Data Diri Nasabah Deposito</h1>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Formulir Data Diri Nasabah Tabungan</h1>
             <p class="mt-2 text-slate-600">Lengkapi data diri, Foto KTP, dan Tanda Tangan Anda di bawah ini dengan benar ya.</p>
         </header>
 
@@ -472,6 +352,7 @@
                             <p class="text-xs text-slate-500">Gunakan format JPG, PNG, atau WEBP. Ukuran file disarankan di bawah 2MB.</p>
                             <button type="button" id="removePhotoBtn" onclick="removePhoto()" class="hidden text-xs text-red-600 hover:underline font-medium">Hapus Foto</button>
                             <p id="photoError" class="text-xs text-red-500 hidden font-medium">Foto KTP wajib diupload ya!</p>
+
                         </div>
                     </div>
                 </div>
@@ -488,7 +369,7 @@
                         </div>
                         
                         <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Alias <span class="text-red-500">*</span></label>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Alias</label>
                             <input type="text" id="alias" placeholder="Contoh: Budi Pratama, S.Kom" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
                         </div>
 
@@ -686,307 +567,228 @@
                     </div>
                 </div>
                 
-                <!-- Pembukaan Rekening Deposito -->
-                <div>
-                    <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-coins text-brand-600"></i> Pembukaan Rekening Deposito
-                    </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                        <!-- Nominal Deposito -->
-                        <div class="md:col-span-2">
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Nominal Deposito <span class="text-red-500">*</span></label>
-                            <div class="relative">
-                                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm font-medium">Rp</span>
-                                <input type="text" id="depositAmount" required inputmode="numeric" placeholder="Minimal 1.000.000" oninput="formatRupiah(this); updateDepositWords()" class="w-full pl-11 pr-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
-                            </div>
-                            <p class="text-xs text-slate-500 mt-1">Minimal Rp 1.000.000</p>
-                            <p id="depositAmountError" class="text-xs text-red-500 mt-1 hidden font-medium">Nominal deposito minimal Rp 1.000.000.</p>
-                        </div>
-
-                        <!-- Terbilang (otomatis dari nominal) -->
-                        <div class="md:col-span-2">
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Terbilang</label>
-                            <input type="text" id="depositWords" readonly placeholder="Terisi otomatis dari nominal deposito" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 bg-slate-50 text-slate-700 outline-none">
-                        </div>
-
-                        <!-- Jangka Waktu -->
-                        <div class="md:col-span-2">
-                            <label class="block text-sm font-medium text-slate-700 mb-2">Jangka Waktu <span class="text-red-500">*</span></label>
-                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                                <label class="flex items-center gap-3 px-4 py-3 rounded-lg border border-slate-300 cursor-pointer hover:bg-slate-50 transition-colors">
-                                    <input type="radio" name="depositTerm" value="1 Bulan" required onchange="updateDepositRate()" class="w-4 h-4 accent-blue-600">
-                                    <span class="text-sm font-medium text-slate-700">1 Bulan</span>
-                                </label>
-                                <label class="flex items-center gap-3 px-4 py-3 rounded-lg border border-slate-300 cursor-pointer hover:bg-slate-50 transition-colors">
-                                    <input type="radio" name="depositTerm" value="3 Bulan" onchange="updateDepositRate()" class="w-4 h-4 accent-blue-600">
-                                    <span class="text-sm font-medium text-slate-700">3 Bulan</span>
-                                </label>
-                                <label class="flex items-center gap-3 px-4 py-3 rounded-lg border border-slate-300 cursor-pointer hover:bg-slate-50 transition-colors">
-                                    <input type="radio" name="depositTerm" value="6 Bulan" onchange="updateDepositRate()" class="w-4 h-4 accent-blue-600">
-                                    <span class="text-sm font-medium text-slate-700">6 Bulan</span>
-                                </label>
-                                <label class="flex items-center gap-3 px-4 py-3 rounded-lg border border-slate-300 cursor-pointer hover:bg-slate-50 transition-colors">
-                                    <input type="radio" name="depositTerm" value="12 Bulan" onchange="updateDepositRate()" class="w-4 h-4 accent-blue-600">
-                                    <span class="text-sm font-medium text-slate-700">12 Bulan</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Suku Bunga (otomatis mengikuti Jangka Waktu) -->
-                        <div class="md:col-span-2">
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Suku Bunga</label>
-                            <div class="relative">
-                                <input type="text" id="depositRate" readonly placeholder="Terisi otomatis sesuai jangka waktu" class="w-full pl-4 pr-28 py-2.5 rounded-lg border border-slate-300 bg-slate-50 text-slate-700 outline-none">
-                                <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm font-medium">% per Tahun</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Perpanjangan -->
-                        <div class="md:col-span-2">
-                            <label class="block text-sm font-medium text-slate-700 mb-2">Perpanjangan</label>
-                            <div class="flex items-center gap-3 px-4 py-3 rounded-lg border border-slate-300 bg-slate-50">
-                                <i class="fa-solid fa-circle-check text-brand-600"></i>
-                                <span class="text-sm font-medium text-slate-700">Otomatis (Automatic Roll Over)</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Pembayaran Bunga -->
-                        <div class="md:col-span-2">
-                            <label class="block text-sm font-medium text-slate-700 mb-2">Pembayaran Bunga <span class="text-red-500">*</span></label>
-                            <div class="space-y-3">
-
-                                <label class="flex items-center gap-3 px-4 py-3 rounded-lg border border-slate-300 cursor-pointer hover:bg-slate-50 transition-colors">
-                                    <input type="radio" name="interestPay" value="Tunai" required onchange="togglePayDetail()" class="w-4 h-4 accent-blue-600">
-                                    <span class="text-sm font-medium text-slate-700">Tunai</span>
-                                </label>
-
-                                <div>
-                                    <label class="flex items-center gap-3 px-4 py-3 rounded-lg border border-slate-300 cursor-pointer hover:bg-slate-50 transition-colors">
-                                        <input type="radio" name="interestPay" value="Transfer ke tabungan BPR" onchange="togglePayDetail()" class="w-4 h-4 accent-blue-600">
-                                        <span class="text-sm font-medium text-slate-700">Transfer ke tabungan BPR</span>
+                    <!-- Pembukaan Rekening Tabungan -->
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-piggy-bank text-brand-600"></i> Pembukaan Rekening Tabungan
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                           <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Produk yang Dipilih <span class="text-red-500">*</span></label>
+                                <div class="produk-group flex flex-col sm:flex-row gap-3">
+                                    <label class="produk-opt flex-1 flex items-center gap-2 px-4 py-3 rounded-lg border border-slate-300 bg-white cursor-pointer">
+                                        <input type="checkbox" name="produk" id="pAraya" value="Tabungan &quot;ARAYA&quot;" class="w-4 h-4 accent-blue-600">
+                                        <span class="text-sm font-medium">Tabungan "ARAYA"</span>
                                     </label>
-                                    <div id="payBprBox" class="hidden mt-2">
-                                        <p class="text-xs font-medium text-slate-600 mb-2">Pilih tabungan tujuan <span class="text-red-500">*</span></p>
-                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                            <label class="flex items-center gap-3 px-4 py-2.5 rounded-lg border border-slate-300 bg-white cursor-pointer hover:bg-slate-50 transition-colors">
-                                                <input type="radio" name="payBprProduct" value="Tabungan &quot;ARAYA&quot;" class="w-4 h-4 accent-blue-600">
-                                                <span class="text-sm font-medium text-slate-700">Tabungan "ARAYA"</span>
-                                            </label>
-                                            <label class="flex items-center gap-3 px-4 py-2.5 rounded-lg border border-slate-300 bg-white cursor-pointer hover:bg-slate-50 transition-colors">
-                                                <input type="radio" name="payBprProduct" value="Tabungan &quot;KU&quot;" class="w-4 h-4 accent-blue-600">
-                                                <span class="text-sm font-medium text-slate-700">Tabungan "KU"</span>
-                                            </label>
-                                        </div>
-                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
-                                            <input type="text" id="payBprNo" inputmode="numeric" placeholder="No. Rekening" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
-                                            <input type="text" id="payBprName" placeholder="Atas nama pemilik rekening" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <label class="flex items-center gap-3 px-4 py-3 rounded-lg border border-slate-300 cursor-pointer hover:bg-slate-50 transition-colors">
-                                        <input type="radio" name="interestPay" value="Transfer ke Bank lain" onchange="togglePayDetail()" class="w-4 h-4 accent-blue-600">
-                                        <span class="text-sm font-medium text-slate-700">Transfer ke Bank lain</span>
+                                    <label class="produk-opt flex-1 flex items-center gap-2 px-4 py-3 rounded-lg border border-slate-300 bg-white cursor-pointer">
+                                        <input type="checkbox" name="produk" id="pKu" value="Tabungan &quot;KU&quot;" class="w-4 h-4 accent-blue-600">
+                                        <span class="text-sm font-medium">Tabungan "KU"</span>
                                     </label>
-                                    <div id="payBankBox" class="hidden mt-2">
-                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                            <input type="text" id="payBankName" placeholder="Nama Bank" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
-                                            <input type="text" id="payBankOwner" placeholder="Nama Pemilik Rekening" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
-                                            <input type="text" id="payBankNo" inputmode="numeric" placeholder="Nomor Rekening" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all sm:col-span-2">
-                                        </div>
-                                    </div>
+                                    <label class="produk-opt flex-1 flex items-center gap-2 px-4 py-3 rounded-lg border border-slate-300 bg-white cursor-pointer">
+                                        <input type="checkbox" name="produk" id="pArisan" value="Tabungan Arisan" class="w-4 h-4 accent-blue-600">
+                                        <span class="text-sm font-medium">Tabungan Arisan</span>
+                                    </label>
                                 </div>
-
+                                <p id="productError" class="text-xs text-red-500 mt-1 hidden font-medium">Pilih minimal satu produk tabungan!</p>
                             </div>
-                        </div>
 
-                        <!-- Rekening Lain yang Dimiliki -->
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Rekening Lain yang Dimiliki</label>
-                            <input type="text" id="otherAccount" placeholder="Contoh: Bank lain / BPR (kosongkan jika tidak ada)" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
-                        </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Rekening Lain yang Dimiliki</label>
+                                <input type="text" id="otherAccount" placeholder="Contoh: Tabungan Bank lain / BPR (kosongkan jika tidak ada)" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
+                            </div>
 
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Nomor Rekening</label>
-                            <input type="text" id="otherAccountNo" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'')" placeholder="Nomor rekening lain" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Nomor Rekening</label>
+                                <input type="text" id="otherAccountNo" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'')" placeholder="Nomor rekening lain" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Data Khusus: Walk-In Customer -->
-                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                    <h2 class="text-base font-bold text-slate-900 mb-1 flex items-center gap-2">
-                    <i class="fa-solid fa-clipboard-list text-brand-600"></i> Data Khusus
-                    </h2>
-                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
-                        Sesuai Peraturan Otoritas Jasa Keuangan No. 8 Tahun 2023 tentang APU PPT&amp;PPPSPM, khusus nasabah yang tidak memiliki rekening di BPR (Walk-In Customer) wajib memberikan keterangan berikut.
-                    </p>
+                    <!-- Data Khusus: Walk-In Customer -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <h2 class="text-base font-bold text-slate-900 mb-1 flex items-center gap-2">
+                            <i class="fa-solid fa-clipboard-list text-brand-600"></i> Data Khusus
+                        </h2>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                            Sesuai Peraturan Otoritas Jasa Keuangan No. 8 Tahun 2023 tentang APU PPT&amp;PPPSPM, khusus nasabah yang tidak memiliki rekening di BPR (Walk-In Customer) wajib memberikan keterangan berikut. 
+                        </p>
 
-                    <div id="walkInBox" class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div id="walkInBox" class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
 
-    <!-- Jumlah Penghasilan (OTOMATIS dari "Penghasilan per Bulan") -->
-    <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">
-            Jumlah Penghasilan <span class="text-xs font-normal text-slate-400">(otomatis)</span>
-        </label>
-        <div class="flex gap-2">
-            <input type="text" id="wiIncome" readonly
-                   placeholder="Terisi otomatis dari Penghasilan per Bulan"
-                   class="flex-1 px-4 py-2.5 rounded-lg border border-slate-300 bg-slate-100 text-slate-700 outline-none cursor-not-allowed">
-            <span class="px-3 py-2.5 rounded-lg border border-slate-300 bg-slate-100 text-slate-600 text-sm">/ Bulan</span>
-        </div>
-    </div>
+                            <!-- Jumlah Penghasilan (OTOMATIS dari "Penghasilan per Bulan") -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">
+                                    Jumlah Penghasilan <span class="text-xs font-normal text-slate-400">(otomatis)</span>
+                                </label>
+                                <div class="flex gap-2">
+                                    <input type="text" id="wiIncome" readonly
+                                           placeholder="Terisi otomatis dari Penghasilan per Bulan"
+                                           class="flex-1 px-4 py-2.5 rounded-lg border border-slate-300 bg-slate-100 text-slate-700 outline-none cursor-not-allowed">
+                                    <span class="px-3 py-2.5 rounded-lg border border-slate-300 bg-slate-100 text-slate-600 text-sm">/ Bulan</span>
+                                </div>
+                            </div>
 
-    <!-- Aktivitas Transaksi Normal (MANUAL) -->
-    <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">Aktivitas Transaksi Normal <span class="text-red-500">*</span></label>
-        <div class="flex gap-2">
-            <div class="relative flex-1">
-                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm font-medium">Rp</span>
-                <input type="text" id="wiActivity" required inputmode="numeric" oninput="formatRupiah(this)" placeholder="0" class="w-full pl-11 pr-3 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
-            </div>
-            <select id="wiActivityPeriod" class="px-3 py-2.5 rounded-lg border border-slate-300 bg-white outline-none">
-                <option value="Bulan">/ Bulan</option>
-                <option value="Triwulan">/ Triwulan</option>
-            </select>
-        </div>
-    </div>
+                            <!-- Aktivitas Transaksi Normal (MANUAL) -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Aktivitas Transaksi Normal <span class="text-red-500">*</span></label>
+                                <div class="flex gap-2">
+                                    <div class="relative flex-1">
+                                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm font-medium">Rp</span>
+                                        <input type="text" id="wiActivity" required inputmode="numeric" oninput="formatRupiah(this)" placeholder="0" class="w-full pl-11 pr-3 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
+                                    </div>
+                                    <select id="wiActivityPeriod" class="px-3 py-2.5 rounded-lg border border-slate-300 bg-white outline-none">
+                                        <option value="Bulan">/ Bulan</option>
+                                        <option value="Triwulan">/ Triwulan</option>
+                                    </select>
+                                </div>
+                            </div>
 
-    <!-- Opsi rekening lain -->
-    <div class="md:col-span-2">
-        <label class="block text-sm font-medium text-slate-700 mb-1">Apakah memiliki rekening di bank lain?</label>
-        <select id="wiHasOther" onchange="toggleWiOther()" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 bg-white focus:ring-2 focus:ring-brand-500 outline-none">
-            <option value="Tidak">Tidak ada</option>
-            <option value="Ya">Ya, ada</option>
-        </select>
-    </div>
+                            <!-- Opsi rekening lain -->
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Apakah memiliki rekening di bank lain?</label>
+                                <select id="wiHasOther" onchange="toggleWiOther()" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 bg-white focus:ring-2 focus:ring-brand-500 outline-none">
+                                    <option value="Tidak">Tidak ada</option>
+                                    <option value="Ya">Ya, ada</option>
+                                </select>
+                            </div>
 
-    <!-- Rekening Lain & Nomor (OPSIONAL, muncul jika memilih "Ya") -->
-    <div id="wiOtherWrap" class="hidden md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">Rekening Lain yang Dimiliki <span class="text-xs font-normal text-slate-400">(opsional)</span></label>
-            <input type="text" id="wiOtherAcc" placeholder="Nama bank" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
-        </div>
-        <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">Nomor Rekening <span class="text-xs font-normal text-slate-400">(opsional)</span></label>
-            <input type="text" id="wiOtherAccNo" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'')" placeholder="Nomor rekening" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
-        </div>
-    </div>
+                            <!-- Rekening Lain & Nomor (OPSIONAL, muncul jika memilih "Ya") -->
+                            <div id="wiOtherWrap" class="hidden md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-1">Rekening Lain yang Dimiliki <span class="text-xs font-normal text-slate-400">(opsional)</span></label>
+                                    <input type="text" id="wiOtherAcc" placeholder="Nama bank" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-1">Nomor Rekening <span class="text-xs font-normal text-slate-400">(opsional)</span></label>
+                                    <input type="text" id="wiOtherAccNo" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'')" placeholder="Nomor rekening" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
+                                </div>
+                            </div>
 
-    <!-- Tujuan Transaksi (OTOMATIS dari "Tujuan Pembukaan Rekening") -->
-    <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">
-            Tujuan Transaksi <span class="text-xs font-normal text-slate-400">(otomatis)</span>
-        </label>
-        <input type="text" id="wiPurpose" readonly
-               placeholder="Terisi otomatis dari Tujuan Pembukaan Rekening"
-               class="w-full px-4 py-2.5 rounded-lg border border-slate-300 bg-slate-100 text-slate-700 outline-none cursor-not-allowed">
-    </div>
+                            <!-- Tujuan Transaksi (OTOMATIS dari "Tujuan Pembukaan Rekening") -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">
+                                    Tujuan Transaksi <span class="text-xs font-normal text-slate-400">(otomatis)</span>
+                                </label>
+                                <input type="text" id="wiPurpose" readonly
+                                       placeholder="Terisi otomatis dari Tujuan Pembukaan Rekening"
+                                       class="w-full px-4 py-2.5 rounded-lg border border-slate-300 bg-slate-100 text-slate-700 outline-none cursor-not-allowed">
+                            </div>
 
-    <!-- Asal Sumber Dana (OTOMATIS dari "Asal Sumber Dana" di atas) -->
-    <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">
-            Asal Sumber Dana <span class="text-xs font-normal text-slate-400">(otomatis)</span>
-        </label>
-        <input type="text" id="wiFund" readonly
-               placeholder="Terisi otomatis dari Asal Sumber Dana"
-               class="w-full px-4 py-2.5 rounded-lg border border-slate-300 bg-slate-100 text-slate-700 outline-none cursor-not-allowed">
-    </div>
-</div>
-</div>                    
-                    
+                            <!-- Asal Sumber Dana (OTOMATIS dari "Asal Sumber Dana" di atas) -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">
+                                        Asal Sumber Dana <span class="text-xs font-normal text-slate-400">(otomatis)</span>
+                                </label>
+                                <input type="text" id="wiFund" readonly
+                                       placeholder="Terisi otomatis dari Asal Sumber Dana"
+                                       class="w-full px-4 py-2.5 rounded-lg border border-slate-300 bg-slate-100 text-slate-700 outline-none cursor-not-allowed">
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- Pernyataan Nasabah -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <h2 class="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-file-signature text-brand-600"></i> Pernyataan
+                        </h2>
 
-                <!-- Pernyataan Nasabah -->
-                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                    <h2 class="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-file-signature text-brand-600"></i> Pernyataan
-                    </h2>
-                    <p class="text-sm text-slate-700 leading-relaxed">
-                        Dengan ini saya menyatakan bahwa data tersebut di atas adalah data diri saya yang sebenarnya. Saya tunduk dan patuh pada peraturan dan ketentuan Bank, apabila saya menggunakan rekening untuk tujuan melanggar peraturan maka saya sanggup :
-                    </p>
-                    <ol class="list-decimal list-inside text-sm text-slate-700 mt-2 space-y-1">
-                        <li>Rekening saya diblokir, dan atau ditutup oleh Bank.</li>
-                        <li>Mempertanggungjawabkan secara hukum yang berlaku.</li>
-                    </ol>
+                    <!-- Pernyataan umum (default) -->
+                    <div id="stmtStandard">
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Dengan ini saya menyatakan bahwa data tersebut di atas adalah data diri saya yang sebenarnya. Saya tunduk dan patuh pada peraturan dan ketentuan Bank, apabila saya menggunakan rekening untuk tujuan melanggar peraturan maka saya sanggup :
+                        </p>
+                        <ol class="list-decimal list-inside text-sm text-slate-700 mt-2 space-y-1">
+                            <li>Rekening saya diblokir, dan atau ditutup oleh Bank.</li>
+                            <li>Mempertanggungjawabkan secara hukum yang berlaku.</li>
+                        </ol>
+                    </div>
+
+                    <!-- Pernyataan Tabungan Arisan (menggantikan pernyataan umum) -->
+                    <div id="stmtArisan" class="hidden">
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Bahwa saya telah mengerti dan memahami dengan seluruh ketentuan tabungan arisan di PT. BPR ARAYA ARTA maka dengan ini saya menyatakan bersedia menjadi anggota tabungan arisan di PT. BPR ARAYA ARTA. Saya bersedia dan saya mendaftarkan diri untuk mengikuti sebanyak
+                            <input type="number" id="arisanCount" min="1" inputmode="numeric" placeholder="..." class="inline-block w-20 mx-1 px-2 py-1 text-center rounded-md border border-slate-300 bg-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none">
+                            nomor kepesertaan.
+                        </p>
+                    </div>
+
                     <label class="flex items-start gap-3 mt-4 cursor-pointer">
                         <input type="checkbox" id="agreeStatement" required class="mt-0.5 w-4 h-4 accent-blue-600">
                         <span class="text-sm font-medium text-slate-700">Saya telah membaca dan menyetujui pernyataan di atas. <span class="text-red-500">*</span></span>
                     </label>
                 </div>
-                <!-- Spesimen Tanda Tangan Nasabah -->
-                <div class="p-4 bg-amber-50 rounded-xl border border-amber-200">
-                    <h2 class="text-base font-bold text-slate-900 mb-1 flex items-center gap-2">
-                        <i class="fa-solid fa-file-pen text-amber-600"></i> Spesimen Tanda Tangan Nasabah
-                    </h2>
-                    <p class="text-xs text-slate-500 mb-3">Dicetak sebagai lembar terpisah (kertas kuning). Nama dan tanda tangan diambil otomatis dari isian di atas.</p>
+                    <!-- Spesimen Tanda Tangan Nasabah -->
+                    <div class="p-4 bg-amber-50 rounded-xl border border-amber-200">
+                        <h2 class="text-base font-bold text-slate-900 mb-1 flex items-center gap-2">
+                            <i class="fa-solid fa-file-pen text-amber-600"></i> Spesimen Tanda Tangan Nasabah
+                        </h2>
+                        <p class="text-xs text-slate-500 mb-3">Dicetak sebagai lembar terpisah (kertas kuning). Nama dan tanda tangan diambil otomatis dari isian di atas.</p>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">Jenis Nasabah</label>
-                        <select id="specJenisNasabah" onchange="toggleSpesimen()" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none bg-white">
-                            <option value="Perorangan">Perorangan (1 tanda tangan)</option>
-                            <option value="Perusahaan">Perusahaan (2 tanda tangan + cap/stempel)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">Nomor CIF (boleh dikosongkan, diisi pihak Bank)</label>
-                        <input type="text" id="specNoRekInput" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'')" placeholder="Nomor CIF" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
-                    </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Jenis Nasabah</label>
+                                <select id="specJenisNasabah" onchange="toggleSpesimen()" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none bg-white">
+                                    <option value="Perorangan">Perorangan (1 tanda tangan)</option>
+                                    <option value="Perusahaan">Perusahaan (2 tanda tangan + cap/stempel)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Nomor CIF (boleh dikosongkan, diisi pihak Bank)</label>
+                                <input type="text" id="specNoRekInput" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'')" placeholder="Nomor CIF" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
+                            </div>
 
-                <!-- Khusus Perusahaan -->
-                <div id="specDireksiWrap" class="hidden md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="md:col-span-2">
-                        <label class="block text-sm font-medium text-slate-700 mb-1">Nama Perusahaan <span class="text-red-500">*</span></label>
-                        <input type="text" id="specNamaPerusahaan" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
-                    </div>
-                <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1">Nama Direksi / Pimpinan 1 <span class="text-red-500">*</span></label>
-                <input type="text" id="specDireksi1" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
-                <p class="text-xs text-slate-500 mt-1">Tanda tangan Direksi 1 memakai Tanda Tangan Digital di bagian bawah formulir.</p>
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1">Nama Direksi / Pimpinan 2 <span class="text-red-500">*</span></label>
-                <input type="text" id="specDireksi2" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
-            </div>
+                            <!-- Khusus Perusahaan -->
+                            <div id="specDireksiWrap" class="hidden md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="md:col-span-2">
+                                    <label class="block text-sm font-medium text-slate-700 mb-1">Nama Perusahaan <span class="text-red-500">*</span></label>
+                                    <input type="text" id="specNamaPerusahaan" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-1">Nama Direksi / Pimpinan 1 <span class="text-red-500">*</span></label>
+                                    <input type="text" id="specDireksi1" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
+                                    <p class="text-xs text-slate-500 mt-1">Tanda tangan Direksi 1 memakai Tanda Tangan Digital di bagian bawah formulir.</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-1">Nama Direksi / Pimpinan 2 <span class="text-red-500">*</span></label>
+                                    <input type="text" id="specDireksi2" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none">
+                                </div>
 
-            <!-- Tanda tangan Direksi 2 -->
-            <div>
-                <div class="flex items-center justify-between mb-1">
-                    <label class="block text-sm font-medium text-slate-700">Tanda Tangan Direksi 2 <span class="text-red-500">*</span></label>
-                    <button type="button" onclick="clearSignature2()" class="text-xs font-semibold text-red-600 hover:underline">Hapus</button>
+                                <!-- Tanda tangan Direksi 2 -->
+                                <div>
+                                    <div class="flex items-center justify-between mb-1">
+                                        <label class="block text-sm font-medium text-slate-700">Tanda Tangan Direksi 2 <span class="text-red-500">*</span></label>
+                                        <button type="button" onclick="clearSignature2()" class="text-xs font-semibold text-red-600 hover:underline">Hapus</button>
+                                    </div>
+                                    <div class="canvas-container relative w-full h-32 bg-white rounded-xl border-2 border-dashed border-slate-300 overflow-hidden cursor-crosshair">
+                                        <canvas id="sig2Canvas" class="w-full h-full"></canvas>
+                                        <div id="sig2Placeholder" class="absolute inset-0 pointer-events-none flex items-center justify-center text-slate-400 text-xs">
+                                            <i class="fa-solid fa-pen-nib mr-2"></i> Tanda tangan Direksi 2
+                                    </div>
+                                    </div>
+                                    <p id="sig2Error" class="text-xs text-red-500 mt-1 hidden font-medium">Tanda tangan Direksi 2 wajib diisi!</p>
+                                    </div>
+
+                            <!-- Cap / Stempel -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Cap / Stempel Perusahaan <span class="text-xs font-normal text-slate-400">(opsional)</span></label>
+                                <div class="flex items-center gap-3 p-3 bg-white rounded-xl border border-dashed border-slate-300">
+                                    <div class="w-24 h-24 bg-slate-100 rounded-lg overflow-hidden flex items-center justify-center border border-slate-200">
+                                        <img id="stampPreview" src="" alt="Stempel" class="max-w-full max-h-full object-contain hidden">
+                                        <i id="stampPlaceholder" class="fa-solid fa-stamp text-2xl text-slate-400"></i>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label for="stampInput" class="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer">
+                                            <i class="fa-solid fa-upload text-brand-600"></i> Pilih Gambar
+                                        </label>
+                                        <input type="file" id="stampInput" accept="image/*" class="hidden" onchange="previewStamp(event)">
+                                        <p class="text-xs text-slate-500">Foto/scan cap perusahaan (JPG/PNG). Boleh dikosongkan jika cap dibubuhkan langsung di atas kertas.</p>
+                                    </div>
+                                </div>
+                                <p id="stampError" class="text-xs text-red-500 mt-1 hidden font-medium">File cap tidak valid.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="canvas-container relative w-full h-32 bg-white rounded-xl border-2 border-dashed border-slate-300 overflow-hidden cursor-crosshair">
-                    <canvas id="sig2Canvas" class="w-full h-full"></canvas>
-                    <div id="sig2Placeholder" class="absolute inset-0 pointer-events-none flex items-center justify-center text-slate-400 text-xs">
-                        <i class="fa-solid fa-pen-nib mr-2"></i> Tanda tangan Direksi 2
-                    </div>
-                </div>
-                <p id="sig2Error" class="text-xs text-red-500 mt-1 hidden font-medium">Tanda tangan Direksi 2 wajib diisi!</p>
-            </div>
-
-            <!-- Cap / Stempel -->
-            <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1">Cap / Stempel Perusahaan <span class="text-xs font-normal text-slate-400">(opsional)</span></label>
-                <div class="flex items-center gap-3 p-3 bg-white rounded-xl border border-dashed border-slate-300">
-                    <div class="w-24 h-24 bg-slate-100 rounded-lg overflow-hidden flex items-center justify-center border border-slate-200">
-                        <img id="stampPreview" src="" alt="Stempel" class="max-w-full max-h-full object-contain hidden">
-                        <i id="stampPlaceholder" class="fa-solid fa-stamp text-2xl text-slate-400"></i>
-                    </div>
-                    <div class="space-y-1">
-                        <label for="stampInput" class="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer">
-                            <i class="fa-solid fa-upload text-brand-600"></i> Pilih Gambar
-                        </label>
-                        <input type="file" id="stampInput" accept="image/*" class="hidden" onchange="previewStamp(event)">
-                        <p class="text-xs text-slate-500">Foto/scan cap perusahaan (JPG/PNG). Boleh dikosongkan jika cap dibubuhkan langsung di atas kertas.</p>
-                    </div>
-                </div>
-                <p id="stampError" class="text-xs text-red-500 mt-1 hidden font-medium">File cap tidak valid.</p>
-            </div>
-        </div>
-    </div>
-</div>
 
                 <!-- Signature Pad Section -->
                 <div>
@@ -1021,8 +823,8 @@
 
             <!-- REVIEW / BIODATA CARD SECTION (HIDDEN BY DEFAULT) -->
             <div id="reviewSection" class="hidden">
-            <div id="saveStatus" class="no-print hidden mb-4 p-4 rounded-xl border text-sm font-medium"></div>
-                
+                <!-- Status penyimpanan data -->
+                <div id="saveStatus" class="no-print hidden mb-4 p-4 rounded-xl border text-sm font-medium"></div>
                 <!-- Review Actions Bar (No Print) -->
                 <div class="mb-6 flex flex-wrap items-center justify-between gap-4 no-print bg-white p-4 rounded-xl shadow-md border border-slate-100">
                     <button onclick="editForm()" class="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-lg transition-colors text-sm">
@@ -1039,7 +841,7 @@
             <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-8 sm:p-12 print-card">
                 <!-- Header Cetak -->
                 <div class="print-header">
-                    <img src="header-bpr.png" alt="PT. BPR Araya Arta" class="print-banner">
+                    <img id="printHeaderImg" src="header-bpr.png" alt="PT. BPR Araya Arta" class="print-banner">
                 </div>
                 <!-- Header Card -->
                 <div class="border-b border-slate-200 pb-6 mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -1050,9 +852,10 @@
                     </div>
                     <div class="text-left sm:text-right">
                         <span class="text-sm text-slate-400 font-medium">Status Verifikasi</span>
-                        <div class="flex items-center gap-1.5 text-emerald-600 font-bold text-sm mt-0.5">
+                        <div class="flex items-center gap-1.5 text-emerald-600 font-bold text-sm mt-0.5 sm:justify-end">
                             <i class="fa-solid fa-circle-check"></i> Data Lengkap & Tervalidasi
                         </div>
+                        <div id="cifArisan" class="hidden text-sm text-slate-600 font-medium mt-1">No. CIF : ............</div>
                     </div>
                 </div>
 
@@ -1190,33 +993,13 @@
             </div>
         </div>
 
-                                <!-- Pembukaan Rekening Deposito (Review) -->
+                                <!-- Pembukaan Rekening Tabungan (Review) -->
                                 <div class="mt-8">
-                                    <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">Pembukaan Rekening Deposito</h3>
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 grid-flow-dense gap-4">
-                                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                                            <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Nominal Deposito</span>
-                                            <span id="reviewDepositAmount" class="text-base font-semibold text-slate-800"></span>
-                                        </div>
-                                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                                            <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Jangka Waktu</span>
-                                            <span id="reviewDepositTerm" class="text-base font-semibold text-slate-800"></span>
-                                        </div>
-                                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                                            <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Suku Bunga</span>
-                                            <span id="reviewDepositRate" class="text-base font-semibold text-slate-800"></span>
-                                        </div>
-                                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 sm:col-span-2 col-wide">
-                                            <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Terbilang</span>
-                                            <span id="reviewDepositWords" class="text-base font-semibold text-slate-800"></span>
-                                        </div>
-                                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                                            <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Perpanjangan</span>
-                                            <span id="reviewDepositRoll" class="text-base font-semibold text-slate-800"></span>
-                                        </div>
-                                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 sm:col-span-2 col-full">
-                                            <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Pembayaran Bunga</span>
-                                            <span id="reviewInterestPay" class="text-base font-semibold text-slate-800"></span>
+                                    <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">Pembukaan Rekening Tabungan</h3>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 sm:col-span-2">
+                                            <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Produk yang Dipilih</span>
+                                            <span id="reviewProduct" class="text-base font-semibold text-slate-800"></span>
                                         </div>
                                         <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
                                             <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Rekening Lain yang Dimiliki</span>
@@ -1228,210 +1011,216 @@
                                         </div>
                                     </div>
                                 </div>
-
-                <!-- Data Khusus Walk-In Customer (Review) -->
-                <div id="reviewWalkInWrap" class="mt-8">
-                    <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-1">Data Khusus </h3>
-                    <p class="wi-note text-[11px] text-slate-600 mb-3">Sesuai Peraturan Otoritas Jasa Keuangan No. 8 Tahun 2023 tentang APU PPT&amp;PPPSPM, khusus nasabah yang tidak memiliki rekening di BPR (Walk-In Customer) wajib memberikan keterangan mengenai :</p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                            <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Jumlah Penghasilan</span>
-                            <span id="reviewWiIncome" class="text-base font-semibold text-slate-800"></span>
-                        </div>
-                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                            <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Aktivitas Transaksi Normal</span>
-                            <span id="reviewWiActivity" class="text-base font-semibold text-slate-800"></span>
-                        </div>
-                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                            <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Rekening Lain yang Dimiliki</span>
-                            <span id="reviewWiOtherAcc" class="text-base font-semibold text-slate-800"></span>
-                        </div>
-                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                            <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Nomor Rekening</span>
-                            <span id="reviewWiOtherAccNo" class="text-base font-semibold text-slate-800"></span>
-                        </div>
-                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                            <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Tujuan Transaksi</span>
-                            <span id="reviewWiPurpose" class="text-base font-semibold text-slate-800"></span>
-                        </div>
-                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                            <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Asal Sumber Dana</span>
-                            <span id="reviewWiFund" class="text-base font-semibold text-slate-800"></span>
+                    <!-- Data Khusus Walk-In Customer (Review) -->
+                    <div id="reviewWalkInWrap" class="mt-8">
+                        <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-1">Data Khusus </h3>
+                        <p class="wi-note text-[11px] text-slate-600 mb-3">Sesuai Peraturan Otoritas Jasa Keuangan No. 8 Tahun 2023 tentang APU PPT&amp;PPPSPM, khusus nasabah yang tidak memiliki rekening di BPR (Walk-In Customer) wajib memberikan keterangan mengenai :</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Jumlah Penghasilan</span>
+                                <span id="reviewWiIncome" class="text-base font-semibold text-slate-800"></span>
+                            </div>
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Aktivitas Transaksi Normal</span>
+                                <span id="reviewWiActivity" class="text-base font-semibold text-slate-800"></span>
+                            </div>
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Rekening Lain yang Dimiliki</span>
+                                <span id="reviewWiOtherAcc" class="text-base font-semibold text-slate-800"></span>
+                            </div>
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Nomor Rekening</span>
+                                <span id="reviewWiOtherAccNo" class="text-base font-semibold text-slate-800"></span>
+                            </div>
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Tujuan Transaksi</span>
+                                <span id="reviewWiPurpose" class="text-base font-semibold text-slate-800"></span>
+                            </div>
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                                <span class="text-xs font-medium text-slate-400 block uppercase tracking-wider">Asal Sumber Dana</span>
+                                <span id="reviewWiFund" class="text-base font-semibold text-slate-800"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
                     <!-- Signature Display Section -->
-                    <div class="sign-section">
-                        <!-- Pernyataan -->
-                        <div class="stmt-box text-xs text-slate-500">
-                            <p class="font-medium text-slate-700 mb-1">Pernyataan:</p>
+                        <div class="sign-section">
+                            <!-- Pernyataan -->
+                            <div class="stmt-box text-xs text-slate-500">
+                                 <p class="font-medium text-slate-700 mb-1">Pernyataan:</p>
 
-                            <div id="reviewStmtStandard">
-                                <p>Dengan ini saya menyatakan bahwa data tersebut di atas adalah data diri saya yang sebenarnya. Saya tunduk dan patuh pada peraturan dan ketentuan Bank, apabila saya menggunakan rekening untuk tujuan melanggar peraturan maka saya sanggup :</p>
-                                <ol class="list-decimal list-inside mt-1 space-y-0.5">
-                                    <li>Rekening saya diblokir, dan atau ditutup oleh Bank.</li>
-                                    <li>Mempertanggungjawabkan secara hukum yang berlaku.</li>
-                                </ol>
+                                <div id="reviewStmtStandard">
+                                    <p>Dengan ini saya menyatakan bahwa data tersebut di atas adalah data diri saya yang sebenarnya. Saya tunduk dan patuh pada peraturan dan ketentuan Bank, apabila saya menggunakan rekening untuk tujuan melanggar peraturan maka saya sanggup :</p>
+                                    <ol class="list-decimal list-inside mt-1 space-y-0.5">
+                                        <li>Rekening saya diblokir, dan atau ditutup oleh Bank.</li>
+                                        <li>Mempertanggungjawabkan secara hukum yang berlaku.</li>
+                                    </ol>
+                                </div>
+
+                                <div id="reviewStmtArisan" class="hidden">
+                                    <p>Bahwa saya telah mengerti dan memahami dengan seluruh ketentuan tabungan arisan di PT. BPR ARAYA ARTA maka dengan ini saya menyatakan bersedia menjadi anggota tabungan arisan di PT. BPR ARAYA ARTA. Saya bersedia dan saya mendaftarkan diri untuk mengikuti sebanyak <b id="reviewArisanCount" class="text-slate-800"></b> nomor kepesertaan.</p>
                                 </div>
                             </div>
 
-                        <!-- Baris tanda tangan: pihak bank (kiri) + pemohon (kanan) -->
-                        <div class="sign-row">
-                            <!-- Tanda Tangan Pihak Bank -->
-                            <div class="bank-sign hidden print:grid grid-cols-3 gap-3">
-                                <div class="border border-slate-300 rounded-lg p-3 text-center">
-                                    <p class="bank-sign-title min-h-[2rem] text-xs font-semibold text-slate-700 leading-tight">Pengesahan Bank /<br>Pengawasan</p>
-                                    <div class="bank-sign-space h-20"></div>
-                                    <p class="bank-sign-note border-t border-dotted border-slate-400 pt-1 text-[10px] text-slate-500">Nama &amp; Tanda Tangan</p>
+                            <!-- Baris tanda tangan: pihak bank (kiri) + pemohon (kanan) -->
+                            <div class="sign-row">
+                                <div class="bank-sign hidden print:grid grid-cols-3 gap-3">
+                                    <div class="border border-slate-300 rounded-lg p-3 text-center">
+                                        <p class="bank-sign-title min-h-[2rem] text-xs font-semibold text-slate-700 leading-tight">Pengesahan Bank /<br>Pengawasan</p>
+                                        <div class="bank-sign-space h-20"></div>
+                                        <p class="bank-sign-note border-t border-dotted border-slate-400 pt-1 text-[10px] text-slate-500">Nama &amp; Tanda Tangan</p>
+                                    </div>
+                                    <div class="border border-slate-300 rounded-lg p-3 text-center">
+                                        <p class="bank-sign-title min-h-[2rem] text-xs font-semibold text-slate-700 leading-tight">Pelayanan</p>
+                                        <div class="bank-sign-space h-20"></div>
+                                        <p class="bank-sign-note border-t border-dotted border-slate-400 pt-1 text-[10px] text-slate-500">Nama &amp; Tanda Tangan</p>
+                                    </div>
+                                    <div class="border border-slate-300 rounded-lg p-3 text-center">
+                                        <p class="bank-sign-title min-h-[2rem] text-xs font-semibold text-slate-700 leading-tight">Kolektor / AO</p>
+                                        <div class="bank-sign-space h-20"></div>
+                                        <p class="bank-sign-note border-t border-dotted border-slate-400 pt-1 text-[10px] text-slate-500">Nama &amp; Tanda Tangan</p>
+                                    </div>
                                 </div>
-                                <div class="border border-slate-300 rounded-lg p-3 text-center">
-                                    <p class="bank-sign-title min-h-[2rem] text-xs font-semibold text-slate-700 leading-tight">Pelayanan</p>
-                                    <div class="bank-sign-space h-20"></div>
-                                    <p class="bank-sign-note border-t border-dotted border-slate-400 pt-1 text-[10px] text-slate-500">Nama &amp; Tanda Tangan</p>
-                                </div>
-                                <div class="border border-slate-300 rounded-lg p-3 text-center">
-                                    <p class="bank-sign-title min-h-[2rem] text-xs font-semibold text-slate-700 leading-tight">Kolektor / AO</p>
-                                    <div class="bank-sign-space h-20"></div>
-                                    <p class="bank-sign-note border-t border-dotted border-slate-400 pt-1 text-[10px] text-slate-500">Nama &amp; Tanda Tangan</p>
-                                </div>
-                            </div>
 
-                            <!-- Tanda Tangan Pemohon -->
-                            <div class="applicant-sign flex flex-col items-center">
-                                <span class="text-xs text-slate-500 mb-1">Kebumen, <span id="reviewSignDate"></span></span>
-                                <span class="text-xs text-slate-500 font-medium mb-2">Tanda Tangan Pemohon</span>
-                                <div class="w-48 h-24 border border-slate-200 rounded-lg p-2 bg-slate-50 flex items-center justify-center">
-                                    <img id="reviewSignature" src="" alt="Tanda Tangan" class="max-h-full max-w-full object-contain">
+                                <div class="applicant-sign flex flex-col items-center">
+                                    <span class="text-xs text-slate-500 mb-1">Kebumen, <span id="reviewSignDate"></span></span>
+                                    <span class="text-xs text-slate-500 font-medium mb-2">Tanda Tangan Pemohon</span>
+                                    <div class="w-48 h-24 border border-slate-200 rounded-lg p-2 bg-slate-50 flex items-center justify-center">
+                                        <img id="reviewSignature" src="" alt="Tanda Tangan" class="max-h-full max-w-full object-contain">
+                                    </div>
+                                    <span id="reviewSignerName" class="text-xs font-bold text-slate-700 mt-2"></span>
                                 </div>
-                                <span id="reviewSignerName" class="text-xs font-bold text-slate-700 mt-2"></span>
                             </div>
                         </div>
+
+                        <!-- Footer Cetak -->
+                        <div class="print-footer">
+                            <img src="banner-bpr.png" alt="Bank Sahabat Anak Negeri" class="print-banner">
+                        </div>
                     </div>
+                </div>
                 
 
-                    <!-- Footer Cetak -->
-                    <div class="print-footer">
-                        <img src="banner-bpr.png" alt="Bank Sahabat Anak Negeri" class="print-banner">
-                    </div>
-                </div>
-            </div>
-    
-            <!-- ===== SPESIMEN TANDA TANGAN NASABAH (halaman terpisah saat dicetak) ===== -->
-            <div id="specimenSection" class="hidden max-w-4xl mx-auto mt-8 specimen-page">
-                <div class="specimen-card">
-                    <div class="print-header">
-                        <img src="header-spesimen.png" alt="PT. BPR Araya Arta" class="print-banner">
-                    </div>
+                            <!-- ===== SPESIMEN TANDA TANGAN NASABAH (halaman terpisah saat dicetak) ===== -->
+                            <div id="specimenSection" class="hidden max-w-4xl mx-auto mt-8 specimen-page">
+                                <div class="specimen-card">
+                                    <div class="print-header">
+                                        <img src="header-spesimen.png" alt="PT. BPR Araya Arta" class="print-banner">
+                                    </div>
+                                    
+                                    <div class="spec-row"><span>Jenis Nasabah</span><span>:</span>
+                                        <span id="specJenisOut"></span></div>
+                                    <div class="spec-row"><span>Jenis Rekening</span><span>:</span>
+                                        <span>Tabungan</span></div>
+                                    <div class="spec-row"><span>Nomor CIF</span><span>:</span>
+                                        <span><span id="specNoRek" class="spec-line"></span></span></div>
+                                    <div class="spec-row"><span id="specNamaLabel">Nama Nasabah</span><span>:</span>
+                                        <span id="specNama" style="font-weight:700"></span></div>
+                                    <div id="specDireksiRow1" class="spec-row"><span>Nama Direksi / Pimpinan</span><span>:</span>
+                                        <span>1. <span id="specDireksi1Out" class="spec-line" style="min-width:260px"></span></span></div>
+                                    <div id="specDireksiRow2" class="spec-row"><span></span><span></span>
+                                        <span>2. <span id="specDireksi2Out" class="spec-line" style="min-width:260px"></span></span></div>
 
-                    <div class="spec-row"><span>Jenis Nasabah</span><span>:</span><span id="specJenisOut"></span></div>
-                    <div class="spec-row"><span>Jenis Rekening</span><span>:</span><span>Deposito</span></div>
-                    <div class="spec-row"><span>Nomor CIF</span><span>:</span><span><span id="specNoRek" class="spec-line"></span></span></div>
-                    <div class="spec-row"><span id="specNamaLabel">Nama Nasabah</span><span>:</span><span id="specNama" style="font-weight:700"></span></div>
-                    <div id="specDireksiRow1" class="spec-row"><span>Nama Direksi / Pimpinan</span><span>:</span>
-                        <span>1. <span id="specDireksi1Out" class="spec-line" style="min-width:260px"></span></span></div>
-                    <div id="specDireksiRow2" class="spec-row"><span></span><span></span>
-                        <span>2. <span id="specDireksi2Out" class="spec-line" style="min-width:260px"></span></span></div>
+                                    <p class="spec-note">
+                                        Bertindak untuk &amp; atas nama <span id="specBertOut"></span><br>
+                                        dalam berhubungan dengan PT. BPR ARAYA ARTA Kebumen
+                                    </p>
 
-                    <p class="spec-note">
-                        Bertindak untuk &amp; atas nama <span id="specBertOut"></span><br>
-                        dalam berhubungan dengan PT. BPR ARAYA ARTA Kebumen
-                    </p>
+                                    <div class="spec-row"><span>Keterangan</span><span>:</span>
+                                        <span id="specKetOut"></span></div>
 
-                    <div class="spec-row"><span>Keterangan</span><span>:</span><span id="specKetOut"></span></div>
+                                    <div class="spec-bottom" style="margin-top:10px">
+                                        <div id="specBox" class="spec-box">
+                                            <div class="spec-cell">
+                                            <div class="spec-cell-title">Contoh tanda tangan</div>
+                                            <div class="spec-ttd"><span class="spec-no">1.</span><img id="specSign1" src="" alt="Tanda tangan 1"></div>
+                                            <div id="specTtd2" class="spec-ttd"><span class="spec-no">2.</span><img id="specSign2" src="" alt="Tanda tangan 2"></div>
+                                        </div>
+                                        <div id="specStampCell" class="spec-cell">
+                                            <div class="spec-cell-title">Cap / Stempel Perusahaan</div>
+                                            <div class="spec-stamp"><img id="specStampImg" src="" alt="Cap Perusahaan"></div>
+                                        </div>
+                                    </div>
+                                    <div class="spec-right">
+                                        <div>Kebumen, <span id="specTanggal"></span></div>
+                                        <div>Pengesahan / Legalisasi</div>
+                                        <div class="space"></div>
+                                        <div>( ................................ )</div>
+                                        <div>Pejabat Bank</div>
+                                    </div>
+                                </div>
 
-                    <div class="spec-bottom" style="margin-top:10px">
-                        <div id="specBox" class="spec-box">
-                            <div class="spec-cell">
-                            <div class="spec-cell-title">Contoh tanda tangan</div>
-                            <div class="spec-ttd"><span class="spec-no">1.</span><img id="specSign1" src="" alt="Tanda tangan 1"></div>
-                            <div id="specTtd2" class="spec-ttd"><span class="spec-no">2.</span><img id="specSign2" src="" alt="Tanda tangan 2"></div>
-                        </div>
-                        <div id="specStampCell" class="spec-cell">
-                            <div class="spec-cell-title">Cap / Stempel Perusahaan</div>
-                            <div class="spec-stamp"><img id="specStampImg" src="" alt="Cap Perusahaan"></div>
-                        </div>
-                    </div>
-                    <div class="spec-right">
-                        <div>Kebumen, <span id="specTanggal"></span></div>
-                        <div>Pengesahan / Legalisasi</div>
-                        <div class="space"></div>
-                        <div>( ................................ )</div>
-                        <div>Pejabat Bank</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="print-footer">
-                <img src="banner-bpr.png" alt="Bank Sahabat Anak Negeri" class="print-banner">
-            </div>
-        </div>
-    </div>
+                                <div class="print-footer">
+                                    <img src="banner-bpr.png" alt="Bank Sahabat Anak Negeri" class="print-banner">
+                                </div>
+                            </div>
+                        </div>    
                                         
     <!-- JAVASCRIPT LOGIC -->
     <script>
         let uploadedPhotoBase64 = '';
-        let stampBase64 = '';
         let isSigned = false;
+        let stampBase64 = '';
         let isSigned2 = false;
-        let lastPayload = null;
-        let isSubmitting = false;
-        let submissionId = null;
         
         const API_URL = "https://script.google.com/macros/s/AKfycbwnX680ihHaIcaOvo5Rm6IcBNaWYwAdCUFwhMNmYyrXmQHRNi9knd8GQVlKTgrpH4nKCw/exec";
-                // ===== Cloudeflare Turnstile =====
-                const TS_SITEKEY = "0x4AAAAAAAxxxxxxxxxxxxxx";      // kunci TES. Ganti dengan Site Key asli nanti.
+                // ===== Cloudflare Turnstile =====
+                const TS_SITEKEY = "0x4AAAAAAAxxxxxxxxxxxxxx";   // kunci TES. Ganti dengan Site Key asli nanti.
                 let tsWidgetId = null, tsResolve = null, tsReject = null;
 
                 function initTurnstile() {
                     if (!window.turnstile || tsWidgetId !== null) return;
                     tsWidgetId = turnstile.render('#tsBox', {
                         sitekey: TS_SITEKEY,
-                        execution: 'execute',               // baru jalan saat tombol sumbit ditekan
-                        appearance: 'interaction-only',     // kotak hanya muncul jika perlu
+                        execution: 'execute',              // baru jalan saat tombol submit ditekan
+                        appearance: 'interaction-only',    // kotak hanya muncul jika perlu
                         callback: function (t) { if (tsResolve) tsResolve(t); },
                         'error-callback': function () { if (tsReject) tsReject(new Error('captcha-error')); },
-                        'timeout-callback': function () { if (tsReject) tsReject(new Error('captcha-timeout')); },
+                        'timeout-callback': function () { if (tsReject) tsReject(new Error('captcha-timeout')); }
                     });
-                }
-                window.addEventListener('load', function() {
-                    const w = setInterval(function(){
-                        if (window.turnstile) { clearInterval(w); initTurnstile(); }
-                    }, 200);
-                });
-            
-                // Token berlaku 5 menit dan sekali pakai, jadi diminta TEPAT sebelum dikirim 
-                function getCaptchaToken() {
-                    return new Promise(function (resolve, reject) {
+            }
+            window.addEventListener('load', function () {
+                const w = setInterval(function () {
+                    if (window.turnstile) { clearInterval(w); initTurnstile(); }
+                }, 200);
+            });
+
+            // Token berlaku 5 menit dan sekali pakai, jadi diminta TEPAT sebelum kirim
+            function getCaptchaToken() {
+                return new Promise(function (resolve, reject) {
                     if (!window.turnstile || tsWidgetId === null) return reject(new Error('captcha-not-ready'));
                     tsResolve = resolve; tsReject = reject;
                     turnstile.reset(tsWidgetId);
                     turnstile.execute(tsWidgetId);
                     setTimeout(function () { reject(new Error('captcha-timeout')); }, 60000);
-                    });
-                }
+                });
+            }
+        let lastPayload = null;   // disimpan supaya bisa dikirim ulang
+        let isSubmitting = false;
+        let submissionId = null;
+        let savedOk = false;
+
         async function kirimKeMasterData(data) {
-            lastPayload = data;
-            const ctrl = new AbortController();
-            const timer = setTimeout(() => ctrl.abort(), 45000);
-        try {
-            const res = await fetch(API_URL, {
-                method: "POST",
-                headers: { "Content-Type": "text/plain;charset=utf-8" },
-                body: JSON.stringify({ action: "create", data: data }),
-                signal: ctrl.signal
-            });
-            const teks = await res.text();
-            console.log("Balasan server:", res.status, teks.slice(0, 300));
-            const hasil = JSON.parse(teks);
-            return hasil.success === true;
-        } catch (err) {
-            console.error("Gagal mengirim ke master data:", err);
-            return false;
-        } finally {
-            clearTimeout(timer);
+                lastPayload = data;
+                const ctrl = new AbortController();
+                const timer = setTimeout(() => ctrl.abort(), 45000);
+                try {
+                    const res = await fetch(API_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify({ action: "create", data: data }),
+                    signal: ctrl.signal
+                });
+                const teks = await res.text();
+                const hasil = JSON.parse(teks);
+                return hasil.success === true;
+            } catch (err) {
+                console.error("Gagal mengirim ke master data:", err);
+                return false;
+            } finally {
+                clearTimeout(timer);
+            }
         }
-    }
         // Canvas Setup
         const canvas = document.getElementById('signatureCanvas');
         const ctx = canvas.getContext('2d');
@@ -1439,21 +1228,31 @@
         let isDrawing = false;
 
         // Initialize Canvas size on load & resize
-        function resizeCanvas() {
-            const rect = canvas.getBoundingClientRect();
-            if (!rect.width || !rect.height) return;   // form sedang disembunyikan
+            function resizeCanvas() {
+                const rect = canvas.getBoundingClientRect();
+                // Jika form sedang disembunyikan, ukuran = 0 → jangan diubah
+                if (!rect.width || !rect.height) return;
 
-            const tempCanvas = document.createElement('canvas');
-            tempCanvas.width = canvas.width;
-            tempCanvas.height = canvas.height;
-            if (canvas.width && canvas.height) tempCanvas.getContext('2d').drawImage(canvas, 0, 0);
+                // Simpan gambar tanda tangan yang sudah ada
+                const tempCanvas = document.createElement('canvas');
+                tempCanvas.width = canvas.width;
+                tempCanvas.height = canvas.height;
+                if (canvas.width && canvas.height) {
+                    tempCanvas.getContext('2d').drawImage(canvas, 0, 0);
+                }
 
-            canvas.width = rect.width;
-            canvas.height = rect.height;
-            ctx.lineWidth = 2.5; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = '#0f172a';
+                canvas.width = rect.width;
+                canvas.height = rect.height;
 
-            if (tempCanvas.width && tempCanvas.height) ctx.drawImage(tempCanvas, 0, 0, rect.width, rect.height);
-        }
+                ctx.lineWidth = 2.5;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                ctx.strokeStyle = '#0f172a';
+
+                if (tempCanvas.width && tempCanvas.height) {
+                    ctx.drawImage(tempCanvas, 0, 0, rect.width, rect.height);
+                }
+            }
 
         window.addEventListener('load', () => {
             resizeCanvas();
@@ -1519,34 +1318,42 @@
             isSigned = false;
         }
 
-            const MAX_IMG_MB = 5;
-            const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+        const MAX_IMG_MB = 5; // batas file mentah; nanti dikecilkan otomatis oleh compressImage
+        const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 
-            function validateImageFile(file) {
-                return new Promise(resolve => {
-                    if (!ALLOWED_TYPES.includes(file.type)) return resolve('Format harus JPG, PNG, atau WEBP.');
-                    if (file.size > MAX_IMG_MB * 1024 * 1024) {
-                        return resolve('Ukuran file maksimal ' + MAX_IMG_MB + 'MB (file Anda ' + (file.size / 1048576).toFixed(1) + 'MB).');
-                    }
-                    const url = URL.createObjectURL(file);
-                    const img = new Image();
-                    img.onload = () => { URL.revokeObjectURL(url); resolve(''); };
-                    img.onerror = () => { URL.revokeObjectURL(url); resolve('File gambar rusak atau tidak bisa dibaca.'); };
-                    img.src = url;
-                });
-            }
+        // Mengembalikan '' jika file OK, atau pesan error jika bermasalah
+        function validateImageFile(file) {
+            return new Promise(resolve => {
+                if (!ALLOWED_TYPES.includes(file.type)) {
+                    return resolve('Format harus JPG, PNG, atau WEBP.');
+                }
+                if (file.size > MAX_IMG_MB * 1024 * 1024) {
+                    return resolve('Ukuran file maksimal ' + MAX_IMG_MB + 'MB (file Anda ' + (file.size / 1048576).toFixed(1) + 'MB).');
+                }
+                // Pastikan file benar-benar bisa dibuka sebagai gambar
+                const url = URL.createObjectURL(file);
+                const img = new Image();
+                img.onload = () => { URL.revokeObjectURL(url); resolve(''); };
+                img.onerror = () => { URL.revokeObjectURL(url); resolve('File gambar rusak atau tidak bisa dibaca.'); };
+                img.src = url;
+            });
+        }
 
-            async function previewImage(event) {
-                const file = event.target.files[0];
+        async function previewImage(event) {
+                const input = event.target;
+                const file = input.files[0];
                 if (!file) return;
+
                 const errEl = document.getElementById('photoError');
                 const err = await validateImageFile(file);
+
                 if (err) {
                     removePhoto();
                     errEl.textContent = err;
                     errEl.classList.remove('hidden');
                     return;
                 }
+
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     uploadedPhotoBase64 = e.target.result;
@@ -1555,33 +1362,6 @@
                     preview.classList.remove('hidden');
                     document.getElementById('photoPlaceholder').classList.add('hidden');
                     document.getElementById('removePhotoBtn').classList.remove('hidden');
-                    errEl.classList.add('hidden');
-                };
-                reader.readAsDataURL(file);
-            }
-
-            async function previewStamp(event) {
-                const input = event.target;
-                const file = input.files[0];
-                if (!file) return;
-                const errEl = document.getElementById('stampError');
-                const err = await validateImageFile(file);
-                if (err) {
-                    input.value = '';
-                    stampBase64 = '';
-                    document.getElementById('stampPreview').classList.add('hidden');
-                    document.getElementById('stampPlaceholder').classList.remove('hidden');
-                    errEl.textContent = err;
-                    errEl.classList.remove('hidden');
-                    return;
-                }
-                const reader = new FileReader();
-                reader.onload = e => {
-                    stampBase64 = e.target.result;
-                    const img = document.getElementById('stampPreview');
-                    img.src = stampBase64;
-                    img.classList.remove('hidden');
-                    document.getElementById('stampPlaceholder').classList.add('hidden');
                     errEl.classList.add('hidden');
                 };
                 reader.readAsDataURL(file);
@@ -1623,7 +1403,15 @@
                 ? 'Lainnya: ' + document.getElementById(otherId).value.trim()
                 : val;
         }
-        
+            // Pernyataan arisan menggantikan pernyataan umum
+            function toggleArisan() {
+                const checked = pArisan.checked;
+                document.getElementById('stmtStandard').classList.toggle('hidden', checked);
+                document.getElementById('stmtArisan').classList.toggle('hidden', !checked);
+                const count = document.getElementById('arisanCount');
+                count.required = checked;
+                if (!checked) count.value = '';
+            }
         // Perkecil foto agar ringan dikirim (maks 1200px, JPEG kualitas 80%)
         function compressImage(dataUrl, maxSize, type = 'image/jpeg') {
             return new Promise(resolve => {
@@ -1641,87 +1429,7 @@
                 img.src = dataUrl;
             });
         }
-
-        // Angka menjadi kata, contoh: 5000000 -> "Lima Juta"
-        function terbilang(n) {
-            const s = ['', 'Satu', 'Dua', 'Tiga', 'Empat', 'Lima', 'Enam', 'Tujuh', 'Delapan', 'Sembilan', 'Sepuluh', 'Sebelas'];
-            n = Math.floor(n);
-            if (n < 12) return s[n];
-            if (n < 20) return terbilang(n - 10) + ' Belas';
-            if (n < 100) return terbilang(Math.floor(n / 10)) + ' Puluh' + (n % 10 ? ' ' + terbilang(n % 10) : '');
-            if (n < 200) return 'Seratus' + (n - 100 ? ' ' + terbilang(n - 100) : '');
-            if (n < 1000) return terbilang(Math.floor(n / 100)) + ' Ratus' + (n % 100 ? ' ' + terbilang(n % 100) : '');
-            if (n < 2000) return 'Seribu' + (n - 1000 ? ' ' + terbilang(n - 1000) : '');
-            if (n < 1e6) return terbilang(Math.floor(n / 1e3)) + ' Ribu' + (n % 1e3 ? ' ' + terbilang(n % 1e3) : '');
-            if (n < 1e9) return terbilang(Math.floor(n / 1e6)) + ' Juta' + (n % 1e6 ? ' ' + terbilang(n % 1e6) : '');
-            if (n < 1e12) return terbilang(Math.floor(n / 1e9)) + ' Miliar' + (n % 1e9 ? ' ' + terbilang(n % 1e9) : '');
-            if (n < 1e15) return terbilang(Math.floor(n / 1e12)) + ' Triliun' + (n % 1e12 ? ' ' + terbilang(n % 1e12) : '');
-            return '';
-        }
-
-        // Isi kolom Terbilang otomatis dari Nominal Deposito
-        function updateDepositWords() {
-            document.getElementById('depositAmountError').classList.add('hidden');
-            const digits = document.getElementById('depositAmount').value.replace(/\D/g, '');
-            const n = digits ? parseInt(digits, 10) : 0;
-            document.getElementById('depositWords').value = n > 0 ? terbilang(n) + ' Rupiah' : '';
-        }
-
-        // Tampilkan isian sesuai cara pembayaran bunga
-        function togglePayDetail() {
-            const checked = document.querySelector('input[name="interestPay"]:checked');
-            const m = checked ? checked.value : '';
-            const bpr = m === 'Transfer ke tabungan BPR';
-            const bank = m === 'Transfer ke Bank lain';
-            document.getElementById('payBprBox').classList.toggle('hidden', !bpr);
-            document.getElementById('payBankBox').classList.toggle('hidden', !bank);
-
-            document.querySelectorAll('input[name="payBprProduct"]').forEach(r => {
-                r.required = bpr;
-                if (!bpr) r.checked = false;
-            });
-            ['payBprNo', 'payBprName'].forEach(id => {
-                const el = document.getElementById(id);
-                el.required = bpr;
-                if (!bpr) el.value = '';
-            });
-            ['payBankName', 'payBankOwner', 'payBankNo'].forEach(id => {
-                const el = document.getElementById(id);
-                el.required = bank;
-                if (!bank) el.value = '';
-            });
-        }
-
-        // Susun teks Pembayaran Bunga untuk review dan Sheet
-        function getInterestPayment() {
-            const m = document.querySelector('input[name="interestPay"]:checked').value;
-            const v = id => document.getElementById(id).value.trim() || '-';
-            if (m === 'Tunai') return 'Tunai';
-            if (m === 'Transfer ke tabungan BPR') {
-                const p = document.querySelector('input[name="payBprProduct"]:checked');
-                return 'Transfer ke tabungan BPR (' + (p ? p.value : '-') +
-                       ', No. Rekening: ' + v('payBprNo') + ', a.n. ' + v('payBprName') + ')';
-            }
-            return 'Transfer ke Bank lain (Bank: ' + v('payBankName') + ', a.n. ' + v('payBankOwner') +
-                   ', No. Rekening: ' + v('payBankNo') + ')';
-        }
-        
-        // Suku bunga deposito per jangka waktu (ubah angka di sini jika berubah)
-        const DEPOSIT_RATES = {
-            '1 Bulan':  '4,50',
-            '3 Bulan':  '5,75',
-            '6 Bulan':  '5,75',
-            '12 Bulan': '5,50'
-        };
-
-        // Isi Suku Bunga otomatis mengikuti Jangka Waktu yang dipilih
-        function updateDepositRate() {
-            const checked = document.querySelector('input[name="depositTerm"]:checked');
-            document.getElementById('depositRate').value = checked ? (DEPOSIT_RATES[checked.value] || '') : '';
-        }
-        
         async function handleFormSubmit(event) {
-            
             event.preventDefault();
             if (isSubmitting) return;
 
@@ -1732,14 +1440,6 @@
                 pe.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return;
             }
-            
-            // Validasi nominal deposito minimal Rp 1.000.000
-            const depositDigits = document.getElementById('depositAmount').value.replace(/\D/g, '');
-            if (!depositDigits || parseInt(depositDigits, 10) < 1000000) {
-                document.getElementById('depositAmountError').classList.remove('hidden');
-                document.getElementById('depositAmount').scrollIntoView({ behavior: 'smooth', block: 'center' });
-                return;
-            }
 
             // Validate Signature
             if (!isSigned) {
@@ -1747,12 +1447,21 @@
                 canvas.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return;
             }
-
-            //Validasi khusus Perusahaan : tanda tangan ke-2 wajib
-            if (document.getElementById('specJenisNasabah').value === 'Perusahaan' && !isSigned2) {
-                document.getElementById('sig2Error').classList.remove('hidden');
-                canvas2.scrollIntoView({ behavior: 'smooth', block: 'center'});
+            // Validate Produk Tabungan
+            const selectedProducts = Array.from(document.querySelectorAll('input[name="produk"]:checked')).map(el => el.value);
+            if (selectedProducts.length === 0) {
+                document.getElementById('productError').classList.remove('hidden');
+                document.getElementById('productError').scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return;
+            }
+            document.getElementById('productError').classList.add('hidden');
+            // Validasi Khusus Perusahaan : tanda tangan ke-2 wajib
+            if (document.getElementById('specJenisNasabah').value === 'Perusahaan') {
+                if (!isSigned2) {
+                    document.getElementById('sig2Error').classList.remove('hidden');
+                    canvas2.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
             }
 
             // Gather values
@@ -1781,24 +1490,19 @@
             const heirAddress    = document.getElementById('heirAddress').value;
             const alias          = document.getElementById('alias').value.trim() || '-';  
             const maritalStatus  = document.getElementById('maritalStatus').value;  
+            const product        = selectedProducts.join(' & ');
             const otherAccount   = document.getElementById('otherAccount').value.trim() || '-';
             const otherAccountNo = document.getElementById('otherAccountNo').value.trim() || '-';
-            const depositAmountRaw = document.getElementById('depositAmount').value;
-            const depositAmount    = depositAmountRaw ? 'Rp ' + depositAmountRaw : '-';
-            const depositWords     = document.getElementById('depositWords').value || '-';
-            const depositTerm      = document.querySelector('input[name="depositTerm"]:checked').value;
-            const depositRateRaw   = document.getElementById('depositRate').value.trim();
-            const depositRate      = depositRateRaw ? depositRateRaw + ' % per Tahun' : '-';
-            const depositRoll      = 'Otomatis (Automatic Roll Over)';
-            const interestPay      = getInterestPayment();
-
+            const isArisan    = selectedProducts.includes('Tabungan Arisan');
+            const arisanCount = isArisan ? document.getElementById('arisanCount').value.trim() : '-';
+            
             // Data spesimen tanda tangan
             const specJenis    = document.getElementById('specJenisNasabah').value;
             const isPerusahaan = specJenis === 'Perusahaan';
-            const specNorek    = document.getElementById('specNoRekInput').value.trim() || '-';
+            const specNoRek    = document.getElementById('specNoRekInput').value.trim() || '-';
             const specNamaPer  = isPerusahaan ? document.getElementById('specNamaPerusahaan').value.trim() : '-';
             const specDireksi1 = isPerusahaan ? document.getElementById('specDireksi1').value.trim() : '-';
-            const specDireksi2 =isPerusahaan ? document.getElementById('specDireksi2').value.trim() : '-';
+            const specDireksi2 = isPerusahaan ? document.getElementById('specDireksi2').value.trim() : '-';
             const isWalkIn = true;
             const wv = id => document.getElementById(id).value.trim();
             const wiIncome   = isWalkIn ? wv('wiIncome') + ' / Bulan' : '-';
@@ -1807,7 +1511,7 @@
             const wiOtherAccNo = isWalkIn ? (wv('wiOtherAccNo') || '-') : '-';
             const wiPurpose  = isWalkIn ? wv('wiPurpose') : '-';
             const wiFund     = isWalkIn ? wv('wiFund') : '-';
-
+            
             isSubmitting = true;
             if (!submissionId) {
                 submissionId = (crypto.randomUUID && crypto.randomUUID()) || (Date.now() + '-' + Math.random().toString(36).slice(2));
@@ -1821,7 +1525,6 @@
                 pe.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return;
             }
-
             let captchaToken = '';
             try {
                 captchaToken = await getCaptchaToken();
@@ -1830,9 +1533,7 @@
                 alert('Verifikasi keamanan gagal. Muat ulang halaman atau coba lagi.');
                 return;
             }
-            
-            tampilStatus('loading');
-
+tampilStatus('loading');
 kirimKeMasterData({
     submissionId: submissionId,
     captchaToken: captchaToken,
@@ -1860,24 +1561,19 @@ kirimKeMasterData({
     hubunganAhliWaris: heirRelation,
     aliasNama: alias,     
     statusPernikahan: maritalStatus,
-    produkDipilih: 'Deposito',
+    produkDipilih: product,
     rekeningLain: otherAccount,
     nomorRekeningLain: otherAccountNo,
-    nominalDeposito: depositAmount,
-    terbilangDeposito: depositWords,
-    jangkaWaktuDeposito: depositTerm,
-    sukuBungaDeposito: depositRate,
-    perpanjanganDeposito: depositRoll,
-    pembayaranBunga: interestPay,
+    jumlahKepesertaanArisan: arisanCount,
     jenisNasabah: specJenis,
-    nomorRekeningSpesimen: specNorek,
+    nomorRekeningSpesimen: specNoRek,
     namaPerusahaan: specNamaPer,
     direksi1: specDireksi1,
     direksi2: specDireksi2,
-    tandaTangan2: isPerusahaan ? canvas2.toDataURL('image/png') : '',
-    capPerusahaan: isPerusahaan ? await compressImage(stampBase64, 800, 'image/png') : '',
     fotoKtp: fotoKtpKecil,
     tandaTangan: canvas.toDataURL('image/png'),
+    tandaTangan2: isPerusahaan ? canvas2.toDataURL('image/png') : '',
+    capPerusahaan: isPerusahaan ? await compressImage(stampBase64, 800, 'image/png') : '',
     walkInCustomer: isWalkIn ? 'Ya' : 'Tidak',
     wiPenghasilan: wiIncome,
     wiAktivitasTransaksi: wiActivity,
@@ -1885,8 +1581,7 @@ kirimKeMasterData({
     wiNomorRekening: wiOtherAccNo,
     wiTujuanTransaksi: wiPurpose,
     wiAsalSumberDana: wiFund,
-}).then(ok => { tampilStatus(ok ? 'ok' : 'gagal'); isSubmitting = false; });
-            
+}).then(ok => { savedOk = ok; tampilStatus(ok ? 'ok' : 'gagal'); isSubmitting = false; });
             // Format Birth Date to ID format (e.g. 17 Agustus 1995)
             const formattedDate = new Date(birthDateVal).toLocaleDateString('id-ID', {
                 day: 'numeric',
@@ -1920,14 +1615,14 @@ kirimKeMasterData({
             document.getElementById('reviewAlias').innerText = alias;                
             document.getElementById('reviewMarital').innerText = maritalStatus;
             document.getElementById('reviewSignDate').innerText = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-            document.getElementById('reviewDepositAmount').innerText = depositAmount;
-            document.getElementById('reviewDepositWords').innerText = depositWords;
-            document.getElementById('reviewDepositTerm').innerText = depositTerm;
-            document.getElementById('reviewDepositRate').innerText = depositRate;
-            document.getElementById('reviewDepositRoll').innerText = depositRoll;
-            document.getElementById('reviewInterestPay').innerText = interestPay;
+            document.getElementById('reviewProduct').innerText = product;
             document.getElementById('reviewOtherAccount').innerText = otherAccount;
             document.getElementById('reviewOtherAccountNo').innerText = otherAccountNo;
+            document.getElementById('reviewStmtStandard').classList.toggle('hidden', isArisan);
+            document.getElementById('reviewStmtArisan').classList.toggle('hidden', !isArisan);
+            document.getElementById('reviewArisanCount').innerText = arisanCount;
+            document.getElementById('cifArisan').classList.toggle('hidden', !isArisan);
+            document.getElementById('printHeaderImg').src = isArisan ? 'header-bpr-arisan.png' : 'header-bpr.png';
             document.getElementById('reviewWiIncome').innerText = wiIncome;
             document.getElementById('reviewWiActivity').innerText = wiActivity;
             document.getElementById('reviewWiOtherAcc').innerText = wiOtherAcc;
@@ -1948,99 +1643,130 @@ kirimKeMasterData({
             document.getElementById('formSection').classList.add('hidden');
             document.getElementById('reviewSection').classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+            }
+        
+            // ===== Pad tanda tangan Direksi 2 (khusus Perusahaan) =====
+            const canvas2 = document.getElementById('sig2Canvas');
+            const ctx2 = canvas2.getContext('2d');
+            let isDrawing2 = false;
 
-        // ==== Pad tanda tangan Direksi 2 (khusus Perusahaan) ====
-        const canvas2 = document.getElementById('sig2Canvas');
-        const ctx2 = canvas2.getContext('2d');
-        let isDrawing2 = false;
+            function sizeCanvas2() {
+                const r = canvas2.getBoundingClientRect();
+                if (!r.width) return;
+                canvas2.width = r.width;
+                canvas2.height = r.height;
+                ctx2.lineWidth = 2.5; ctx2.lineCap = 'round'; ctx2.lineJoin = 'round'; ctx2.strokeStyle = '#0f172a';
+                isSigned2 = false;
+                document.getElementById('sig2Placeholder').classList.remove('hidden');
+            }
+            function getPos2(e) {
+                const r = canvas2.getBoundingClientRect();
+                const t = e.touches ? e.touches[0] : e;
+                return { x: t.clientX - r.left, y: t.clientY - r.top };
+            }
+            function start2(e) {
+                isDrawing2 = true;
+                const p = getPos2(e);
+                ctx2.beginPath(); ctx2.moveTo(p.x, p.y);
+                document.getElementById('sig2Placeholder').classList.add('hidden');
+                document.getElementById('sig2Error').classList.add('hidden');
+                isSigned2 = true;
+            }
+            function draw2(e) {
+                if (!isDrawing2) return;
+                e.preventDefault();
+                const p = getPos2(e);
+                ctx2.lineTo(p.x, p.y); ctx2.stroke();
+            }
+            function stop2() { isDrawing2 = false; }
+            function clearSignature2() {
+                ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+                document.getElementById('sig2Placeholder').classList.remove('hidden');
+                isSigned2 = false;
+            }
+            canvas2.addEventListener('mousedown', start2);
+            canvas2.addEventListener('mousemove', draw2);
+            canvas2.addEventListener('mouseup', stop2);
+            canvas2.addEventListener('mouseleave', stop2);
+            canvas2.addEventListener('touchstart', start2);
+            canvas2.addEventListener('touchmove', draw2);
+            canvas2.addEventListener('touchend', stop2);
 
-        function sizeCanvas2() {
-            const r = canvas2.getBoundingClientRect();
-            if (!r.width) return;
-            canvas2.width = r.width;
-            canvas2.height = r.height;
-            ctx2.lineWidth = 2.5; ctx2.lineCap = 'round'; ctx2.lineJoin = 'round'; ctx2.strokeStyle = '#0f172a';
-            isSigned2 = false;
-            document.getElementById('sig2Placeholder').classList.remove('hidden');
-        }
-        function getPos2(e) {
-            const r = canvas2.getBoundingClientRect();
-            const t = e.touches ? e.touches[0] : e;
-            return { x: t.clientX - r.left, y: t.clientY - r.top };
-        }
-        function start2(e) {
-            isDrawing2 = true;
-            const p = getPos2(e);
-            ctx2.beginPath(); ctx2.moveTo(p.x, p.y);
-            document.getElementById('sig2Placeholder').classList.add('hidden');
-            document.getElementById('sig2Error'). classList.add('hidden');
-            isSigned2 = true;
-        }
-        function draw2(e) {
-            if (!isDrawing2) return;
-            e.preventDefault();
-            const p = getPos2(e);
-            ctx2.lineTo(p.x, p.y); ctx2.stroke();
-        }
-        function stop2() { isDrawing2 = false; }
-        function clearSignature2() {
-            ctx2.clearRect(0,0, canvas2.width, canvas2.height);
-            document.getElementById('sig2Placeholder').classList.remove('hidden');
-            isSigned2 = false;
-        }
-        canvas2.addEventListener('mousedown', start2);
-        canvas2.addEventListener('mousemove', draw2);
-        canvas2.addEventListener('mouseup', stop2);
-        canvas2.addEventListener('mouseleave', stop2);
-        canvas2.addEventListener('touchstart', start2);
-        canvas2.addEventListener('touchmove', draw2);
-        canvas2.addEventListener('touchend', stop2);
+            // ===== Upload cap / stempel =====
+                
+            async function previewStamp(event) {
+                    const input = event.target;
+                    const file = input.files[0];
+                    if (!file) return;
+                    const errEl = document.getElementById('stampError');
+                    const err = await validateImageFile(file);
+                    if (err) {
+                        input.value = '';
+                        stampBase64 = '';
+                        document.getElementById('stampPreview').classList.add('hidden');
+                        document.getElementById('stampPlaceholder').classList.remove('hidden');
+                        errEl.textContent = err;
+                        errEl.classList.remove('hidden');
+                        return;
+                    }
+                    const reader = new FileReader();
+                    reader.onload = e => {
+                        stampBase64 = e.target.result;
+                        const img = document.getElementById('stampPreview');
+                        img.src = stampBase64;
+                        img.classList.remove('hidden');
+                        document.getElementById('stampPlaceholder').classList.add('hidden');
+                        errEl.classList.add('hidden');
+                    };
+                    reader.readAsDataURL(file);
+                }
 
-    
-        // Tampilkan isian Perusahaan hanya jika jenis nasabah = Perusahaan
-        function toggleSpesimen() {
-            const perusahaan = document.getElementById('specJenisNasabah').value === 'Perusahaan';
-            document.getElementById('specDireksiWrap').classList.toggle('hidden', !perusahaan);
-            ['specNamaPerusahaan', 'specDireksi1', 'specDireksi2'].forEach(id => {
-                document.getElementById(id).required = perusahaan;
-            });
-            if (perusahaan) sizeCanvas2();
-        }
+            // Tampilkan isian Perusahaan hanya jika jenis nasabah = Perusahaan
+            function toggleSpesimen() {
+                const perusahaan = document.getElementById('specJenisNasabah').value === 'Perusahaan';
+                document.getElementById('specDireksiWrap').classList.toggle('hidden', !perusahaan);
+                ['specNamaPerusahaan', 'specDireksi1', 'specDireksi2'].forEach(id => {
+                    document.getElementById(id).required = perusahaan;
+                });
+                if (perusahaan) sizeCanvas2();
+            }
 
-        // Isi lembar spesimen (kertas kuning)
-        function isiSpesimen(namaNasabah, signatureDataUrl) {
-            const v = id => document.getElementById(id).value.trim();
-            const set = (id, text) => document.getElementById(id).innerText = text;
-            const show = (id, tampil) => document.getElementById(id).style.display = tampil ? '' : 'none';
-            const perusahaan = v('specJenisNasabah') === 'Perusahaan';
+            // Isi lembar spesimen (kertas kuning)
+            function isiSpesimen(namaNasabah, signatureDataUrl) {
+                const v = id => document.getElementById(id).value.trim();
+                const set = (id, text) => document.getElementById(id).innerText = text;
+                const show = (id, tampil) => document.getElementById(id).style.display = tampil ? '' : 'none';
 
-            set('specJenisOut', perusahaan ? 'Perusahaan' : 'Perorangan');
-            set('specNamaLabel', perusahaan ? 'Nama Perusahaan' : 'Nama Nasabah');
-            set('specNama', perusahaan ? v('specNamaPerusahaan') : namaNasabah);
-            set('specNoRek', v('specNoRekInput'));
-            set('specBertOut', perusahaan ? 'Perusahaan' : 'Nasabah');
-            set('specKetOut', perusahaan ? 'Harus dua tanda tangan' : 'Satu tanda tangan');
-            set('specDireksi1Out', perusahaan ? v('specDireksi1') : '');
-            set('specDireksi2Out', perusahaan ? v('specDireksi2') : '');
-            set('specTanggal', new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }));
+                const perusahaan = v('specJenisNasabah') === 'Perusahaan';
 
-            show('specDireksiRow1', perusahaan);
-            show('specDireksiRow2', perusahaan);
-            show('specTtd2', perusahaan);
-            show('specStampCell', perusahaan);
-            document.getElementById('specBox').classList.toggle('single', !perusahaan);
+                set('specJenisOut', perusahaan ? 'Perusahaan' : 'Perorangan');
+                set('specNamaLabel', perusahaan ? 'Nama Perusahaan' : 'Nama Nasabah');
+                set('specNama', perusahaan ? v('specNamaPerusahaan') : namaNasabah);
+                set('specNoRek', v('specNoRekInput'));
+                set('specBertOut', perusahaan ? 'Perusahaan' : 'Nasabah');
+                set('specKetOut', perusahaan ? 'Harus dua tanda tangan' : 'Satu tanda tangan');
+                set('specDireksi1Out', perusahaan ? v('specDireksi1') : '');
+                set('specDireksi2Out', perusahaan ? v('specDireksi2') : '');
+                set('specTanggal', new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }));
 
-            document.getElementById('specSign1').src = signatureDataUrl;
-            document.getElementById('specSign2').src = perusahaan ? canvas2.toDataURL('image/png') : '';
-            const stampImg = document.getElementById('specStampImg');
-            stampImg.src = (perusahaan && stampBase64) ? stampBase64 : '';
-            stampImg.style.display = (perusahaan && stampBase64) ? '' : 'none';
-        }
+                show('specDireksiRow1', perusahaan);
+                show('specDireksiRow2', perusahaan);
+                show('specTtd2', perusahaan);
+                show('specStampCell', perusahaan);
+                document.getElementById('specBox').classList.toggle('single', !perusahaan);
 
-        function tampilStatus(state) {
-            const box = document.getElementById('saveStatus');
-            box.className = 'no-print mb-4 p-4 rounded-xl border text-sm font-medium';
+                document.getElementById('specSign1').src = signatureDataUrl;
+                document.getElementById('specSign2').src = perusahaan ? canvas2.toDataURL('image/png') : '';
+                const stampImg = document.getElementById('specStampImg');
+                stampImg.src = (perusahaan && stampBase64) ? stampBase64 : '';
+                stampImg.style.display = (perusahaan && stampBase64) ? '' : 'none';
+            }
+        
+            // Menampilkan status penyimpanan di halaman review
+            function tampilStatus(state) {
+                const box = document.getElementById('saveStatus');
+                box.className = 'no-print mb-4 p-4 rounded-xl border text-sm font-medium';
+
             if (state === 'loading') {
                 box.classList.add('bg-amber-50', 'border-amber-200', 'text-amber-800');
                 box.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Menyimpan data...';
@@ -2057,121 +1783,156 @@ kirimKeMasterData({
             }
         }
 
+        // Tombol "Kirim Ulang"
         async function kirimUlang() {
             if (!lastPayload) return;
             tampilStatus('loading');
             try { lastPayload.captchaToken = await getCaptchaToken(); } catch (e) {}
             const ok = await kirimKeMasterData(lastPayload);
+            savedOk = ok;
             tampilStatus(ok ? 'ok' : 'gagal');
         }
+
+                    function editForm() {
+                        if (savedOk && !confirm('Data sudah tersimpan. Jika disimpan lagi akan tercatat sebagai data BARU (ganda). Jika ada koreksi, mohon sampaikan ke petugas bank. Lanjutkan?')) return;
+                        savedOk = false;
+                        submissionId = null;
+                        document.getElementById('specimenSection').classList.add('hidden');
+                        document.getElementById('reviewSection').classList.add('hidden');
+                        document.getElementById('formSection').classList.remove('hidden');
+
+                        requestAnimationFrame(() => {
+                            resizeCanvas();
+                        });
+
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
         
-        // ===== Data Khusus: isi otomatis dari form di atasnya =====
-        function syncWalkIn() {
-            const val = id => document.getElementById(id).value.trim();
+                    // ===== Data Khusus: isi otomatis dari form di atasnya =====
+                    function syncWalkIn() {
+                        const val = id => document.getElementById(id).value.trim();
 
-            document.getElementById('wiIncome').value = val('income');
+                        // Jumlah Penghasilan <- Penghasilan per Bulan
+                        document.getElementById('wiIncome').value = val('income');
 
-            const purpose = getSelectOrOther('accountPurpose', 'accountPurposeOther');
-            document.getElementById('wiPurpose').value = purpose === 'Lainnya: ' ? '' : purpose;
+                        // Tujuan Transaksi <- Tujuan Pembukaan Rekening
+                        const purpose = getSelectOrOther('accountPurpose', 'accountPurposeOther');
+                        document.getElementById('wiPurpose').value = purpose === 'Lainnya: ' ? '' : purpose;
 
-            const fund = getSelectOrOther('fundSource', 'fundSourceOther');
-            document.getElementById('wiFund').value = fund === 'Lainnya: ' ? '' : fund;
+                        // Asal Sumber Dana <- Asal Sumber Dana
+                        const fund = getSelectOrOther('fundSource', 'fundSourceOther');
+                        document.getElementById('wiFund').value = fund === 'Lainnya: ' ? '' : fund;
+                    }
+
+                    ['income', 'accountPurpose', 'accountPurposeOther', 'fundSource', 'fundSourceOther'].forEach(id => {
+                        const el = document.getElementById(id);
+                        el.addEventListener('input', syncWalkIn);
+                        el.addEventListener('change', syncWalkIn);
+                    });
+                    syncWalkIn();
+
+                    // Rekening lain: tampil hanya jika dipilih "Ya"
+                    function toggleWiOther() {
+                        const ya = document.getElementById('wiHasOther').value === 'Ya';
+                        document.getElementById('wiOtherWrap').classList.toggle('hidden', !ya);
+                        if (!ya) {
+                            document.getElementById('wiOtherAcc').value = '';
+                            document.getElementById('wiOtherAccNo').value = '';
+                        }
+                    }
+        
+                    const pAraya = document.getElementById("pAraya");
+                    const pKu = document.getElementById("pKu");
+                    const pArisan = document.getElementById("pArisan");
+
+                    function aturProduk() {
+                        const adaTabungan = pAraya.checked || pKu.checked;
+
+                        // Arisan hanya bisa jika ARAYA dan KU tidak dipilih
+                        if (adaTabungan) pArisan.checked = false;
+                        pArisan.disabled = adaTabungan;
+
+                        // Kalau Arisan dipilih, ARAYA dan KU dikunci
+                        pAraya.disabled = pArisan.checked;
+                        pKu.disabled = pArisan.checked;
+
+                        toggleArisan();   // tampilkan pernyataan arisan / umum
+                        document.getElementById('productError').classList.add('hidden');
+                    }
+
+                    [pAraya, pKu, pArisan].forEach(function (el) {
+                          el.addEventListener("change", aturProduk);
+                    });
+                    aturProduk();
+        </script>
+                    
+        <script>
+        (function () {
+            const PAGE_W = 748, PAGE_H = 1050;
+
+        function split(card) {
+            const kids = Array.from(card.children);
+            const i = kids.findIndex(k => k.classList.contains('sign-section'));
+            return i < 0 ? kids : kids.slice(0, i);
         }
-
-        ['income', 'accountPurpose', 'accountPurposeOther', 'fundSource', 'fundSourceOther'].forEach(id => {
-            const el = document.getElementById(id);
-            el.addEventListener('input', syncWalkIn);
-            el.addEventListener('change', syncWalkIn);
-        });
-        syncWalkIn();
-
-        // Rekening lain: tampil hanya jika dipilih "Ya"
-        function toggleWiOther() {
-            const ya = document.getElementById('wiHasOther').value === 'Ya';
-            document.getElementById('wiOtherWrap').classList.toggle('hidden', !ya);
-            if (!ya) {
-                document.getElementById('wiOtherAcc').value = '';
-                document.getElementById('wiOtherAccNo').value = '';
-            }
+        function resetReview(card) {
+            if (!card) return;
+            split(card).forEach(el => { el.style.zoom = ''; el.style.width = ''; });
+            card.style.width = ''; card.style.minHeight = '';
         }
-        function editForm() {
-            submissionId = null;
-            document.getElementById('specimenSection').classList.add('hidden');
-            document.getElementById('reviewSection').classList.add('hidden');
-            document.getElementById('formSection').classList.remove('hidden');
-            requestAnimationFrame(() => {
-                resizeCanvas();
+        function fitReview(card) {
+            if (!card || !card.getClientRects().length) return;
+            resetReview(card);
+            const top = split(card);
+            if (!top.length) return;
+            card.style.width = PAGE_W + 'px';
+            card.style.minHeight = '0';
+
+            const apply = s => top.forEach(el => {
+                el.style.zoom = s;
+                el.style.width = (PAGE_W / s) + 'px';
             });
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    </script>
-    <script>
-(function () {
-    const PAGE_W = 748, PAGE_H = 1050;
+            const fits = () => card.getBoundingClientRect().height <= PAGE_H;
 
-    function split(card) {
-        const kids = Array.from(card.children);
-        const i = kids.findIndex(k => k.classList.contains('sign-section'));
-        return i < 0 ? kids : kids.slice(0, i);
-    }
-    function resetReview(card) {
-        if (!card) return;
-        split(card).forEach(el => { el.style.zoom = ''; el.style.width = ''; });
-        card.style.width = ''; card.style.minHeight = '';
-    }
-    function fitReview(card) {
-        if (!card || !card.getClientRects().length) return;
-        resetReview(card);
-        const top = split(card);
-        if (!top.length) return;
-        card.style.width = PAGE_W + 'px';
-        card.style.minHeight = '0';
-
-        const apply = s => top.forEach(el => {
+            apply(1);
+            if (!fits()) {
+                let lo = 0.5, hi = 1;
+                for (let i = 0; i < 12; i++) {
+                    const mid = (lo + hi) / 2;
+                    apply(mid);
+                    if (fits()) lo = mid; else hi = mid;
+                }
+                apply(lo);
+            }
+            card.style.minHeight = PAGE_H + 'px';   // banner bawah tetap di dasar halaman
+        }
+        function fitWhole(el) {
+            if (!el || !el.getClientRects().length) return;
+            el.style.zoom = '1'; el.style.minHeight = '0'; el.style.width = PAGE_W + 'px';
+            const s = Math.min(1, PAGE_H / el.scrollHeight);
             el.style.zoom = s;
             el.style.width = (PAGE_W / s) + 'px';
-        });
-        const fits = () => card.getBoundingClientRect().height <= PAGE_H;
-
-        apply(1);
-        if (!fits()) {
-            let lo = 0.5, hi = 1;
-            for (let i = 0; i < 12; i++) {
-                const mid = (lo + hi) / 2;
-                apply(mid);
-                if (fits()) lo = mid; else hi = mid;
-            }
-            apply(lo);
         }
-        card.style.minHeight = PAGE_H + 'px';   // banner bawah tetap di dasar halaman
-    }
-    function fitWhole(el) {
-        if (!el || !el.getClientRects().length) return;
-        el.style.zoom = '1'; el.style.minHeight = '0'; el.style.width = PAGE_W + 'px';
-        const s = Math.min(1, PAGE_H / el.scrollHeight);
-        el.style.zoom = s;
-        el.style.width = (PAGE_W / s) + 'px';
-    }
-    function resetWhole(el) {
-        if (!el) return;
-        el.style.zoom = ''; el.style.width = ''; el.style.minHeight = '';
-    }
-    function beforePrint() {
-        const m = document.createElement('style');
-        m.textContent = document.getElementById('printCss').textContent;
-        document.head.appendChild(m);
-        try {
-            fitReview(document.querySelector('#reviewSection .print-card'));
-            fitWhole(document.getElementById('specimenSection'));
-        } finally { m.remove(); }
-    }
-    function afterPrint() {
-        resetReview(document.querySelector('#reviewSection .print-card'));
-        resetWhole(document.getElementById('specimenSection'));
-    }
-    window.addEventListener('beforeprint', beforePrint);
-    window.addEventListener('afterprint', afterPrint);
-})();
-</script>
-</body>
+        function resetWhole(el) {
+            if (!el) return;
+            el.style.zoom = ''; el.style.width = ''; el.style.minHeight = '';
+        }
+        function beforePrint() {
+            const m = document.createElement('style');
+            m.textContent = document.getElementById('printCss').textContent;
+            document.head.appendChild(m);
+            try {
+                fitReview(document.querySelector('#reviewSection .print-card'));
+                fitWhole(document.getElementById('specimenSection'));
+            } finally { m.remove(); }
+        }
+        function afterPrint() {
+            resetReview(document.querySelector('#reviewSection .print-card'));
+            resetWhole(document.getElementById('specimenSection'));
+        }
+        window.addEventListener('beforeprint', beforePrint);
+        window.addEventListener('afterprint', afterPrint);
+        })();
+        </script>
+    </body>
 </html>
